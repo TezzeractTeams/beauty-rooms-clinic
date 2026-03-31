@@ -26,8 +26,8 @@ export default function WorkWithUs() {
       <section className="relative w-full min-h-[calc(65vh-85px)] overflow-hidden bg-[#FAFAF5]">
         <div className="absolute inset-0">
           <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/311c7b6313d6b19839dbb5fd6c0d417d258f9130?width=2604"
-            alt="Beauty Rooms Clinic interior"
+            src="/images/workwithus.webp"
+            alt="Beauty Rooms Clinic team and workspace"
             className="h-full w-full object-cover object-center"
           />
         </div>
