@@ -3,8 +3,8 @@ export function WhySection() {
     <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row min-h-[480px] md:min-h-[560px]">
       <div className="w-full md:w-[48%] lg:w-[50%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0">
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/311c7b6313d6b19839dbb5fd6c0d417d258f9130?width=1600"
-          alt="Beauty Rooms Clinic salon interior"
+          src="/images/Curated%20Care%20for%20Your%20Unique%20Features.webp"
+          alt="Curated care tailored to your features"
           className="w-full h-full object-cover object-center"
         />
       </div>

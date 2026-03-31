@@ -11,11 +11,11 @@ export interface CategoryDetailFromJson {
   services: FeaturedServiceCardData[];
 }
 
-const PEXELS = (id: string) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1200`;
-
 const BUILDER_INTERIOR =
   "https://api.builder.io/api/v1/image/assets/TEMP/311c7b6313d6b19839dbb5fd6c0d417d258f9130?width=1600";
+
+const IMG_LASHES = "/images/lashes.webp";
+const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makeup.webp";
 
 /** Display order on /services and in nav: Lash, Head Spa, PMU */
 const CATEGORY_ORDER = [
@@ -41,10 +41,9 @@ const CATEGORY_UI: Record<
     eyebrow: "Lash",
     title: "Lash services",
     ctaLabel: "Book lash appointment",
-    imageSrc: PEXELS("10850706"),
+    imageSrc: IMG_LASHES,
     imageAlt: "Close-up beauty treatment emphasizing eyes and lashes",
     imageAltShort: "Lash service",
-    imageClassName: "grayscale",
     imageOnLeft: false,
   },
   "head-spa": {
@@ -60,7 +59,7 @@ const CATEGORY_UI: Record<
     eyebrow: "PMU",
     title: "Permanent makeup",
     ctaLabel: "Book PMU consultation",
-    imageSrc: PEXELS("30896215"),
+    imageSrc: IMG_PERMANENT_MAKEUP,
     imageAlt: "Permanent makeup and brow treatment at Beauty Rooms Clinic",
     imageAltShort: "PMU service",
     imageOnLeft: false,

@@ -6,7 +6,7 @@ export function AboutHeroSection() {
     <section className="relative w-full min-h-[calc(70vh-85px)] overflow-hidden bg-[#FAFAF5]">
       <div className="absolute inset-0">
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/311c7b6313d6b19839dbb5fd6c0d417d258f9130?width=2604"
+          src="/images/About%20us.webp"
           alt="Beauty Rooms Clinic interior"
           className="w-full h-full object-cover object-center"
         />

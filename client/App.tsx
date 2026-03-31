@@ -16,6 +16,7 @@ import ServiceCategoryDetail from "./pages/ServiceCategoryDetail";
 import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
 import Specialists from "./pages/Specialists";
+import BookNow from "./pages/BookNow";
 
 const queryClient = new QueryClient();
 
@@ -34,8 +35,9 @@ const App = () => (
           <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/experts" element={<Specialists />} />
-          <Route path="/bookings" element={<Placeholder title="Book an Appointment" />} />
+          <Route path="/bookings" element={<BookNow />} />
           <Route path="/blog" element={<Placeholder title="Our Blog" />} />
+          <Route path="/gallery" element={<Placeholder title="Results Gallery" />} />
           <Route path="/work-with-us" element={<WorkWithUs />} />
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />

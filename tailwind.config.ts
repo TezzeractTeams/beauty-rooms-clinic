@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         barlow: ["Barlow", "-apple-system", "Roboto", "Helvetica", "sans-serif"],
         script: ["Dancing Script", "cursive"],
+        cormorant: ["Cormorant Garamond", "Georgia", "Times New Roman", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

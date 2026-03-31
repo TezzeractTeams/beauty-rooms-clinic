@@ -6,24 +6,24 @@ export function ServicesSection() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <div className="aspect-square md:aspect-auto md:min-h-[380px] overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/10850706/pexels-photo-10850706.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Lip treatment"
-            className="w-full h-full object-cover object-center grayscale"
+            src="/images/lashes.webp"
+            alt="Lashes and brow styling"
+            className="w-full h-full object-cover object-center"
           />
         </div>
 
         <div className="min-h-[320px] md:min-h-0">
           <ServiceTextCard
-            title={"Microblading\n& Brows"}
-            description="Enhance your natural lip color and shape with a soft tint that adds definition and the illusion of fullness."
+            title={"Lashes\n& Brows"}
+            description="From lifted, fuller lashes to perfectly shaped brows, we refine what frames your face. Custom lash treatments and brow design that look polished yet natural—so you leave feeling confident and camera-ready every day."
             to="/services"
           />
         </div>
 
         <div className="aspect-square md:aspect-auto md:min-h-[380px] overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/30896215/pexels-photo-30896215.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt="Microblading & brows treatment"
+            src="/images/Permanent%20Makeup.webp"
+            alt="Permanent makeup treatment"
             className="w-full h-full object-cover object-center"
           />
         </div>
@@ -38,7 +38,7 @@ export function ServicesSection() {
 
         <div className="aspect-square md:aspect-auto md:min-h-[380px] overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/5725146/pexels-photo-5725146.jpeg?auto=compress&cs=tinysrgb&w=800"
+            src="/images/Lip%20Blush.webp"
             alt="Lip blush treatment"
             className="w-full h-full object-cover object-center"
           />
