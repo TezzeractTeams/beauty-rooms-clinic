@@ -1,57 +1,60 @@
 import { Link } from "react-router-dom";
-import { ArrowRightIcon, ClockIcon } from "@/components/home/icons";
+import { ClockIcon } from "@/components/home/icons";
 import type { FeaturedServiceCardData } from "./service-category-detail-sample";
 
 interface ServiceFeaturedCardProps {
   service: FeaturedServiceCardData;
+  /** Unique id for heading + aria-labelledby when multiple cards render on one page */
+  headingId?: string;
 }
 
-export function ServiceFeaturedCard({ service }: ServiceFeaturedCardProps) {
+export function ServiceFeaturedCard({ service, headingId = "featured-service-heading" }: ServiceFeaturedCardProps) {
   const { name, description, duration, imageSrc, imageAlt } = service;
 
   return (
-    <section
-      className="w-full bg-[#F9F8F6] border-t border-[rgba(103,92,83,0.12)]"
-      aria-labelledby="featured-service-heading"
-    >
-      <div className="mx-auto flex w-full max-w-[1100px] flex-col items-center gap-8 px-6 py-10 md:flex-row md:justify-center md:items-center md:gap-12 md:px-10 md:py-12 lg:px-[90px]">
-        <div className="w-full max-w-[520px] text-center">
+    <section className="w-full bg-[#FAF9F6]" aria-labelledby={headingId}>
+      <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:gap-10 lg:gap-12 md:px-12 md:py-10 lg:px-[90px] lg:py-12">
+        <div className="min-w-0 w-full md:w-[56%] lg:max-w-[640px] text-left">
           <h2
-            id="featured-service-heading"
-            className="font-barlow font-light text-[clamp(22px,3vw,34px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-4"
+            id={headingId}
+            className="font-barlow font-light text-[clamp(22px,2.8vw,34px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-3"
           >
             {name}
           </h2>
-          <p className="font-barlow font-light text-sm md:text-base leading-[1.65] text-[rgba(45,41,38,0.72)] mb-5 mx-auto max-w-[480px]">
+          <p className="font-barlow font-light text-sm md:text-[15px] leading-[1.6] text-[#757575] mb-4 max-w-[540px]">
             {description}
           </p>
-          <div className="flex justify-center items-center gap-2.5 mb-5">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[rgba(103,92,83,0.25)] text-warm-brown/70">
-              <span className="scale-[0.75]">
+          <div className="flex items-center gap-2.5 mb-4">
+            <span
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[rgba(109,99,91,0.35)] text-[#6D635B]"
+              aria-hidden
+            >
+              <span className="scale-[0.75] opacity-80">
                 <ClockIcon />
               </span>
             </span>
-            <span className="font-barlow font-light text-[10px] md:text-xs tracking-[0.15em] uppercase text-[#8E8E8E]">
+            <span className="font-barlow font-light text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-[#8E8E8E]">
               {duration}
             </span>
           </div>
-          <div className="border-t border-[rgba(103,92,83,0.15)] pt-5 flex justify-center">
+          <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
             <Link
               to="/bookings"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-charcoal/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
+              className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-[#6D635B] text-white font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-[#5e564f] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6D635B]"
             >
-              <span>Book now</span>
-              <ArrowRightIcon />
+              Book now
             </Link>
           </div>
         </div>
 
-        <div className="w-full max-w-[320px] shrink-0 md:max-w-[300px] lg:max-w-[340px] mx-auto md:mx-0">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="aspect-[4/3] max-h-[220px] w-full rounded-sm object-cover object-center md:max-h-[260px] md:aspect-square lg:max-h-[280px] mx-auto"
-          />
+        <div className="flex w-full shrink-0 justify-center md:flex-1 md:min-w-0 md:justify-end">
+          <div className="h-[220px] w-[165px] shrink-0 md:h-[260px] md:w-[195px] lg:h-[280px] lg:w-[210px]">
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              className="h-full w-full rounded-none object-cover object-center"
+            />
+          </div>
         </div>
       </div>
     </section>

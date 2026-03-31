@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BenefitCard } from "@/components/home/BenefitCard";
 import { ArrowRightIcon, BadgeCheckIcon, ClockIcon, SparkleIcon } from "@/components/home/icons";
-import type { ServiceCategory } from "./services-data";
+import type { ServiceCategory } from "./service-types";
 
 const benefitIcons = [<SparkleIcon key="s" />, <BadgeCheckIcon key="b" />, <ClockIcon key="c" />] as const;
 const benefitTitleWeights: ("font-light" | "font-normal")[] = ["font-light", "font-normal", "font-light"];
@@ -26,11 +26,11 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
   return (
     <section
       id={category.id}
-      className="w-full bg-[#FAFAF5] flex flex-col md:flex-row min-h-[480px] md:min-h-[560px] scroll-mt-24"
+      className="w-full bg-[#FAFAF5] flex flex-col md:flex-row md:items-stretch min-h-[80vh] md:h-[80vh] scroll-mt-24"
       aria-labelledby={`${category.id}-heading`}
     >
       <div
-        className={`w-full md:w-[48%] lg:w-[50%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0 ${
+        className={`w-full md:w-[48%] lg:w-[50%] aspect-[4/3] min-h-[45vh] md:min-h-0 md:h-full md:aspect-auto overflow-hidden flex-shrink-0 ${
           imageOnLeft ? "" : "md:order-2"
         }`}
       >
@@ -42,7 +42,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
       </div>
 
       <div
-        className={`flex-1 bg-[#F4F4EF] flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-20 py-14 md:py-16 min-w-0 ${
+        className={`flex-1 bg-[#F4F4EF] flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-20 py-14 md:py-16 min-w-0 md:min-h-0 md:h-full md:overflow-y-auto ${
           imageOnLeft ? "" : "md:order-1"
         }`}
       >
@@ -61,19 +61,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
           </Link>
         </h2>
 
-        <ul
-          className="flex flex-col gap-3 md:gap-4 max-w-[520px] list-none p-0 m-0 mb-10"
-          aria-label={`${title} — included treatments`}
-        >
-          {treatments.map((item) => (
-            <li
-              key={item}
-              className="font-barlow font-light text-base leading-[1.7] text-[rgba(45,41,38,0.70)] pl-0 border-l-0"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
+    
 
         <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-4">
           Benefits

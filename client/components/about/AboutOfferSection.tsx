@@ -3,9 +3,9 @@ import { ArrowRight } from "lucide-react";
 
 const offers = [
   { title: "Lash Services", to: "/services/lash" },
-  { title: "Permanent Makeup (PMU)", to: "/services/pmu" },
   { title: "Head Spa Treatments", to: "/services/head-spa" },
-  { title: "Skin & Facial Treatments", to: "/services/esthetician" },
+  { title: "Permanent Makeup (PMU)", to: "/services/pmu" },
+  { title: "Esthetician", to: "/services/esthetician" },
 ] as const;
 
 export function AboutOfferSection() {

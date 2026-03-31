@@ -1,19 +1,25 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
+/** Matches main service categories + Esthetician (placeholder route) */
+export const NAV_SERVICE_LINKS = [
+  { label: "Lash", to: "/services/lash" },
+  { label: "Head Spa", to: "/services/head-spa" },
+  { label: "PMU", to: "/services/pmu" },
+  { label: "Esthetician", to: "/services/esthetician" },
+] as const;
+
+const BEAUTY_ROOMS_NJ_URL = "https://www.beautyroomsbynj.com/";
+
+const submenuItemClass =
+  "block px-4 py-2.5 font-barlow font-light text-xs tracking-[0.08em] uppercase text-warm-brown/80 transition-colors hover:bg-[#F4F4EF] hover:text-warm-brown";
+
 const Logo = () => (
-  <div className="flex flex-col items-center gap-0.5 select-none">
-    <span className="font-script text-[26px] leading-none text-charcoal tracking-wide">
-      Beauty Rooms
-    </span>
-    <div className="flex items-center gap-2 w-full">
-      <span className="flex-1 h-px bg-charcoal/80" />
-      <span className="font-barlow font-light text-[9px] tracking-[0.2em] uppercase text-charcoal">
-        Clinic
-      </span>
-      <span className="flex-1 h-px bg-charcoal/80" />
-    </div>
-  </div>
+  <img
+    src="/images/Logo.svg"
+    alt="Beauty Rooms Clinic"
+    className="h-10 w-auto md:h-12 select-none"
+  />
 );
 
 const ChevronDownIcon = () => (
@@ -60,6 +66,9 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
   </Link>
 );
 
+const navLinkClass =
+  "block py-2 font-barlow font-light text-xs tracking-[0.08em] uppercase text-warm-brown/80 hover:text-warm-brown transition-colors";
+
 export default function Navbar() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -67,6 +76,10 @@ export default function Navbar() {
   const isActive = (path: string) => location.pathname === path;
 
   const isServicesActive = location.pathname === "/services" || location.pathname.startsWith("/services/");
+
+  const isSpecialistsActive = location.pathname === "/experts";
+
+  const isProfessionalsActive = location.pathname === "/work-with-us";
 
   return (
     <header className="w-full bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
@@ -79,11 +92,66 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-10">
           <NavLink to="/" label="Home" active={isActive("/")} />
-          <NavLink to="/about" label="About" active={isActive("/about")} />
-          <NavLink to="/services" label="Services" hasDropdown active={isServicesActive} />
-          <NavLink to="/bookings" label="Bookings" active={isActive("/bookings")} />
-          <NavLink to="/blog" label="Blog" active={isActive("/blog")} />
-          <NavLink to="/careers" label="Careers" active={isActive("/careers")} />
+          <NavLink to="/about" label="About us" active={isActive("/about")} />
+          <div className="relative group">
+            <Link
+              to="/services"
+              className={`flex items-center gap-1 pb-1 font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors ${
+                isServicesActive
+                  ? "text-warm-brown border-b-2 border-warm-brown"
+                  : "text-warm-brown/70 hover:text-warm-brown"
+              }`}
+            >
+              Services
+              <ChevronDownIcon />
+            </Link>
+            <div
+              role="menu"
+              className="absolute left-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
+            >
+              <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
+                {NAV_SERVICE_LINKS.map(({ label, to }) => (
+                  <Link key={to} to={to} role="menuitem" className={submenuItemClass}>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+          <NavLink to="/experts" label="Specialists" active={isSpecialistsActive} />
+          <div className="relative group">
+            <Link
+              to="/work-with-us"
+              className={`flex items-center gap-1 pb-1 font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors ${
+                isProfessionalsActive
+                  ? "text-warm-brown border-b-2 border-warm-brown"
+                  : "text-warm-brown/70 hover:text-warm-brown"
+              }`}
+            >
+              For Professional
+              <ChevronDownIcon />
+            </Link>
+            <div
+              role="menu"
+              className="absolute left-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
+            >
+              <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
+                <Link to="/work-with-us" role="menuitem" className={submenuItemClass}>
+                  Work with us
+                </Link>
+                <a
+                  href={BEAUTY_ROOMS_NJ_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  role="menuitem"
+                  className={submenuItemClass}
+                >
+                  Beauty Rooms by NJ
+                </a>
+              </div>
+            </div>
+          </div>
+          <NavLink to="/contact" label="Contact us" active={isActive("/contact")} />
         </nav>
 
         {/* Book Now Button */}
@@ -108,11 +176,48 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-[#FAFAF5] border-t border-[rgba(232,232,227,0.50)] px-6 py-6 flex flex-col gap-6">
           <NavLink to="/" label="Home" active={isActive("/")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/about" label="About" active={isActive("/about")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/services" label="Services" hasDropdown active={isServicesActive} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/bookings" label="Bookings" active={isActive("/bookings")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/blog" label="Blog" active={isActive("/blog")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/careers" label="Careers" active={isActive("/careers")} onClick={() => setMobileOpen(false)} />
+          <NavLink to="/about" label="About us" active={isActive("/about")} onClick={() => setMobileOpen(false)} />
+          <div className="flex flex-col gap-2">
+            <NavLink
+              to="/services"
+              label="Services"
+              hasDropdown
+              active={isServicesActive}
+              onClick={() => setMobileOpen(false)}
+            />
+            <div className="flex flex-col gap-1 border-l border-[rgba(103,92,83,0.2)] pl-4 ml-1">
+              {NAV_SERVICE_LINKS.map(({ label, to }) => (
+                <Link key={to} to={to} onClick={() => setMobileOpen(false)} className={navLinkClass}>
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <NavLink to="/experts" label="Specialists" active={isSpecialistsActive} onClick={() => setMobileOpen(false)} />
+          <div className="flex flex-col gap-2">
+            <NavLink
+              to="/work-with-us"
+              label="For Professional"
+              hasDropdown
+              active={isProfessionalsActive}
+              onClick={() => setMobileOpen(false)}
+            />
+            <div className="flex flex-col gap-1 border-l border-[rgba(103,92,83,0.2)] pl-4 ml-1">
+              <Link to="/work-with-us" onClick={() => setMobileOpen(false)} className={navLinkClass}>
+                Work with us
+              </Link>
+              <a
+                href={BEAUTY_ROOMS_NJ_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className={navLinkClass}
+              >
+                Beauty Rooms by NJ
+              </a>
+            </div>
+          </div>
+          <NavLink to="/contact" label="Contact us" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
           <Link
             to="/bookings"
             onClick={() => setMobileOpen(false)}

@@ -1,7 +1,8 @@
 interface ServiceCategoryIntroProps {
-  /** Short category label, e.g. "Lash Services" */
+  /** Short category label, e.g. "Lash" */
   title: string;
-  description: string;
+  /** Supporting copy below the title (optional) */
+  description?: string;
 }
 
 export function ServiceCategoryIntro({ title, description }: ServiceCategoryIntroProps) {
@@ -17,9 +18,11 @@ export function ServiceCategoryIntro({ title, description }: ServiceCategoryIntr
         >
           {title}
         </h2>
-        <p className="font-barlow font-light text-base md:text-lg leading-[1.65] text-[#757575]">
-          {description}
-        </p>
+        {description ? (
+          <p className="font-barlow font-light text-base md:text-lg leading-[1.65] text-[#757575]">
+            {description}
+          </p>
+        ) : null}
       </div>
     </section>
   );

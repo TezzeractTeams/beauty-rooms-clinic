@@ -1,20 +1,22 @@
 import Layout from "@/components/Layout";
 import { ArrowRightIcon } from "@/components/home/icons";
 import {
+  ServiceCategoryBottomCta,
   ServiceCategoryIntro,
   ServiceFeaturedCard,
   ServicesSplitHero,
-  getServiceCategoryDetailSample,
+  getCategoryDetail,
   serviceCategories,
 } from "@/components/services";
+import { Fragment } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 
 export default function ServiceCategoryDetail() {
   const { slug } = useParams<{ slug: string }>();
   const category = slug ? serviceCategories.find((c) => c.id === slug) : undefined;
-  const sample = slug ? getServiceCategoryDetailSample(slug) : undefined;
+  const detail = slug ? getCategoryDetail(slug) : undefined;
 
-  if (!category || !sample) {
+  if (!category || !detail) {
     return <Navigate to="/services" replace />;
   }
 
@@ -24,6 +26,7 @@ export default function ServiceCategoryDetail() {
         headingId={`service-category-${category.id}-heading`}
         eyebrow={category.eyebrow}
         title={category.title}
+        body={detail.heroBody}
         imageSrc={category.imageSrc}
         imageAlt={category.imageAlt}
         cta={
@@ -36,8 +39,25 @@ export default function ServiceCategoryDetail() {
           </Link>
         }
       />
-      <ServiceCategoryIntro title={category.eyebrow} description={sample.heroBody} />
-      <ServiceFeaturedCard service={sample.featured} />
+      <ServiceCategoryIntro
+        title={category.eyebrow}
+        description={detail.introSampleDescription}
+      />
+      {detail.services.map((service, index) => (
+        <Fragment key={`${category.id}-${index}-${service.name}`}>
+          {index > 0 ? (
+            <div
+              className="w-full h-px bg-[rgba(103,92,83,0.18)]"
+              aria-hidden
+            />
+          ) : null}
+          <ServiceFeaturedCard
+            headingId={`featured-${category.id}-${index}`}
+            service={service}
+          />
+        </Fragment>
+      ))}
+      <ServiceCategoryBottomCta categoryId={category.id} />
     </Layout>
   );
 }

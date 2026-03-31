@@ -38,9 +38,13 @@ export default function Footer() {
       <div className="px-6 md:px-10 pt-16 pb-16 md:pt-40 md:pb-20 max-w-[90%] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <h2 className="font-barlow font-thin text-xl md:text-2xl text-[#D1D1D1] tracking-tight mb-4">
-              Beauty Rooms by NJ
-            </h2>
+            <Link to="/" className="inline-block mb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAF5] rounded-sm">
+              <img
+                src="/images/image.webp"
+                alt="Beauty Rooms by NJ"
+                className="h-12 w-auto md:h-14 max-w-[220px] object-contain object-left"
+              />
+            </Link>
             <p className="font-barlow font-light text-sm leading-relaxed text-[#FAFAF5CC]/90 max-w-md mb-6">
               A boutique sanctuary dedicated to modern aesthetics and timeless beauty. We combine expert
               clinical skill with a luxury spa experience.
