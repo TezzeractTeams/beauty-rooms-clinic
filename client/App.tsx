@@ -17,9 +17,13 @@ import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
 import Specialists from "./pages/Specialists";
 import BookNow from "./pages/BookNow";
+import ComingSoon from "./pages/ComingSoon";
 
 const queryClient = new QueryClient();
 
+// Coming soon: only the ComingSoon catch-all route is active below.
+// To launch: delete the <Route path="*" element={<ComingSoon />} /> line, then
+// remove the "{/*" line and the "*/" line that wrap the full route list.
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -28,6 +32,9 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          <Route path="*" element={<ComingSoon />} />
+
+          {/*
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
@@ -42,8 +49,9 @@ const App = () => (
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
+          */}
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
