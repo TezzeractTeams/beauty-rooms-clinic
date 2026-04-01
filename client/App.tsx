@@ -32,9 +32,9 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="*" element={<ComingSoon />} />
+          {/*<Route path="*" element={<ComingSoon />} />*/}
 
-          {/*
+      
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
@@ -51,7 +51,7 @@ const App = () => (
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
-          */}
+     
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
