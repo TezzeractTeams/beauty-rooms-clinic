@@ -58,7 +58,7 @@ function PathColumn({
       <p className="mb-3 font-barlow text-[10px] font-light uppercase tracking-[0.2em] text-charcoal/45 md:text-xs">
         {eyebrow}
       </p>
-      <h2 className="font-barlow text-[clamp(1.75rem,4vw,2.5rem)] font-light leading-[1.15] tracking-[-0.02em] text-charcoal">
+      <h2 className="font-barlow text-[clamp(1.75rem,4vw,2.5rem)] font-extralight leading-[1.15] tracking-[-0.02em] text-charcoal">
         {title}
       </h2>
       <div className="my-6 h-px w-full bg-charcoal/[0.12]" />

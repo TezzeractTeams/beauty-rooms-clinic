@@ -53,7 +53,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
       
         <h2
           id={`${category.id}-heading`}
-          className="font-barlow font-light text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-8 max-w-[520px]"
+          className="font-barlow font-extralight text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-8 max-w-[520px]"
         >
           <Link
             to={`/services/${category.id}`}
@@ -65,7 +65,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
 
     
 
-        <h3 className="font-barlow font-light text-2xl leading-8 tracking-[-0.02em] text-[#2D2926] mb-4">
+        <h3 className="font-barlow font-extralight text-2xl leading-8 tracking-[-0.02em] text-[#2D2926] mb-4">
           Benefits
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 border border-[rgba(103,92,83,0.10)] gap-px bg-[rgba(103,92,83,0.10)] mb-10">
@@ -75,7 +75,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
               icon={benefitIcons[i % 3]}
               title={b.title}
               description={b.description || undefined}
-              titleWeight="font-light"
+              titleWeight="font-extralight"
               compact
             />
           ))}

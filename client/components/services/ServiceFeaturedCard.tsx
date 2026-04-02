@@ -17,26 +17,28 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
         <div className="min-w-0 w-full md:w-[56%] lg:max-w-[640px] text-left">
           <h2
             id={headingId}
-            className="font-barlow font-light text-[clamp(22px,2.8vw,34px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-3"
+            className="font-barlow font-extralight text-[clamp(22px,2.8vw,34px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-3"
           >
             {name}
           </h2>
           <p className="font-barlow font-light text-sm md:text-[15px] leading-[1.6] text-[#757575] mb-4 max-w-[540px]">
             {description}
           </p>
-          <div className="flex items-center gap-2.5 mb-4">
-            <span
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[rgba(109,99,91,0.35)] text-[#6D635B]"
-              aria-hidden
-            >
-              <span className="scale-[0.75] opacity-80">
-                <ClockIcon />
+          {duration ? (
+            <div className="flex items-center gap-2.5 mb-4">
+              <span
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[rgba(109,99,91,0.35)] text-[#6D635B]"
+                aria-hidden
+              >
+                <span className="scale-[0.75] opacity-80">
+                  <ClockIcon />
+                </span>
               </span>
-            </span>
-            <span className="font-barlow font-light text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-[#8E8E8E]">
-              {duration}
-            </span>
-          </div>
+              <span className="font-barlow font-light text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-[#8E8E8E]">
+                {duration}
+              </span>
+            </div>
+          ) : null}
           <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
             <Link
               to="/bookings"

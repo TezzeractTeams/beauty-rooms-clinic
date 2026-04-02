@@ -16,7 +16,7 @@ export function AboutOfferSection() {
           <p className="font-barlow font-light text-xs tracking-[0.083em] uppercase text-warm-brown">
             What we offer
           </p>
-          <h2 className="font-barlow font-light text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[720px]">
+          <h2 className="font-barlow font-extralight text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[720px]">
             Treatments &amp; services
           </h2>
         </div>
@@ -28,7 +28,7 @@ export function AboutOfferSection() {
               to={to}
               className="group bg-[#FAFAF5] flex flex-col justify-between min-h-[160px] px-10 md:px-12 py-10 transition-colors hover:bg-[#F4F4EF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
             >
-              <h3 className="font-barlow font-light text-[clamp(22px,2.5vw,28px)] leading-[1.2] tracking-[-0.02em] text-charcoal pr-8">
+              <h3 className="font-barlow font-extralight text-[clamp(22px,2.5vw,28px)] leading-[1.2] tracking-[-0.02em] text-charcoal pr-8">
                 {title}
               </h3>
               <span className="inline-flex items-center gap-2 font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/80 group-hover:text-warm-brown mt-6">

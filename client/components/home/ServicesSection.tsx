@@ -3,8 +3,9 @@ import { ServiceTextCard } from "./ServiceTextCard";
 /** New photography assets (filenames as on disk; Permanent uses client’s spelling “Makup”). */
 const IMG_HEAD_SPA = "/images/Head%20SPA.JPG";
 const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makup.jpg";
-const IMG_LIP_BLUSH_TINT = "/images/LipBlush.jpg";
 const IMG_LASHES_BROWS = "/images/home-lashes.jpg";
+/** Placeholder until dedicated Aesthetics photography is added */
+const IMG_AESTHETICS = "/images/our-products.png";
 
 const tileMinH = "max-h-[45vh]";
 
@@ -40,7 +41,7 @@ function ServiceSplitTile({ imageSrc, imageAlt, title, description, to }: Servic
   );
 }
 
-/** Display order: Lashes → Lip → Permanent → Head Spa (reading order in 2×2 grid). */
+/** Display order: top row Lashes & Brows | Head Spa; bottom row PMU | Aesthetics (2×2 grid). */
 const SERVICES: ServiceSplitTileProps[] = [
   {
     imageSrc: IMG_LASHES_BROWS,
@@ -51,28 +52,28 @@ const SERVICES: ServiceSplitTileProps[] = [
     to: "/services/lash",
   },
   {
-    imageSrc: IMG_LIP_BLUSH_TINT,
-    imageAlt: "Lip blush and tint treatment",
-    title: "Lip Blush & Tint",
-    description:
-      "Enhance your natural lip color and shape with a soft tint that adds definition and the illusion of fullness.",
-    to: "/services/pmu",
-  },
-  {
-    imageSrc: IMG_PERMANENT_MAKEUP,
-    imageAlt: "Permanent makeup consultation and treatment",
-    title: "Permanent Makeup",
-    description:
-      "Wake up ready with our bespoke cosmetic tattooing. Each treatment is tailored to your unique bone structure and aesthetic goals.",
-    to: "/services/pmu",
-  },
-  {
     imageSrc: IMG_HEAD_SPA,
     imageAlt: "Head spa and scalp wellness treatment",
     title: "Head Spa",
     description:
       "Scalp-focused rituals that melt tension away while supporting healthier hair from the root. Choose hydration, detox, or relaxation sessions tailored to you.",
     to: "/services/head-spa",
+  },
+  {
+    imageSrc: IMG_PERMANENT_MAKEUP,
+    imageAlt: "Permanent makeup consultation and treatment",
+    title: "PMU",
+    description:
+      "Wake up ready with our bespoke cosmetic tattooing. Each treatment is tailored to your unique bone structure and aesthetic goals.",
+    to: "/services/pmu",
+  },
+  {
+    imageSrc: IMG_AESTHETICS,
+    imageAlt: "Aesthetics and advanced skin treatments",
+    title: "Aesthetics",
+    description:
+      "Targeted facials and advanced skin treatments designed to refine texture, restore radiance, and support long-term skin health.",
+    to: "/services/esthetician",
   },
 ];
 

@@ -9,7 +9,7 @@ export function AboutApproachSection() {
           <p className="font-barlow font-light text-xs tracking-[0.083em] uppercase text-warm-brown">
             Our approach
           </p>
-          <h2 className="font-barlow font-light text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[720px]">
+          <h2 className="font-barlow font-extralight text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[720px]">
             How we care for you
           </h2>
         </div>

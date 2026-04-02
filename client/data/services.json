@@ -172,40 +172,24 @@
   },
   {
     "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Nano brows (Initial Session)",
+    "SERVICE ": "Nano brows",
     "SERVICE DESCRIPTION": "Effortless. Natural. Life-Proof\nStop struggling with brow pencils and wake up to professional symmetry every morning. Using advanced nano-needle technology, we create ultra-fine hair strokes that mimic your natural brow for a soft, polished look that lasts 2–3 years.\n-The Look: Fluffy, \"\"brushed-up,\"\" and natural—no harsh lines.\n- The Feel: Minimal trauma and suitable for all skin types.\n- The Life: Smudge-proof and sweat-proof, from the gym to the pool.\n- The Fit: 100% bespoke mapping and color-matching to your unique features.\nExperience the freedom of permanent beauty.",
     "DURATION": "",
     "Booking Link": "",
     "Image URL": "",
     "": ""
   },
+
   {
     "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Nano brows (Follow up Session)",
-    "SERVICE DESCRIPTION": "A touch-up session for your Nano Brows to refine any healed hair strokes, touch up any faded spots, and ensure your natural, life-proof brows remain perfectly pristine",
-    "DURATION": "",
-    "Booking Link": "",
-    "Image URL": "",
-    "": ""
-  },
-  {
-    "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Powder/shading brows  (Initial Session)",
+    "SERVICE ": "Powder/shading brows",
     "SERVICE DESCRIPTION": "Perfect for those who prefer a more defined makeup appearance, this procedure offers a bolder, filled-in, \"\"penciled\"\" look\n. Unlike hair strokes, this shading technique deposits a soft color across the brow to provide a solid shape\n. It is highly effective for clients with sparse natural hair or for covering up older, faded permanent makeup",
     "DURATION": "",
     "Booking Link": "",
     "Image URL": "",
     "": ""
   },
-  {
-    "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Powder/shading brows  (Follow up Session)",
-    "SERVICE DESCRIPTION": "A follow-up appointment to refresh the shape, enhance the color saturation, and perfect the soft, shaded finish of your initial Powder Brows procedure\n",
-    "DURATION": "",
-    "Booking Link": "",
-    "Image URL": "",
-    "": ""
-  },
+
   {
     "SERVICE GATEGORY ": "PMU",
     "SERVICE ": "Color correction (per session) ",
@@ -235,7 +219,7 @@
   },
   {
     "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "lip blush (Initial Session)",
+    "SERVICE ": "lip blush ",
     "SERVICE DESCRIPTION": "Effortless Color, Every Single Day:\nElevate your natural beauty with Lip Blush, a premium semi-permanent treatment designed to define, brighten, and enhance your lips\nInstead of a heavy “lipstick” look, this technique deposits a soft, sheer tint that mimics the flush of youth, looks like a natural gloss, and adds the illusion of fullness for about one year\n/ Definition & Symmetry: Gently redefine your lip borders for a more balanced appearance\n/ Customized for You: We begin with a personalized consultation to blend a bespoke shade that complements your skin tone\n/ Life-proof Results: Enjoy a smudge-proof, “woke up like this” glow that eliminates the need for daily reapplying\n",
     "DURATION": "",
     "Booking Link": "",
@@ -244,22 +228,14 @@
   },
   {
     "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "lip tint (Initial Session)",
+    "SERVICE ": "lip tint",
     "SERVICE DESCRIPTION": "For a more dramatic, glamorous finish\nLip Tint offers a vibrant, lipstick-like look. This service adds deep color and sharply defines the lip line to give your lips a bold, fully made-up appearance. The results are highly durable, lasting three years or even longer\n",
     "DURATION": "",
     "Booking Link": "",
     "Image URL": "",
     "": ""
   },
-  {
-    "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "lip tint (follow up session)",
-    "SERVICE DESCRIPTION": "Because Lip Tint is a long-lasting and saturated procedure, this follow-up session is offered as a remediation to fix minor imperfections—such as spots caused by cold sores—and ensure your dramatic color stays flawlessly defined",
-    "DURATION": "",
-    "Booking Link": "",
-    "Image URL": "",
-    "": ""
-  },
+
   {
     "SERVICE GATEGORY ": "PMU",
     "SERVICE ": "lash liner",
@@ -271,22 +247,14 @@
   },
   {
     "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Eyeliner (Initial session)",
+    "SERVICE ": "Eyeliner",
     "SERVICE DESCRIPTION": "A bold, permanent makeup procedure that gives your eyes striking definition. This service involves drawing a fully defined eyeliner look along the eyelid, complete with a beautiful wing, allowing you to wake up with perfect eye makeup every single day",
     "DURATION": "",
     "Booking Link": "",
     "Image URL": "",
     "": ""
   },
-  {
-    "SERVICE GATEGORY ": "PMU",
-    "SERVICE ": "Eyeliner (Touch Up)",
-    "SERVICE DESCRIPTION": " A perfecting session for your permanent eyeliner to address any small faded spots or tiny imperfections, ensuring your wing and liner remain sharply defined",
-    "DURATION": "",
-    "Booking Link": "",
-    "Image URL": "",
-    "": ""
-  },
+
   {
     "SERVICE GATEGORY ": "PMU",
     "SERVICE ": "Areola Micropigmentation ",

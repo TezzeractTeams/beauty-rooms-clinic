@@ -32,7 +32,7 @@ export function ServicesSplitHero({
           </p>
           <h1
             id={headingId}
-            className="font-barlow font-light text-[clamp(40px,8vw,96px)] leading-[1.05] tracking-[-0.04em] text-charcoal mb-6 md:mb-8"
+            className="font-barlow font-extralight text-[clamp(36px,5vw,64px)] leading-none tracking-[-0.05em] text-charcoal mb-6 md:mb-8"
           >
             {title}
           </h1>

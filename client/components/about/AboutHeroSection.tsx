@@ -23,7 +23,7 @@ export function AboutHeroSection() {
 
       <div className="relative z-10 flex flex-col justify-end min-h-[calc(70vh-85px)] px-6 md:px-10 lg:px-[90px] py-24 md:py-28">
         <div className="max-w-[900px] flex flex-col gap-5">
-          <h1 className="font-barlow font-light leading-none tracking-[-0.05em] text-[clamp(36px,5vw,64px)] text-charcoal capitalize">
+          <h1 className="font-barlow font-extralight leading-none tracking-[-0.05em] text-[clamp(36px,5vw,64px)] text-charcoal capitalize">
             About Beauty Rooms Clinic
           </h1>
           <p className="font-barlow font-light text-lg md:text-xl leading-[1.65] text-[rgba(45,41,38,0.75)] max-w-[640px]">

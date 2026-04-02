@@ -58,7 +58,7 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         <div className="flex items-start justify-between gap-3">
           <h2
             id={headingId}
-            className="font-barlow text-2xl font-light tracking-[-0.02em] text-charcoal md:text-[26px]"
+            className="font-barlow text-2xl font-extralight tracking-[-0.02em] text-charcoal md:text-[26px]"
           >
             {name}
           </h2>

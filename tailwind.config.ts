@@ -13,6 +13,11 @@ export default {
       },
     },
     extend: {
+      /** Barlow: bump lighter steps so UI reads clearer (extralight 200→300, light 300→400). */
+      fontWeight: {
+        extralight: "300",
+        light: "400",
+      },
       fontFamily: {
         barlow: ["Barlow", "-apple-system", "Roboto", "Helvetica", "sans-serif"],
         script: ["Dancing Script", "cursive"],

@@ -48,7 +48,7 @@ export default function Faq() {
             </p>
             <h1
               id="faq-heading"
-              className="mb-4 font-barlow font-light text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
+              className="mb-4 font-barlow font-extralight text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
             >
               Frequently asked questions
             </h1>
@@ -71,13 +71,13 @@ export default function Faq() {
           ) : (
             faqCategories.map((cat, ci) => (
               <div key={cat.category}>
-                <h2 className="mb-8 font-barlow font-light text-2xl tracking-[-0.02em] text-charcoal md:text-3xl">
+                <h2 className="mb-8 font-barlow font-extralight text-2xl tracking-[-0.02em] text-charcoal md:text-3xl">
                   {formatCategoryLabel(cat.category)}
                 </h2>
                 <div className="space-y-10">
                   {cat.services.map((svc, si) => (
                     <div key={`${cat.category}-${svc.service}`} className={sectionCardClass}>
-                      <h3 className="mb-4 font-barlow font-light text-xs tracking-[0.12em] uppercase text-warm-brown/85">
+                      <h3 className="mb-4 font-barlow font-extralight text-xs tracking-[0.12em] uppercase text-warm-brown/85">
                         {svc.service}
                       </h3>
                       <Accordion type="multiple" className="w-full">
@@ -118,7 +118,7 @@ export default function Faq() {
       >
         <h2
           id="faq-cta-heading"
-          className="mb-8 max-w-2xl font-barlow font-light text-3xl leading-[1.15] tracking-[-0.03em] text-white sm:text-4xl"
+          className="mb-8 max-w-2xl font-barlow font-extralight text-3xl leading-[1.15] tracking-[-0.03em] text-white sm:text-4xl"
         >
           Still have questions?
         </h2>

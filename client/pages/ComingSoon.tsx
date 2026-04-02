@@ -18,7 +18,7 @@ export default function ComingSoon() {
           <p className="font-barlow font-light text-xs tracking-[0.1em] uppercase text-white/80">
             Beauty Rooms Clinic
           </p>
-          <h1 className="font-barlow font-light leading-[1.05] tracking-[-0.05em] text-[clamp(42px,6vw,72px)] text-white">
+          <h1 className="font-barlow font-extralight leading-[1.05] tracking-[-0.05em] text-[clamp(42px,6vw,72px)] text-white">
             Coming Soon
           </h1>
           <p className="font-barlow font-light max-w-md text-base leading-6 text-white/75">

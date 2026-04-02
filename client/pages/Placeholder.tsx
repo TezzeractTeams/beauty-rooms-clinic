@@ -12,7 +12,7 @@ export default function Placeholder({ title }: PlaceholderProps) {
         <p className="font-barlow font-light text-xs tracking-[0.1em] uppercase text-warm-brown mb-4">
           Coming Soon
         </p>
-        <h1 className="font-barlow font-light text-[clamp(36px,5vw,64px)] tracking-[-0.04em] text-charcoal mb-6 capitalize">
+        <h1 className="font-barlow font-extralight text-[clamp(36px,5vw,64px)] tracking-[-0.04em] text-charcoal mb-6 capitalize">
           {title}
         </h1>
         <p className="font-barlow font-light text-base leading-6 text-warm-brown max-w-md mb-10">

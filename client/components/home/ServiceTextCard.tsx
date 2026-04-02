@@ -18,7 +18,7 @@ export function ServiceTextCard({ title, description, to, className }: ServiceCa
         className,
       )}
     >
-      <h3 className="font-barlow font-light text-[clamp(22px,2.5vw,30px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-4 whitespace-pre-line">
+      <h3 className="font-barlow font-extralight text-[clamp(22px,2.5vw,30px)] leading-[1.2] tracking-[-0.02em] text-charcoal mb-4 whitespace-pre-line">
         {title}
       </h3>
       <div className="w-full h-px bg-[rgba(103,92,83,0.15)] mb-6" />

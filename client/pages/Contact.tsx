@@ -43,7 +43,7 @@ export default function Contact() {
             </p>
             <h1
               id="contact-heading"
-              className="mb-6 font-barlow font-light text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
+              className="mb-6 font-barlow font-extralight text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
             >
               Contact Beauty Rooms Clinic
             </h1>
@@ -61,7 +61,7 @@ export default function Contact() {
         <div className="mx-auto max-w-6xl">
           <h2
             id="contact-options-heading"
-            className="mb-12 text-center font-barlow font-light text-2xl tracking-[-0.02em] text-charcoal md:mb-16 md:text-3xl"
+            className="mb-12 text-center font-barlow font-extralight text-2xl tracking-[-0.02em] text-charcoal md:mb-16 md:text-3xl"
           >
             Contact options
           </h2>
@@ -139,7 +139,7 @@ export default function Contact() {
       >
         <h2
           id="contact-cta-heading"
-          className="mb-10 max-w-3xl font-barlow font-light text-4xl leading-[1.12] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl"
+          className="mb-10 max-w-3xl font-barlow font-extralight text-4xl leading-[1.12] tracking-[-0.03em] text-white sm:text-5xl lg:text-6xl"
         >
           <span className="block">Book your appointment</span>
           <span className="block">or send us a message today</span>

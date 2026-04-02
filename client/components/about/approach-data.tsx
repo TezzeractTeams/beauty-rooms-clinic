@@ -10,18 +10,18 @@ export const aboutApproachItems = [
     icon: <SparkleIcon />,
     title: "Natural Results",
     description: "Subtle enhancements that never look overdone.",
-    titleWeight: "font-light" as const,
+    titleWeight: "font-extralight" as const,
   },
   {
     icon: <BadgeCheckIcon />,
     title: "Personalized Treatments",
     description: "Every service tailored to your features and goals.",
-    titleWeight: "font-normal" as const,
+    titleWeight: "font-light" as const,
   },
   {
     icon: <ExpertIcon />,
     title: "Expert Care",
     description: "Certified professionals using advanced techniques.",
-    titleWeight: "font-light" as const,
+    titleWeight: "font-extralight" as const,
   },
 ];

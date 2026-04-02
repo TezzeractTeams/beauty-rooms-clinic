@@ -31,7 +31,7 @@ export function ConsultationCtaSection({
     >
       <h2
         id={headingId}
-        className="font-barlow font-light text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.12] tracking-[-0.03em] mb-5"
+        className="font-barlow font-extralight text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.12] tracking-[-0.03em] mb-5"
       >
         {lines.map((line) => (
           <span key={line} className="block">

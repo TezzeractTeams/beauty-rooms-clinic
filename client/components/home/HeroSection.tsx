@@ -18,7 +18,7 @@ export function HeroSection() {
 
       <div className="relative z-10 flex flex-col justify-end min-h-[calc(100vh-85px)] px-6 md:px-10 lg:px-[90px] py-32">
         <div className="max-w-[900px] flex flex-col gap-4">
-          <h1 className="font-barlow font-light leading-[1.05] tracking-[-0.05em] text-[clamp(42px,6vw,72px)] text-white flex flex-col">
+          <h1 className="font-barlow font-extralight leading-[1.05] tracking-[-0.05em] text-[clamp(42px,6vw,72px)] text-white flex flex-col">
             <span>Advanced</span>
             <span>Beauty &amp; Aesthetic</span>
             <span>Clinic in Sarasota, FL</span>

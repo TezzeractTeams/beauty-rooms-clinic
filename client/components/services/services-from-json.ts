@@ -280,12 +280,15 @@ export function getCategoryDetail(categoryId: string): CategoryDetailFromJson | 
   return {
     heroBody,
     introSampleDescription: CATEGORY_INTRO_SAMPLE[categoryId] ?? "",
-    services: rows.map((r) => ({
-      name: r.name,
-      description: r.description || "Details available at your consultation.",
-      duration: parseDuration(r.durationRaw),
-      imageSrc: r.imageUrl ? r.imageUrl : ui.imageSrc,
-      imageAlt: `${r.name} — ${ui.imageAltShort}`,
-    })),
+    services: rows.map((r) => {
+      const base = {
+        name: r.name,
+        description: r.description || "Details available at your consultation.",
+        imageSrc: r.imageUrl ? r.imageUrl : ui.imageSrc,
+        imageAlt: `${r.name} — ${ui.imageAltShort}`,
+      };
+      if (!r.durationRaw) return base;
+      return { ...base, duration: parseDuration(r.durationRaw) };
+    }),
   };
 }

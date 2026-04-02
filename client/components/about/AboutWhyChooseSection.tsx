@@ -13,7 +13,7 @@ export function AboutWhyChooseSection() {
           <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-5">
             Why choose us
           </p>
-          <h2 className="font-barlow font-light text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[400px]">
+          <h2 className="font-barlow font-extralight text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal max-w-[400px]">
             The Beauty Rooms difference
           </h2>
         </div>

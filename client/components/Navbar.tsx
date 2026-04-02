@@ -12,7 +12,7 @@ export const NAV_SERVICE_LINKS = [
 const BEAUTY_ROOMS_NJ_URL = "https://www.beautyroomsbynj.com/";
 
 const submenuItemClass =
-  "block px-4 py-2.5 font-barlow font-light text-xs tracking-[0.08em] uppercase text-warm-brown/80 transition-colors hover:bg-[#F4F4EF] hover:text-warm-brown";
+  "block px-4 py-2.5 font-barlow font-normal text-sm tracking-[0.05em] text-warm-brown/80 transition-colors hover:bg-[#F4F4EF] hover:text-warm-brown";
 
 const Logo = () => (
   <img
@@ -55,7 +55,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
   <Link
     to={to}
     onClick={onClick}
-    className={`flex items-center gap-1 pb-1 font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors ${
+    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
       active
         ? "text-warm-brown border-b-2 border-warm-brown"
         : "text-warm-brown/70 hover:text-warm-brown"
@@ -67,7 +67,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
 );
 
 const navLinkClass =
-  "block py-2 font-barlow font-light text-xs tracking-[0.08em] uppercase text-warm-brown/80 hover:text-warm-brown transition-colors";
+  "block py-2 font-barlow font-medium text-sm tracking-[0.05em] text-warm-brown/80 hover:text-warm-brown transition-colors";
 
 export default function Navbar() {
   const location = useLocation();
@@ -77,90 +77,95 @@ export default function Navbar() {
 
   const isServicesActive = location.pathname === "/services" || location.pathname.startsWith("/services/");
 
-  const isSpecialistsActive = location.pathname === "/experts";
-
   const isProfessionalsActive = location.pathname === "/work-with-us";
 
   return (
     <header className="w-full bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 md:px-10 py-6">
-        {/* Logo */}
-        <Link to="/" className="flex-shrink-0">
-          <Logo />
-        </Link>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-          <NavLink to="/" label="Home" active={isActive("/")} />
-          <NavLink to="/about" label="About us" active={isActive("/about")} />
-          <div className="relative group">
-            <Link
-              to="/services"
-              className={`flex items-center gap-1 pb-1 font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors ${
-                isServicesActive
-                  ? "text-warm-brown border-b-2 border-warm-brown"
-                  : "text-warm-brown/70 hover:text-warm-brown"
-              }`}
-            >
-              Services
-              <ChevronDownIcon />
-            </Link>
-            <div
-              role="menu"
-              className="absolute left-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
-            >
-              <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
-                {NAV_SERVICE_LINKS.map(({ label, to }) => (
-                  <Link key={to} to={to} role="menuitem" className={submenuItemClass}>
-                    {label}
-                  </Link>
-                ))}
+        {/* Desktop: nav groups hug the logo; Book Now stays on the far right */}
+        <div className="hidden md:flex w-full items-center">
+          <nav className="flex flex-1 min-w-0 items-center justify-end gap-5 lg:gap-6 pr-5 md:pr-7 lg:pr-9">
+            <NavLink to="/" label="Home" active={isActive("/")} />
+            <NavLink to="/about" label="About" active={isActive("/about")} />
+            <div className="relative group">
+              <Link
+                to="/services"
+                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
+                  isServicesActive
+                    ? "text-warm-brown border-b-2 border-warm-brown"
+                    : "text-warm-brown/70 hover:text-warm-brown"
+                }`}
+              >
+                Services
+                <ChevronDownIcon />
+              </Link>
+              <div
+                role="menu"
+                className="absolute left-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
+              >
+                <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
+                  {NAV_SERVICE_LINKS.map(({ label, to }) => (
+                    <Link key={to} to={to} role="menuitem" className={submenuItemClass}>
+                      {label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-          <NavLink to="/experts" label="Specialists" active={isSpecialistsActive} />
-          <div className="relative group">
-            <Link
-              to="/work-with-us"
-              className={`flex items-center gap-1 pb-1 font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors ${
-                isProfessionalsActive
-                  ? "text-warm-brown border-b-2 border-warm-brown"
-                  : "text-warm-brown/70 hover:text-warm-brown"
-              }`}
-            >
-              JOIN OUR TEAM
-              <ChevronDownIcon />
-            </Link>
-            <div
-              role="menu"
-              className="absolute left-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
-            >
-              <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
-                <Link to="/work-with-us" role="menuitem" className={submenuItemClass}>
-                  Work with us
-                </Link>
-                <a
-                  href={BEAUTY_ROOMS_NJ_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  role="menuitem"
-                  className={submenuItemClass}
+          </nav>
+
+          <Link to="/" className="shrink-0 mx-3 md:mx-4 lg:mx-5">
+            <Logo />
+          </Link>
+
+          <div className="flex flex-1 min-w-0 items-center justify-start gap-5 lg:gap-6 pl-5 md:pl-7 lg:pl-9">
+            <nav className="flex items-center gap-5 lg:gap-6">
+              <div className="relative group">
+                <Link
+                  to="/work-with-us"
+                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
+                    isProfessionalsActive
+                      ? "text-warm-brown border-b-2 border-warm-brown"
+                      : "text-warm-brown/70 hover:text-warm-brown"
+                  }`}
                 >
-                  Beauty Rooms by NJ
-                </a>
+                  Join our team
+                  <ChevronDownIcon />
+                </Link>
+                <div
+                  role="menu"
+                  className="absolute right-0 top-full z-50 min-w-[220px] hidden group-hover:block pt-1"
+                >
+                  <div className="border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] py-2 shadow-sm">
+                    <Link to="/work-with-us" role="menuitem" className={submenuItemClass}>
+                      Work with us
+                    </Link>
+                    <a
+                      href={BEAUTY_ROOMS_NJ_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      role="menuitem"
+                      className={submenuItemClass}
+                    >
+                      Beauty Rooms by NJ
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+              <NavLink to="/faq" label="Faq" active={isActive("/faq")} />
+              <NavLink to="/contact" label="Contact" active={isActive("/contact")} />
+            </nav>
+            <Link
+              to="/bookings"
+              className="ml-auto flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
+            >
+              Book Now
+            </Link>
           </div>
-          <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
-          <NavLink to="/contact" label="Contact us" active={isActive("/contact")} />
-        </nav>
+        </div>
 
-        {/* Book Now Button */}
-        <Link
-          to="/bookings"
-          className="hidden md:flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
-        >
-          Book Now
+        <Link to="/" className="flex-shrink-0 md:hidden">
+          <Logo />
         </Link>
 
         {/* Mobile Menu Toggle */}
@@ -177,7 +182,7 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden bg-[#FAFAF5] border-t border-[rgba(232,232,227,0.50)] px-6 py-6 flex flex-col gap-6">
           <NavLink to="/" label="Home" active={isActive("/")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/about" label="About us" active={isActive("/about")} onClick={() => setMobileOpen(false)} />
+          <NavLink to="/about" label="About" active={isActive("/about")} onClick={() => setMobileOpen(false)} />
           <div className="flex flex-col gap-2">
             <NavLink
               to="/services"
@@ -194,11 +199,10 @@ export default function Navbar() {
               ))}
             </div>
           </div>
-          <NavLink to="/experts" label="Specialists" active={isSpecialistsActive} onClick={() => setMobileOpen(false)} />
           <div className="flex flex-col gap-2">
             <NavLink
               to="/work-with-us"
-              label="JOIN OUR TEAM"
+              label="Join our team"
               hasDropdown
               active={isProfessionalsActive}
               onClick={() => setMobileOpen(false)}
@@ -218,12 +222,12 @@ export default function Navbar() {
               </a>
             </div>
           </div>
-          <NavLink to="/faq" label="FAQ" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
-          <NavLink to="/contact" label="Contact us" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
+          <NavLink to="/faq" label="Faq" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
+          <NavLink to="/contact" label="Contact" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
           <Link
             to="/bookings"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+            className="flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
           >
             Book Now
           </Link>

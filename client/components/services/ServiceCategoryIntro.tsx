@@ -14,7 +14,7 @@ export function ServiceCategoryIntro({ title, description }: ServiceCategoryIntr
       <div className="mx-auto max-w-[640px]">
         <h2
           id="category-intro-heading"
-          className="font-barlow font-light text-[clamp(28px,4.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-5 md:mb-6"
+          className="font-barlow font-extralight text-[clamp(28px,4.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-5 md:mb-6"
         >
           {title}
         </h2>

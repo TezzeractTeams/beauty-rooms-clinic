@@ -15,7 +15,7 @@ export default function Index() {
       <WelcomeSection />
       <WhySection />
       <ServicesSection />
-      <ApproachSection />
+      
       <ConsultationCtaSection />
     </Layout>
   );

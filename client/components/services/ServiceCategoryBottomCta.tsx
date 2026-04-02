@@ -18,7 +18,7 @@ export function ServiceCategoryBottomCta({ categoryId }: ServiceCategoryBottomCt
     >
       <h2
         id={headingId}
-        className="font-barlow font-light text-white text-[clamp(32px,5vw,56px)] leading-[1.12] tracking-[-0.03em] mb-6 md:mb-8 max-w-4xl"
+        className="font-barlow font-extralight text-white text-[clamp(32px,5vw,56px)] leading-[1.12] tracking-[-0.03em] mb-6 md:mb-8 max-w-4xl"
       >
         Ready for effortless {copy.headingHighlight}?
       </h2>

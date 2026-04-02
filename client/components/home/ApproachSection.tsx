@@ -34,7 +34,7 @@ export function ApproachSection() {
         <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-5">
           Our Process
         </p>
-        <h2 className="font-barlow font-light text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-10 max-w-[520px]">
+        <h2 className="font-barlow font-extralight text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-10 max-w-[520px]">
           The Beauty Rooms Clinic Approach
         </h2>
 
@@ -48,7 +48,7 @@ export function ApproachSection() {
                 {step.num}
               </span>
               <div className="min-w-0 pt-1">
-                <h3 className="font-barlow font-normal text-lg md:text-xl text-charcoal mb-2">
+                <h3 className="font-barlow font-light text-lg md:text-xl text-charcoal mb-2">
                   {step.title}
                 </h3>
                 <p className="font-barlow font-light text-base leading-[1.7] text-[rgba(45,41,38,0.70)]">

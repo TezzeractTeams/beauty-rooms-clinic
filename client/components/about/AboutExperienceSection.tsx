@@ -13,7 +13,7 @@ export function AboutExperienceSection() {
         <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-5">
           The experience
         </p>
-        <h2 className="font-barlow font-light text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-6 max-w-[480px]">
+        <h2 className="font-barlow font-extralight text-[clamp(28px,3.5vw,44px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-6 max-w-[480px]">
           A space designed for you
         </h2>
         <p className="font-barlow font-light text-base leading-[1.7] text-[rgba(45,41,38,0.70)] max-w-[440px]">

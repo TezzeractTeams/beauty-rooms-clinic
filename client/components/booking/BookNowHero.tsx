@@ -10,7 +10,7 @@ export function BookNowHero() {
         </p>
         <h1
           id="book-now-heading"
-          className="mx-auto mb-6 max-w-5xl font-barlow text-[clamp(2rem,5vw,3.5rem)] font-light leading-[1.1] tracking-[-0.02em] text-charcoal"
+          className="mx-auto mb-6 max-w-5xl font-barlow text-[clamp(2rem,5vw,3.5rem)] font-extralight leading-[1.1] tracking-[-0.02em] text-charcoal"
         >
           Book Your Appointment
         </h1>

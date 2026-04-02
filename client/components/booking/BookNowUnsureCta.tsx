@@ -11,7 +11,7 @@ export function BookNowUnsureCta() {
         <div className="text-left">
           <h2
             id="book-now-unsure-heading"
-            className="flex items-start gap-3 font-barlow text-[clamp(1.5rem,3vw,2rem)] font-light leading-snug tracking-[-0.02em] text-charcoal"
+            className="flex items-start gap-3 font-barlow text-[clamp(1.5rem,3vw,2rem)] font-extralight leading-snug tracking-[-0.02em] text-charcoal"
           >
             <HelpCircle
               className="mt-2 h-7 w-7 shrink-0 text-charcoal/70"

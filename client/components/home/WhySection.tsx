@@ -13,7 +13,7 @@ export function WhySection() {
         <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-5">
           Why Beauty Rooms Clinics?
         </p>
-        <h2 className="font-barlow font-light text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-8 max-w-[480px]">
+        <h2 className="font-barlow font-extralight text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-8 max-w-[480px]">
           Curated Care for Your Unique Features
         </h2>
         <p className="font-barlow font-light text-base leading-[1.7] text-[rgba(45,41,38,0.70)] max-w-[440px] mb-6">

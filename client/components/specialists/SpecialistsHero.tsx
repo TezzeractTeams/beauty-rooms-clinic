@@ -15,7 +15,7 @@ export function SpecialistsHero() {
         <div className="mx-auto w-full max-w-xl md:mx-0">
           <h1
             id="specialists-page-heading"
-            className="font-barlow font-light text-[clamp(36px,7vw,76px)] leading-[1.05] tracking-[-0.03em] text-charcoal mb-6 md:mb-8 md:font-light"
+            className="font-barlow font-extralight text-[clamp(36px,7vw,76px)] leading-[1.05] tracking-[-0.03em] text-charcoal mb-6 md:mb-8 md:font-extralight"
           >
             Meet our
             <br />
