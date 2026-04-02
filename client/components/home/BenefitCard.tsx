@@ -1,16 +1,27 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 export interface BenefitCardProps {
   icon: ReactNode;
   title: string;
   description?: string;
   titleWeight: string;
+  /** Tighter icon + spacing: small icon, header, brief description (e.g. service category benefits) */
+  compact?: boolean;
 }
 
-export function BenefitCard({ icon, title, description, titleWeight }: BenefitCardProps) {
+export function BenefitCard({ icon, title, description, titleWeight, compact }: BenefitCardProps) {
   return (
-    <div className="bg-[#FAFAF5] flex flex-col gap-0 px-10 md:px-12 py-12">
-      <div className="mb-[46px]">{icon}</div>
+    <div className="bg-[#FAFAF5] flex flex-col gap-0 px-8 py-8">
+      <div
+        className={cn(
+          compact
+            ? "mb-5 inline-block origin-top-left scale-[0.88] [&_svg]:block"
+            : "mb-[46px]",
+        )}
+      >
+        {icon}
+      </div>
       <h3
         className={`font-barlow ${titleWeight} text-2xl leading-8 tracking-[-0.02em] text-[#2D2926] mb-[14px]`}
       >

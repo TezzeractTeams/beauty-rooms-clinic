@@ -32,7 +32,7 @@ export function BookNowUnsureCta() {
         <div className="flex flex-col items-center gap-6 lg:items-end">
           <Link
             to="/contact"
-            className="flex w-full max-w-md items-center justify-center bg-[#6B6158] px-10 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em] text-cream transition-colors hover:bg-[#6B6158]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6B6158] lg:max-w-[320px]"
+            className="flex w-full max-w-md items-center justify-center bg-primary px-10 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:max-w-[320px]"
           >
             Contact specialist
           </Link>

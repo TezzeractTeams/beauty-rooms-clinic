@@ -4,7 +4,6 @@ import { ArrowRightIcon, BadgeCheckIcon, ClockIcon, SparkleIcon } from "@/compon
 import type { ServiceCategory } from "./service-types";
 
 const benefitIcons = [<SparkleIcon key="s" />, <BadgeCheckIcon key="b" />, <ClockIcon key="c" />] as const;
-const benefitTitleWeights: ("font-light" | "font-normal")[] = ["font-light", "font-normal", "font-light"];
 
 interface ServiceCategorySectionProps {
   category: ServiceCategory;
@@ -19,9 +18,14 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
     ctaLabel,
     imageSrc,
     imageAlt,
+    listingImageSrc,
+    listingImageAlt,
     imageClassName,
     imageOnLeft,
   } = category;
+
+  const splitImageSrc = listingImageSrc ?? imageSrc;
+  const splitImageAlt = listingImageAlt ?? imageAlt;
 
   return (
     <section
@@ -35,8 +39,8 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         }`}
       >
         <img
-          src={imageSrc}
-          alt={imageAlt}
+          src={splitImageSrc}
+          alt={splitImageAlt}
           className={`w-full h-full object-cover object-center ${imageClassName ?? ""}`}
         />
       </div>
@@ -46,9 +50,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
           imageOnLeft ? "" : "md:order-1"
         }`}
       >
-        <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-5">
-          {eyebrow}
-        </p>
+      
         <h2
           id={`${category.id}-heading`}
           className="font-barlow font-light text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal mb-8 max-w-[520px]"
@@ -63,9 +65,9 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
 
     
 
-        <p className="font-barlow font-light text-[10px] tracking-[0.15em] uppercase text-warm-brown/70 mb-4">
+        <h3 className="font-barlow font-light text-2xl leading-8 tracking-[-0.02em] text-[#2D2926] mb-4">
           Benefits
-        </p>
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 border border-[rgba(103,92,83,0.10)] gap-px bg-[rgba(103,92,83,0.10)] mb-10">
           {benefits.map((b, i) => (
             <BenefitCard
@@ -73,7 +75,8 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
               icon={benefitIcons[i % 3]}
               title={b.title}
               description={b.description || undefined}
-              titleWeight={benefitTitleWeights[i % 3]}
+              titleWeight="font-light"
+              compact
             />
           ))}
         </div>
@@ -81,7 +84,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         <div>
           <Link
             to="/bookings"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-charcoal/90 transition-colors"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
           >
             <span>{ctaLabel}</span>
             <ArrowRightIcon />

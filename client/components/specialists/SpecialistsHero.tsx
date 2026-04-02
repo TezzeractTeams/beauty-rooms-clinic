@@ -27,7 +27,7 @@ export function SpecialistsHero() {
           <div className="flex flex-col items-start gap-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-4">
             <Link
               to="/services"
-              className="inline-flex w-fit items-center gap-3 px-10 py-5 bg-[#6B635B] text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors hover:bg-[#6B635B]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6B635B]"
+              className="inline-flex w-fit items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span>Explore our services</span>
               <ArrowRightIcon />

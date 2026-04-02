@@ -11,11 +11,10 @@ export interface CategoryDetailFromJson {
   services: FeaturedServiceCardData[];
 }
 
-const BUILDER_INTERIOR =
-  "https://api.builder.io/api/v1/image/assets/TEMP/311c7b6313d6b19839dbb5fd6c0d417d258f9130?width=1600";
-
-const IMG_LASHES = "/images/lashes.webp";
-const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makeup.webp";
+const IMG_LASHES = "/images/home-lashes.jpg";
+const IMG_HEAD_SPA = "/images/Head%20SPA.JPG";
+const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makup.jpg";
+const IMG_PMU_SERVICES_LISTING = "/images/lip-pmu.jpg";
 
 /** Display order on /services and in nav: Lash, Head Spa, PMU */
 const CATEGORY_ORDER = [
@@ -35,6 +34,9 @@ const CATEGORY_UI: Record<
     imageAltShort: string;
     imageClassName?: string;
     imageOnLeft: boolean;
+    listingImageSrc?: string;
+    listingImageAlt?: string;
+    detailPageHeroTitle?: string;
   }
 > = {
   lash: {
@@ -42,7 +44,7 @@ const CATEGORY_UI: Record<
     title: "Lash services",
     ctaLabel: "Book lash appointment",
     imageSrc: IMG_LASHES,
-    imageAlt: "Close-up beauty treatment emphasizing eyes and lashes",
+    imageAlt: "Close-up of classic eyelash extensions and soft shaded eyeliner",
     imageAltShort: "Lash service",
     imageOnLeft: false,
   },
@@ -50,7 +52,7 @@ const CATEGORY_UI: Record<
     eyebrow: "Head Spa",
     title: "Head spa treatments",
     ctaLabel: "Book head spa session",
-    imageSrc: BUILDER_INTERIOR,
+    imageSrc: IMG_HEAD_SPA,
     imageAlt: "Calm, welcoming interior for head spa and wellness services",
     imageAltShort: "Head spa service",
     imageOnLeft: true,
@@ -58,11 +60,14 @@ const CATEGORY_UI: Record<
   pmu: {
     eyebrow: "PMU",
     title: "Permanent makeup",
+    detailPageHeroTitle: "Sophisticated Artistry. Permanent Results",
     ctaLabel: "Book PMU consultation",
     imageSrc: IMG_PERMANENT_MAKEUP,
     imageAlt: "Permanent makeup and brow treatment at Beauty Rooms Clinic",
     imageAltShort: "PMU service",
     imageOnLeft: false,
+    listingImageSrc: IMG_PMU_SERVICES_LISTING,
+    listingImageAlt: "Lip and permanent makeup treatment at Beauty Rooms Clinic",
   },
 };
 
@@ -70,7 +75,8 @@ const CATEGORY_HERO_BODY: Record<string, string> = {
   lash: "Define your gaze with precision lash applications that range from subtle enhancement to dramatic volume.",
   "head-spa":
     "Scalp-focused rituals that melt tension away while supporting healthier hair from the root.",
-  pmu: "Wake up with refined brows and soft lip color—permanent makeup designed to look natural and age gracefully.",
+  pmu:
+    "Elevate your daily aesthetic with precision-crafted Permanent Makeup. At BRC, we specialize in hyper-realistic techniques designed to harmonize with your unique facial structure, ensuring you wake up every day looking refined, refreshed, and effortlessly yourself.",
 };
 
 /** Second paragraph under the category intro heading (sample / supporting copy) */
@@ -78,7 +84,7 @@ const CATEGORY_INTRO_SAMPLE: Record<string, string> = {
   lash: "From classic extensions to lifts, tints, and brow design—each appointment is tailored to your features and lifestyle.",
   "head-spa":
     "Choose hydration, detox, growth-focused, or relaxation sessions—and add mini facials, massage, or styling when you want a little extra.",
-  pmu: "Brows, lips, liner, and paramedical options are mapped and color-matched for results that look like you—only more polished.",
+  pmu: "At Beauty Rooms Clinic, we don't believe in 'trend brows.' We believe in timeless proportions. Your session is a collaborative design process focused on restoring what time or over-plucking has taken away.",
 };
 
 const BOTTOM_CTA_SUBTEXT =
@@ -119,19 +125,54 @@ export function getCategoryBottomCta(categoryId: string): CategoryBottomCtaCopy 
 
 const CATEGORY_BENEFITS: Record<string, { title: string; description: string }[]> = {
   lash: [
-    { title: "Fuller, longer lashes instantly", description: "" },
-    { title: "No mascara needed", description: "" },
-    { title: "Customized to your eye shape", description: "" },
+    {
+      title: "Instant, Weightless Volume",
+      description:
+        "Achieve a full, natural look that opens your eyes and boosts confidence from the second you leave.",
+    },
+    {
+      title: "Mascara-Free, Flawless Days",
+      description: "Wake up every morning with perfectly defined lashes.",
+    },
+    {
+      title: "Artfully Bespoke Styling",
+      description:
+        "Every set is precisely custom-mapped and styled to perfectly harmonize with your unique eye shape and natural lashes.",
+    },
   ],
   "head-spa": [
-    { title: "Improves scalp health", description: "" },
-    { title: "Promotes hair growth", description: "" },
-    { title: "Deep relaxation", description: "" },
+    {
+      title: "Deep Scalp Renewal",
+      description:
+        "Rich cleansing and targeted care restore balance so your scalp feels light, fresh, and ready to support healthier-looking hair.",
+    },
+    {
+      title: "Circulation That Feeds Growth",
+      description:
+        "Massage and advanced techniques boost blood flow and nutrient delivery to the follicles—supporting stronger, fuller hair over time.",
+    },
+    {
+      title: "Unwind From Root to Tip",
+      description:
+        "Slow, intentional rituals calm the nervous system and release tension while you enjoy quiet, restorative care.",
+    },
   ],
   pmu: [
-    { title: "Long-lasting results", description: "" },
-    { title: "Natural enhancement", description: "" },
-    { title: "Saves time daily", description: "" },
+    {
+      title: "Effortless Morning Polish",
+      description:
+        "Wake up with softly defined brows, lips, and liner that look refined the moment you open your eyes—no daily drawing required.",
+    },
+    {
+      title: "Naturally Yours, Refined",
+      description:
+        "Every shape and shade is mapped and color-matched to your features for results that enhance without looking overdone.",
+    },
+    {
+      title: "Beauty That Goes the Distance",
+      description:
+        "Premium pigments and precise application deliver lasting confidence with fewer products and less time in front of the mirror.",
+    },
   ],
 };
 
@@ -216,11 +257,14 @@ export function buildServiceCategories(): ServiceCategory[] {
       id,
       eyebrow: ui.eyebrow,
       title: ui.title,
+      detailPageHeroTitle: ui.detailPageHeroTitle,
       treatments: list.map((r) => r.name),
       benefits: CATEGORY_BENEFITS[id] ?? [],
       ctaLabel: ui.ctaLabel,
       imageSrc: ui.imageSrc,
       imageAlt: ui.imageAlt,
+      listingImageSrc: ui.listingImageSrc,
+      listingImageAlt: ui.listingImageAlt,
       imageClassName: ui.imageClassName,
       imageOnLeft: ui.imageOnLeft,
     };

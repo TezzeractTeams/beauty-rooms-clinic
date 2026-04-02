@@ -98,7 +98,7 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         <div className="mt-auto flex items-stretch gap-3 pt-2">
           <Link
             to={`/bookings?specialist=${encodeURIComponent(id)}`}
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-[#6B635B] px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-white transition-colors hover:bg-[#5e564f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6B635B]"
+            className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             {bookLabel}
           </Link>

@@ -6,9 +6,10 @@ export function AboutHeroSection() {
     <section className="relative w-full min-h-[calc(70vh-85px)] overflow-hidden bg-[#FAFAF5]">
       <div className="absolute inset-0">
         <img
-          src="/images/About%20us.webp"
-          alt="Beauty Rooms Clinic interior"
-          className="w-full h-full object-cover object-center"
+          src="/images/aboutushero.jpeg"
+          alt="Beauty Rooms Clinic"
+          className="h-full w-full object-cover"
+          style={{ objectPosition: "30% 50%" }}
         />
       </div>
 
@@ -31,7 +32,7 @@ export function AboutHeroSection() {
           <div className="mt-4">
             <Link
               to="/bookings"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-charcoal/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <span>Book Now</span>
               <ArrowRightIcon />

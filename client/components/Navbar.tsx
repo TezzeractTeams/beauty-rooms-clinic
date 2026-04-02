@@ -18,7 +18,7 @@ const Logo = () => (
   <img
     src="/images/Logo.svg"
     alt="Beauty Rooms Clinic"
-    className="h-10 w-auto md:h-12 select-none"
+    className="h-12 w-auto md:h-[4.25rem] lg:h-[4.1rem] select-none"
   />
 );
 
@@ -128,7 +128,7 @@ export default function Navbar() {
                   : "text-warm-brown/70 hover:text-warm-brown"
               }`}
             >
-              For Professional
+              JOIN OUR TEAM
               <ChevronDownIcon />
             </Link>
             <div
@@ -157,7 +157,7 @@ export default function Navbar() {
         {/* Book Now Button */}
         <Link
           to="/bookings"
-          className="hidden md:flex items-center px-8 py-5 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-charcoal/90 transition-colors"
+          className="hidden md:flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
         >
           Book Now
         </Link>
@@ -197,7 +197,7 @@ export default function Navbar() {
           <div className="flex flex-col gap-2">
             <NavLink
               to="/work-with-us"
-              label="For Professional"
+              label="JOIN OUR TEAM"
               hasDropdown
               active={isProfessionalsActive}
               onClick={() => setMobileOpen(false)}
@@ -221,7 +221,7 @@ export default function Navbar() {
           <Link
             to="/bookings"
             onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center px-8 py-4 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase"
+            className="flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
           >
             Book Now
           </Link>

@@ -3,7 +3,7 @@ export function WhySection() {
     <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row min-h-[480px] md:min-h-[560px]">
       <div className="w-full md:w-[48%] lg:w-[50%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0">
         <img
-          src="/images/Curated%20Care%20for%20Your%20Unique%20Features.webp"
+          src="/images/curated.webp"
           alt="Curated care tailored to your features"
           className="w-full h-full object-cover object-center"
         />

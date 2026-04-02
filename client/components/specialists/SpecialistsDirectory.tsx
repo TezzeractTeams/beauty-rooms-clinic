@@ -28,7 +28,7 @@ export function SpecialistsDirectory() {
                 onClick={() => setActiveFilter(id)}
                 className={`rounded-lg px-5 py-2.5 font-barlow text-xs font-light tracking-[0.12em] uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal ${
                   isActive
-                    ? "bg-charcoal text-cream"
+                    ? "bg-primary text-primary-foreground"
                     : "text-warm-brown hover:bg-muted/50"
                 }`}
                 aria-pressed={isActive}

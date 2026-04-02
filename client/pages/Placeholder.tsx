@@ -20,7 +20,7 @@ export default function Placeholder({ title }: PlaceholderProps) {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center gap-3 px-10 py-5 bg-charcoal text-cream font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-charcoal/90 transition-colors"
+          className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
         >
           Return Home
         </Link>

@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { ConsultationCtaSection } from "@/components/home/ConsultationCtaSection";
 import { ArrowRightIcon } from "@/components/home/icons";
+import { ProfessionalIntakeFormSection } from "@/components/work-with-us/ProfessionalIntakeFormSection";
 import { Link } from "react-router-dom";
 
 const BEAUTY_ROOMS_NJ_URL = "https://www.beautyroomsbynj.com/";
@@ -13,11 +14,36 @@ const bodyClass =
 
 const sectionClass = "w-full bg-[#F9F8F6] px-6 py-20 md:px-10 md:py-28 lg:py-32";
 
+const platformBenefits = [
+  {
+    title: "Client Generation",
+    body: "We invest in paid advertising, local search, and digital funnels to bring new clients into the clinic.",
+  },
+  {
+    title: "Booking & CRM System",
+    body: "We handle lead capture, booking, follow-ups, and client communication so your schedule stays full.",
+  },
+  {
+    title: "Front Desk & Operations",
+    body: "Our front desk manages check-ins, scheduling, and client experience — so you're not dealing with admin.",
+  },
+  {
+    title: "High-End Environment",
+    body: "A professional clinic space designed to support premium services and client retention.",
+  },
+] as const;
+
 const disciplines = [
-  "Lash artists",
-  "Head spa and scalp care specialists",
+  "Nurse injectors (Botox / fillers)",
+  "Medical aestheticians",
+  "Licensed estheticians",
+  "Lash artists (classic / volume / mega)",
   "Permanent makeup (PMU) artists",
-  "Estheticians and skin-focused practitioners",
+  "Brow specialists (microblading / lamination)",
+  "Skin specialists (acne / anti-aging treatments)",
+  "Advanced facial providers (Hydrafacial, peels, etc.)",
+  "Laser technicians",
+  "Regenerative service (peptides, etc.)",
 ] as const;
 
 export default function WorkWithUs() {
@@ -43,9 +69,9 @@ export default function WorkWithUs() {
             <p className={`mb-4 ${eyebrowClass}`}>For professionals</p>
             <h1
               id="work-with-us-heading"
-              className="mb-6 font-barlow font-light text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
+              className="mb-6 font-barlow font-light text-[clamp(36px,5vw,56px)] leading-[1.08] tracking-[-0.04em] text-charcoal"
             >
-              Work with us
+              Join Our Team
             </h1>
             <p className={`max-w-[560px] ${bodyClass}`}>
               Join a boutique clinic in Sarasota where clinical skill meets a calm, luxury experience. We
@@ -55,12 +81,67 @@ export default function WorkWithUs() {
             <div className="mt-8">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-3 bg-charcoal px-10 py-5 font-barlow font-light text-xs uppercase tracking-[0.1em] text-cream transition-colors hover:bg-charcoal/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
+                className="inline-flex items-center gap-3 bg-primary px-10 py-5 font-barlow font-light text-xs uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 <span>Contact us</span>
                 <ArrowRightIcon />
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="relative w-full overflow-hidden bg-[#FAFAF5] px-6 pt-20 "
+        aria-labelledby="platform-focus-heading"
+      >
+        <div
+          className="pointer-events-none absolute left-0 top-0 h-[min(420px,55vw)] w-[min(420px,90vw)] -translate-x-1/3 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(103,92,83,0.06)_0%,transparent_70%)]"
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-5xl">
+          <div className="mb-14  lg:flex lg:items-center lg:justify-between lg:gap-16 xl:gap-24">
+            <h2
+              id="platform-focus-heading"
+              className="mb-6 max-w-[28rem] font-barlow font-light text-2xl leading-snug tracking-[-0.02em] text-charcoal md:max-w-xl md:text-3xl lg:mb-0 lg:shrink-0"
+            >
+              Focus on your clients. We&apos;ll handle everything else.
+            </h2>
+            <p className={`max-w-xl lg:pt-1 ${bodyClass}`}>
+              The Beauty Rooms Clinic Platform has invested in marketing, technology, and front-of-house
+              systems so you can focus on delivering high-value services and growing your income.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+            {platformBenefits.map((item, index) => (
+              <article
+                key={item.title}
+                className="group relative border border-[rgba(103,92,83,0.12)] bg-[#F9F8F6]/80 p-8 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset] backdrop-blur-[2px] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-md md:p-9"
+              >
+                <div className="mb-6 flex items-center gap-4">
+                  <span
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[rgba(103,92,83,0.18)] bg-[#FAFAF5] font-barlow text-xs font-light tracking-[0.12em] text-warm-brown"
+                    aria-hidden
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="h-px min-w-[2rem] flex-1 max-w-[6rem] bg-gradient-to-r from-[rgba(103,92,83,0.28)] to-transparent"
+                    aria-hidden
+                  />
+                  <span className="font-barlow text-[10px] font-light tracking-[0.35em] text-warm-brown/50">
+                    ⸻
+                  </span>
+                </div>
+                <h3 className="mb-3 font-barlow font-light text-xl tracking-[-0.02em] text-charcoal md:text-[1.35rem]">
+                  {index + 1}. {item.title}
+                </h3>
+                <p className="font-barlow font-light text-base leading-[1.65] text-[rgba(45,41,38,0.72)] md:text-lg">
+                  {item.body}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -74,8 +155,10 @@ export default function WorkWithUs() {
             Who we&apos;re looking for
           </h2>
           <p className={`mb-8 ${bodyClass}`}>
-            We build our menu around advanced beauty and wellness services. If you excel in one of these
-            areas and value a refined, client-first environment, we would love to hear from you.
+          We partner with licensed and certified professionals who are reliable, client-focused, and serious about growing their business.
+
+
+Our platform is best suited to providers offering repeatable, high-demand services — those who value consistency, professionalism, and want to maximize their earning potential within a structured, growth-focused environment.
           </p>
           <ul className="flex flex-col gap-3 border-l-2 border-[rgba(103,92,83,0.25)] pl-6">
             {disciplines.map((item) => (
@@ -87,28 +170,7 @@ export default function WorkWithUs() {
         </div>
       </section>
 
-      <section
-        className="w-full bg-[#FAFAF5] px-6 py-20 md:px-10 md:py-28 lg:py-32"
-        aria-labelledby="environment-heading"
-      >
-        <div className="mx-auto max-w-3xl">
-          <h2
-            id="environment-heading"
-            className="mb-6 font-barlow font-light text-2xl tracking-[-0.02em] text-charcoal md:text-3xl"
-          >
-            What you can expect
-          </h2>
-          <p className={`mb-6 ${bodyClass}`}>
-            Beauty Rooms Clinic is designed as a sanctuary for guests and a professional home for
-            specialists. We focus on clear standards, respectful collaboration, and a space where your
-            expertise can shine.
-          </p>
-          <p className={bodyClass}>
-            Whether you are exploring a new home for your practice or the next step in your career, tell us
-            about your background and goals—we will follow up with next steps.
-          </p>
-        </div>
-      </section>
+      <ProfessionalIntakeFormSection professionSuggestions={disciplines} />
 
       <section className={sectionClass} aria-labelledby="nj-heading">
         <div className="mx-auto max-w-3xl border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] px-8 py-10 md:px-12 md:py-12">
@@ -120,10 +182,7 @@ export default function WorkWithUs() {
             Beauty Rooms by NJ
           </h2>
           <p className={`mb-6 ${bodyClass}`}>
-            Interested in running your own suite or renting a booth?{" "}
-            <span className="text-charcoal">Beauty Rooms by NJ</span> offers adjoining salon suite and booth
-            rental spaces for hair, wellness, and beauty professionals in the Sarasota area—separate from
-            our clinic services, with its own leasing model.
+          Looking for a booth? Beauty Rooms by NJ offers premium, independent leasing for hair professionals in Sarasota. Same location, separate model—Elevated platform designed for your autonomy
           </p>
           <a
             href={BEAUTY_ROOMS_NJ_URL}

@@ -67,7 +67,7 @@ function PathColumn({
         {variant === "solid" ? (
           <Link
             to={ctaTo}
-            className="inline-flex w-full items-center justify-center gap-2.5 bg-[#6B635B] px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-cream transition-colors hover:bg-[#6B635B]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6B635B] sm:w-auto"
+            className="inline-flex w-full items-center justify-center gap-2.5 bg-primary px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
           >
             <span>{ctaLabel}</span>
             <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden />

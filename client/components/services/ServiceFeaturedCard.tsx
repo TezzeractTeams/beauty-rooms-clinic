@@ -40,7 +40,7 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
           <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
             <Link
               to="/bookings"
-              className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-[#6D635B] text-white font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-[#5e564f] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6D635B]"
+              className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Book now
             </Link>
