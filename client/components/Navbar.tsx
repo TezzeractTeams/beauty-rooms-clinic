@@ -151,6 +151,7 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+          <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
           <NavLink to="/contact" label="Contact us" active={isActive("/contact")} />
         </nav>
 
@@ -217,6 +218,7 @@ export default function Navbar() {
               </a>
             </div>
           </div>
+          <NavLink to="/faq" label="FAQ" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
           <NavLink to="/contact" label="Contact us" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
           <Link
             to="/bookings"

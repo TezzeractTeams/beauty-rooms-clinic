@@ -1,0 +1,474 @@
+[
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Eyelash Extension",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Eyelash Extension Volume set",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Eyelash Extension FILL SET",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Lash lift and tint",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Brow Lamination",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Upper lip hair rempoval",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "lower lip removal",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Eyebrow Cleanup",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Eyebrow designer + tint",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "LASH",
+    "SERVICE": "Lashes removal",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Hydration Treatment",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Detox Treatment",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Thinning/Growth Treatment",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Sensitive Scalp Treatment",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Anti-Stress Treatment",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Mini Facial (Add-On)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Mini Massage (Add-On)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Blowout (Add-On)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "HEAD SPA",
+    "SERVICE": "Extended Scalp Massage (Add-On)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Nano brows (Initial Session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Nano brows (Follow up Session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Powder/shading brows  (Initial Session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Powder/shading brows  (Follow up Session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Color correction (per session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "What is the \"BRC Method\" of Microblading?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microblading is a sophisticated form of semi-permanent artistry. Unlike traditional tattooing, we use a specialized handheld tool to create ultra-fine, crisp hair strokes that mimic the natural growth of your brow hair. It is a strategic investment in your facial symmetry, designed to enhance your features without looking \"done.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "Is the procedure painful?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Your comfort is central to the BRC experience. We utilize a high-potency, medical-grade topical anesthetic before and during the procedure to minimize sensation. Most clients describe the feeling as a light \"scratching\" or \"pressure.\" Many of our clients find the process so relaxing they actually nap during the session.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "How long does Microblading last?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microblading is semi-permanent, typically lasting 12 to 18 months depending on your skin type and lifestyle. Because we use high-quality pigments that fade naturally over time, your brows can be \"refreshed\" as your facial structure or style preferences evolve with age.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "What is the \"Downtime\" or healing process?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "mmediately after the session, your brows will appear darker and bolder—this is a normal part of the pigment settling. Over the next 7 to 10 days, your skin will undergo a light flaking process. We provide a premium BRC Aftercare Kit and detailed instructions to ensure your skin heals perfectly with zero compromise to the pigment.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "Why do I need a Follow-Up Session?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microblading is a two-step transformation. The initial session lays the foundation; the 6-week Follow-Up is where we refine the detail, perfect the color saturation, and ensure the strokes have healed symmetrically. We consider the second session essential to achieving the \"BRC Signature\" result.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "Am I a candidate for Microblading?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microblading works beautifully on most skin types; however, for clients with excessively oily skin or large pores, we may recommend Nano Brows or Powder Shading. These techniques provide better pigment retention for specific skin chemistries while still delivering a soft, natural aesthetic.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microblading / Micropigmentation",
+    "QUESTION": "How should I prepare for my \"Brow Day\"?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "To ensure the best pigment retention and minimize sensitivity:\n\n48 Hours Prior: Strictly avoid alcohol, caffeine, Aspirin, or Ibuprofen (these can thin the blood).\n\n2 Weeks Prior: Discontinue Retinol, AHA/BHAs, and avoid Botox in the forehead area.\n\nDay of: Arrive relaxed. We will begin with an in-depth \"Mapping\" session where we draw your new shape for your approval before a single stroke is made.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Micro Blading - Sparce",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "What is the difference between Lip Blush and Lip Tint?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "At BRC, we treat these as a spectrum of saturation.\n\nLip Tint: Provides a sheer, \"watercolor\" wash of color—perfect for those who want a subtle, healthy glow.\n\nLip Blush: Offers more defined contouring and slightly deeper saturation, ideal for correcting asymmetry or restoring the lost natural border of the lips.\nBoth are a strategic investment in your daily aesthetic, eliminating the need for constant reapplication of lipsticks.\n\nOur artists will help decide on the best treatment subject to your skin type and desired look",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "Will my lips look \"too bright\" or unnatural?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "This is the most common concern, and the answer is no. Immediately after the procedure, the color will appear vibrant and bold. However, during the healing process, the pigment softens by 30–50%, resulting in a soft, diffused \"blush\" that looks like your natural lip color—only better. We custom-blend every shade to harmonize with your skin’s unique undertones.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "Does the procedure hurt?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "We prioritize a pain-free experience. We apply a potent, medical-grade topical anesthetic before we begin and continue to numb the area throughout the process. Most clients describe the sensation as a light rhythmic vibration. Because we use a gentle, high-precision technique, trauma to the delicate lip tissue is kept to an absolute minimum.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "How long is the recovery?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "The initial \"bold\" phase lasts about 3 to 5 days. You may experience minor swelling for the first 24–48 hours (many clients actually love this temporary \"plumped\" look!). By day 7, the surface has healed, and the true, soft color begins to bloom from within the skin over the following few weeks.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "I’ve had cold sores in the past—can I still get this done?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Yes, but with a simple precaution. The procedure can trigger a flare-up if the virus is dormant in your system. We require clients with a history of cold sores to take an antiviral medication (like Valtrex) for a few days before and after the session. This ensures your healing process is seamless and your results remain flawless.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "Can Lip Blushing replace fillers?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "While it doesn’t add physical volume like a filler, it is a powerful illusion of fullness. By defining the \"vermillion border\" (the edge of your lips) and adding consistent color to pale areas, your lips will appear more structured, symmetrical, and youthful. Many BRC clients find that Lip Blushing provides the \"finish\" that fillers alone cannot achieve.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip blush (Initial Session)",
+    "QUESTION": "How should I prepare for my appointment?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Hydration is the \"secret ingredient\" for Lip Blush success.\n\n7 Days Prior: Use a gentle lip scrub and keep your lips heavily moisturized with a high-quality balm. We cannot work on dry, cracked, or chapped lips.\n\n48 Hours Prior: Avoid caffeine, alcohol, and blood thinners.\n\nPro-Tip: Bring your favorite everyday \"holy grail\" lipstick to your consultation so we can use it as a reference for your custom pigment blend.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip tint (Initial Session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lip tint (follow up session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "lash liner",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Eyeliner (Initial session)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Eyeliner (Touch Up)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Areola Micropigmentation",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "scar camouflage",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "PMU Consultation (Areola & Scar & MIcropigmentation Carmouflate)",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "What is Microneedling",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microneedling is a minimally invasive rejuvenation treatment that uses ultra-fine, sterile needles to create controlled \"micro-channels\" in the skin. This \"skin-gym\" approach triggers your body’s natural repair process, flooding the area with fresh collagen and elastin for a firmer, smoother complexion.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "Does Microneedling hurt?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "At Beauty Rooms Clinic, your comfort is a priority. We apply a medical-grade topical numbing cream 20–30 minutes before your session. Most clients describe the sensation as a light, vibrating \"grittiness\" rather than pain.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "What is the downtime?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Expect a \"sunburn\" look for 24 to 48 hours. Most clients experience slight redness and tightness immediately after, but you can typically return to work the next day. We provide specific post-care instructions to ensure your skin heals beautifully and quickly.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "How many sessions will I need to see results?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "While you’ll notice a \"glow\" within a week, structural changes take time.\n\nFor general rejuvenation: A series of 3 sessions.\n\nFor acne scarring or deep wrinkles: A series of 6 sessions.\n\nInterval: Sessions are spaced 4–6 weeks apart to allow for collagen remodeling.\n\nThe Beauty Rooms Clinic team will advise you absed on your skin type and we offer packages accodingly",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "Can I get Microneedling if I have active acne?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "We cannot perform microneedling directly over active, inflammatory acne or open breakouts as it can spread bacteria. However, it is the \"gold standard\" for treating the scars left behind once acne has cleared. We recommend a consultation to prep your skin for the best results.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "How Often Should People Get MicroNeedling",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Microneedling is not a \"one-and-done\" service. It requires a series to see structural changes in the skin.\n\nThe Initial Series: Most clients need 3 to 6 sessions spaced 4 to 6 weeks apart. This timeline allows the skin’s cellular turnover and collagen remodeling to complete before the next \"wound\" is created.\n\nMaintenance: Once the desired results are achieved, a \"maintenance\" session is typically recommended every 3 to 6 months to keep the skin firm and glowing.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "Can Microneedling be used on the scalp?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "Yes! Scalp microneedling is a powerful tool for hair restoration. By stimulating the follicles and increasing blood flow to the scalp, it helps \"wake up\" dormant hair and improves the absorption of growth serums.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Microneedling",
+    "QUESTION": "How should I prepare for my appointment?",
+    "BEAUTY ROOMS CLINIC RESPONSE": "7 Days Prior: Stop using Retinol, AHA/BHAs, or exfoliating acids.\n\n24 Hours Prior: Avoid alcohol and excessive sun exposure.\n\nDay of: Arrive with a clean face (no makeup) and no active sunburn.",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "microneedling / Face",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "microneedling / Scalp",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "microneedling / Scalp",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  },
+  {
+    "SERVICE GATEGORY": "PMU",
+    "SERVICE": "Beauty Day\" Combo Package",
+    "QUESTION": "",
+    "BEAUTY ROOMS CLINIC RESPONSE": "",
+    "PROVIDER APPROVER": "",
+    "DATE": ""
+  }
+]

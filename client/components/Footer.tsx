@@ -101,6 +101,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/faq" className={footerLinkClass}>
+                  FAQ
+                </Link>
+              </li>
+              <li>
                 <Link to="/privacy" className={footerLinkClass}>
                   Privacy Policy
                 </Link>

@@ -18,6 +18,7 @@ import WorkWithUs from "./pages/WorkWithUs";
 import Specialists from "./pages/Specialists";
 import BookNow from "./pages/BookNow";
 import ComingSoon from "./pages/ComingSoon";
+import Faq from "./pages/Faq";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/services/esthetician" element={<Placeholder title="Esthetician Services" />} />
           <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
           <Route path="/services" element={<Services />} />
