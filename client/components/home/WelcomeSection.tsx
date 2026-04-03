@@ -14,7 +14,7 @@ export function WelcomeSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-[rgba(103,92,83,0.10)] gap-px bg-[rgba(103,92,83,0.10)]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
           {benefits.map((b, i) => (
             <BenefitCard key={i} {...b} />
           ))}

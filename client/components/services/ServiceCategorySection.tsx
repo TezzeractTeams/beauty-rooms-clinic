@@ -68,7 +68,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         <h3 className="font-barlow font-extralight text-2xl leading-8 tracking-[-0.02em] text-[#2D2926] mb-4">
           Benefits
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-[rgba(103,92,83,0.10)] gap-px bg-[rgba(103,92,83,0.10)] mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 mb-10">
           {benefits.map((b, i) => (
             <BenefitCard
               key={b.title}

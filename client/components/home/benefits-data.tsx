@@ -1,22 +1,23 @@
-import { BadgeCheckIcon, ClockIcon, SparkleIcon } from "./icons";
-
 export const benefits = [
   {
-    icon: <BadgeCheckIcon />,
-    title: "Certified and experienced experts",
-    description: "Enjoy flawless definition for 12–18 months before a touch-up is recommended.",
-    titleWeight: "font-light",
+    imageSrc: "/images/experts.webp",
+    imageAlt: "Certified beauty professional at work",
+    title: "Certified beauty professional at work",
+    description:
+      "Certified, experienced specialists focused on safe, high-quality treatments tailored to your goals.",
   },
   {
-    icon: <SparkleIcon />,
-    title: "Certified and experienced experts",
-    description: "Each stroke is manually placed to mimic your natural hair growth pattern and density.",
-    titleWeight: "font-extralight",
+    imageSrc: "/images/curated.webp",
+    imageAlt: "Personalized beauty treatment",
+    title: "Certified beauty professional at work",
+    description:
+      "Each detail is considered so results complement your natural features—never stiff or overdone.",
   },
   {
-    icon: <ClockIcon />,
+    imageSrc: "/images/home-lashes.jpg",
+    imageAlt: "Effortless everyday beauty",
     title: "Saves time daily",
-    description: "Wake up every morning with perfect brows. Reduce your makeup routine significantly.",
-    titleWeight: "font-extralight",
+    description:
+      "Wake up with polished brows and lashes and spend less time on your daily routine.",
   },
 ];

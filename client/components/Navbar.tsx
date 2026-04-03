@@ -18,7 +18,7 @@ const Logo = () => (
   <img
     src="/images/Logo.svg"
     alt="Beauty Rooms Clinic"
-    className="h-12 w-auto md:h-[4.25rem] lg:h-[4.1rem] select-none"
+    className="h-12 w-auto md:h-[4.25rem] lg:h-[4.1rem] select-none origin-center scale-[1.18] md:scale-[1.3] md:mb-2"
   />
 );
 
@@ -55,7 +55,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
   <Link
     to={to}
     onClick={onClick}
-    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-base tracking-[0.05em] transition-colors ${
+    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
       active
         ? "text-warm-brown border-b-2 border-warm-brown"
         : "text-warm-brown/70 hover:text-warm-brown"
@@ -79,18 +79,20 @@ export default function Navbar() {
 
   const isProfessionalsActive = location.pathname === "/work-with-us";
 
+  const isSpecialistsActive = location.pathname === "/experts";
+
   return (
-    <header className="w-full bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
+    <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 md:px-10 py-6">
         {/* Desktop: nav groups hug the logo; Book Now stays on the far right */}
         <div className="hidden md:flex w-full items-center">
-          <nav className="flex flex-1 min-w-0 items-center justify-end gap-5 lg:gap-6 pr-5 md:pr-7 lg:pr-9">
+          <nav className="flex flex-1 min-w-0 items-center justify-end md:gap-[7%] pr-5 md:pr-7 lg:pr-9">
             <NavLink to="/" label="Home" active={isActive("/")} />
             <NavLink to="/about" label="About" active={isActive("/about")} />
             <div className="relative group">
               <Link
                 to="/services"
-                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-md tracking-[0.05em] transition-colors ${
+                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
                   isServicesActive
                     ? "text-warm-brown border-b-2 border-warm-brown"
                     : "text-warm-brown/70 hover:text-warm-brown"
@@ -112,18 +114,26 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
+            <NavLink
+              to="/experts"
+              label="Professionals"
+              active={isSpecialistsActive}
+            />
           </nav>
 
-          <Link to="/" className="shrink-0 mx-3 md:mx-4 lg:mx-5">
+          <Link
+            to="/"
+            className="relative z-10 shrink-0 mx-3 md:mx-4 lg:mx-10 inline-flex items-center justify-center"
+          >
             <Logo />
           </Link>
 
-          <div className="flex flex-1 min-w-0 items-center justify-start gap-5 lg:gap-6 pl-5 md:pl-7 lg:pl-9">
-            <nav className="flex items-center gap-5 lg:gap-6">
+          <div className="flex flex-1 min-w-0 items-center justify-between gap-6 md:gap-8 lg:gap-10 pl-6 md:pl-8 lg:pl-11">
+            <nav className="flex shrink-0 items-center gap-5 md:gap-7 lg:gap-8">
               <div className="relative group">
                 <Link
                   to="/work-with-us"
-                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-base tracking-[0.05em] transition-colors ${
+                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
                     isProfessionalsActive
                       ? "text-warm-brown border-b-2 border-warm-brown"
                       : "text-warm-brown/70 hover:text-warm-brown"
@@ -157,14 +167,17 @@ export default function Navbar() {
             </nav>
             <Link
               to="/bookings"
-              className="ml-auto flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
+              className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
             >
               Book Now
             </Link>
           </div>
         </div>
 
-        <Link to="/" className="flex-shrink-0 md:hidden">
+        <Link
+          to="/"
+          className="relative z-10 flex-shrink-0 md:hidden inline-flex items-center justify-center"
+        >
           <Logo />
         </Link>
 
@@ -199,6 +212,12 @@ export default function Navbar() {
               ))}
             </div>
           </div>
+          <NavLink
+            to="/experts"
+            label="Specialists"
+            active={isSpecialistsActive}
+            onClick={() => setMobileOpen(false)}
+          />
           <div className="flex flex-col gap-2">
             <NavLink
               to="/work-with-us"

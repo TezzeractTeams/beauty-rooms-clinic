@@ -1,27 +1,20 @@
-import { Award } from "lucide-react";
-import { BadgeCheckIcon, SparkleIcon } from "@/components/home/icons";
-
-const ExpertIcon = () => (
-  <Award className="h-7 w-7 text-[#675C53]/50" strokeWidth={1.25} aria-hidden />
-);
-
 export const aboutApproachItems = [
   {
-    icon: <SparkleIcon />,
-    title: "Natural Results",
+    imageSrc: "/images/curated.webp",
+    imageAlt: "Natural, subtle beauty results",
+    title: "Our standard — Natural",
     description: "Subtle enhancements that never look overdone.",
-    titleWeight: "font-extralight" as const,
   },
   {
-    icon: <BadgeCheckIcon />,
-    title: "Personalized Treatments",
+    imageSrc: "/images/experts.webp",
+    imageAlt: "Personalized consultation",
+    title: "How we work — Personal",
     description: "Every service tailored to your features and goals.",
-    titleWeight: "font-light" as const,
   },
   {
-    icon: <ExpertIcon />,
-    title: "Expert Care",
+    imageSrc: "/images/Permanent%20Makeup.webp",
+    imageAlt: "Expert permanent makeup artistry",
+    title: "In our hands — Expert",
     description: "Certified professionals using advanced techniques.",
-    titleWeight: "font-extralight" as const,
   },
 ];
