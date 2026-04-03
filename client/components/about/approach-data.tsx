@@ -1,20 +1,20 @@
 export const aboutApproachItems = [
   {
-    imageSrc: "/images/curated.webp",
+    imageSrc: "/images/OurStanderd.jpeg",
     imageAlt: "Natural, subtle beauty results",
-    title: "Our standard — Natural",
+    title: "Natural Results",
     description: "Subtle enhancements that never look overdone.",
   },
   {
-    imageSrc: "/images/experts.webp",
+    imageSrc: "/images/HowWe.jpeg",
     imageAlt: "Personalized consultation",
-    title: "How we work — Personal",
+    title: "Personalized Treatments",
     description: "Every service tailored to your features and goals.",
   },
   {
-    imageSrc: "/images/Permanent%20Makeup.webp",
+    imageSrc: "/images/OurHands.jpeg",
     imageAlt: "Expert permanent makeup artistry",
-    title: "In our hands — Expert",
+    title: "Expert Care",
     description: "Certified professionals using advanced techniques.",
   },
 ];

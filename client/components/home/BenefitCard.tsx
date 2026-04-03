@@ -11,6 +11,8 @@ export interface BenefitCardProps {
   titleWeight?: string;
   /** Tighter icon layout for service category grids. */
   compact?: boolean;
+  /** Text and icon alignment; defaults to centered (home / about). */
+  align?: "center" | "left";
 }
 
 export function BenefitCard({
@@ -21,14 +23,16 @@ export function BenefitCard({
   description,
   titleWeight = "font-extralight",
   compact,
+  align = "center",
 }: BenefitCardProps) {
   const hasImage = Boolean(imageSrc);
+  const isLeft = align === "left";
 
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden bg-[#F4F4EF] text-center",
-        " ",
+        "flex flex-col overflow-hidden bg-[#F4F4EF]",
+        isLeft ? "text-left" : "text-center",
         compact ? "h-full" : "h-full min-h-0",
       )}
     >
@@ -40,7 +44,8 @@ export function BenefitCard({
 
       <div
         className={cn(
-          "flex flex-1 flex-col items-center",
+          "flex flex-1 flex-col",
+          isLeft ? "items-start" : "items-center",
           compact ? "px-5 py-6 md:px-6 md:py-7" : "px-7 py-8 md:px-9 md:py-10",
         )}
       >
@@ -58,7 +63,8 @@ export function BenefitCard({
 
         <h3
           className={cn(
-            "font-barlow text-[#2D2926] mb-3 max-w-[22rem] mx-auto",
+            "font-barlow text-[#2D2926] mb-3 max-w-[22rem]",
+            !isLeft && "mx-auto",
             compact
               ? `${titleWeight} text-xl leading-snug tracking-[-0.02em]`
               : "font-extralight text-[clamp(1.2rem,2vw,1.5rem)] leading-snug tracking-[-0.02em]",
@@ -70,7 +76,8 @@ export function BenefitCard({
         {description ? (
           <p
             className={cn(
-              "font-barlow font-light text-[#2D2926]/65 leading-relaxed max-w-[19rem] mx-auto",
+              "font-barlow font-light text-[#2D2926]/65 leading-relaxed max-w-[19rem]",
+              !isLeft && "mx-auto",
               compact ? "text-sm leading-[1.55]" : "text-[0.9375rem] leading-[1.65]",
             )}
           >

@@ -30,11 +30,11 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
   return (
     <section
       id={category.id}
-      className="w-full bg-[#FAFAF5] flex flex-col md:flex-row md:items-stretch min-h-[80vh] md:h-[80vh] scroll-mt-24"
+      className="w-full bg-[#FAFAF5] flex flex-col md:flex-row md:items-stretch min-h-[80vh] scroll-mt-24"
       aria-labelledby={`${category.id}-heading`}
     >
       <div
-        className={`w-full md:w-[48%] lg:w-[50%] aspect-[4/3] min-h-[45vh] md:min-h-0 md:h-full md:aspect-auto overflow-hidden flex-shrink-0 ${
+        className={`w-full md:w-[48%] lg:w-[50%] aspect-[4/3] min-h-[45vh] md:min-h-0 md:aspect-auto overflow-hidden flex-shrink-0 ${
           imageOnLeft ? "" : "md:order-2"
         }`}
       >
@@ -46,7 +46,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
       </div>
 
       <div
-        className={`flex-1 bg-[#F4F4EF] flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-20 py-14 md:py-16 min-w-0 md:min-h-0 md:h-full md:overflow-y-auto ${
+        className={`flex-1 bg-[#F4F4EF] flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-20 py-14 md:py-16 min-w-0 ${
           imageOnLeft ? "" : "md:order-1"
         }`}
       >
@@ -77,6 +77,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
               description={b.description || undefined}
               titleWeight="font-extralight"
               compact
+              align="left"
             />
           ))}
         </div>
