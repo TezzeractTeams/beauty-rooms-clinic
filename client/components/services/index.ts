@@ -1,3 +1,4 @@
+export { LashKnowFaqSection } from "./LashKnowFaqSection";
 export { ServiceCategoryBottomCta } from "./ServiceCategoryBottomCta";
 export { ServiceCategorySection } from "./ServiceCategorySection";
 export { ServiceCategoryIntro } from "./ServiceCategoryIntro";

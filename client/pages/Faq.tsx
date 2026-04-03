@@ -25,12 +25,12 @@ const sectionCardClass =
 export default function Faq() {
   return (
     <Layout>
-      <section className="relative w-full min-h-[calc(50vh-85px)] overflow-hidden bg-[#FAFAF5]">
+      <section className="relative w-full min-h-[calc(65vh-85px)] overflow-hidden bg-[#FAFAF5]">
         <div className="absolute inset-0">
           <img
             src="/images/FAQHero.jpeg"
             alt=""
-            className="h-full w-full object-cover object-center"
+            className="h-full w-full object-cover object-[center_38%]"
             aria-hidden
           />
         </div>
@@ -41,18 +41,18 @@ export default function Faq() {
               "linear-gradient(90deg, rgba(250,250,245,0.94) 0%, rgba(250,250,245,0.88) 42%, rgba(250,250,245,0.45) 62%, rgba(250,250,245,0.08) 100%)",
           }}
         />
-        <div className="relative z-10 flex min-h-[calc(50vh-85px)] flex-col justify-end px-6 py-16 md:px-10 md:py-24 lg:px-[90px]">
-          <div className="max-w-[720px]">
+        <div className="relative z-10 mx-auto flex min-h-[calc(65vh-85px)] w-full max-w-7xl flex-col justify-end px-6 py-20 md:px-10 md:py-28 lg:px-12 lg:py-28 xl:px-16">
+          <div className="max-w-4xl">
             <p className="mb-4 font-barlow font-light text-[10px] tracking-[0.15em] text-warm-brown/80 md:text-xs">
               Help center
             </p>
             <h1
               id="faq-heading"
-              className="mb-4 font-barlow font-extralight text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
+              className="mb-6 font-barlow font-extralight text-[clamp(36px,5vw,56px)] capitalize leading-[1.08] tracking-[-0.04em] text-charcoal"
             >
               Frequently asked questions
             </h1>
-            <p className="max-w-[560px] font-barlow font-light text-lg leading-[1.65] text-[rgba(45,41,38,0.75)] md:text-xl">
+            <p className="max-w-2xl font-barlow font-light text-lg leading-[1.65] text-[rgba(45,41,38,0.75)] md:text-xl">
               Answers about our treatments, preparation, and what to expect—organized by category.
             </p>
           </div>

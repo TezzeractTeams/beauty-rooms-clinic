@@ -48,13 +48,7 @@ function PathColumn({
 }: PathColumnProps) {
   return (
     <div className={cn("flex flex-col", className)}>
-      <div className="relative mb-8 aspect-[4/5] w-full overflow-hidden bg-charcoal/10 md:mb-10">
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="h-full w-full object-cover object-center grayscale"
-        />
-      </div>
+      
       <p className="mb-3 font-barlow text-[10px] font-light uppercase tracking-[0.2em] text-charcoal/45 md:text-xs">
         {eyebrow}
       </p>
@@ -81,6 +75,13 @@ function PathColumn({
             <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden />
           </Link>
         )}
+        <div className="relative mt-8 aspect-[4/5] w-full overflow-hidden bg-charcoal/10 md:mt-10">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="h-full w-full object-cover object-center grayscale"
+        />
+      </div>
       </div>
     </div>
   );

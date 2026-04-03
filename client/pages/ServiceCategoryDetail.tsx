@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { ArrowRightIcon } from "@/components/home/icons";
 import {
+  LashKnowFaqSection,
   ServiceCategoryBottomCta,
   ServiceCategoryIntro,
   ServiceFeaturedCard,
@@ -39,6 +40,7 @@ export default function ServiceCategoryDetail() {
           </Link>
         }
       />
+      {category.id === "lash" ? <LashKnowFaqSection /> : null}
       <ServiceCategoryIntro
         title={category.eyebrow}
         description={detail.introSampleDescription}
