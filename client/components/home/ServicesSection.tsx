@@ -2,7 +2,7 @@ import { ServiceTextCard } from "./ServiceTextCard";
 
 /** New photography assets (filenames as on disk; Permanent uses client’s spelling “Makup”). */
 const IMG_HEAD_SPA = "/images/Head%20SPA.JPG";
-const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makup.jpg";
+const IMG_PERMANENT_MAKEUP = "/images/lip-pmu.jpg";
 const IMG_LASHES_BROWS = "/images/home-lashes.jpg";
 /** Placeholder until dedicated Aesthetics photography is added */
 const IMG_AESTHETICS = "/images/our-products.png";
