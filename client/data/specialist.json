@@ -1,53 +1,30 @@
 {
   "specialists": [
     {
-      "id": "nj",
-      "name": "NJ",
-      "title": "Founder & master injector",
+      "id": "Andrezza",
+      "name": "Andrezza",
+      "title": "Lash Specialist",
       "rating": 5,
       "specialties": ["esthetician"],
-      "tags": ["Skin", "Injectables"],
+      "tags": ["Lash Extentions", "Lash Removal", "Lash Lift & Tint"],
       "description": "With over 15 years in medical aesthetics, NJ specializes in restorative facial sculpting that honors each individual's unique bone structure.",
       "certification": "Board certified specialist",
-      "imageSrc": "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "imageSrc": "images/Andrezza.jpeg",
       "imageAlt": "Portrait of NJ, founder and master injector",
       "websiteUrl": "https://www.beautyroomsbynj.com/"
     },
     {
-      "id": "sarah",
-      "name": "Sarah",
-      "title": "Lash specialist",
-      "rating": 4.9,
+      "id": "Erica",
+      "name": "Erica",
+      "title": "PMU Specialist",
+      "rating": 5,
       "specialties": ["lash", "head-spa"],
-      "tags": ["Lash", "Head spa"],
+      "tags": ["Nano Brows", "Microblading", "Micropigmentation"],
       "description": "Sarah blends precision with relaxation, crafting bespoke lash sets that range from barely-there enhancement to red-carpet drama.",
       "certification": "Master lash artist certified",
-      "imageSrc": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "imageSrc": "images/Erica.jpeg",
       "imageAlt": "Portrait of Sarah, lash specialist"
-    },
-    {
-      "id": "elena",
-      "name": "Elena",
-      "title": "PMU artist",
-      "rating": 5,
-      "specialties": ["pmu"],
-      "tags": ["PMU", "Skin"],
-      "description": "Elena's \"soft touch\" philosophy for permanent makeup ensures results that look effortless and timeless, focusing on subtle brow architecture.",
-      "certification": "International PMU academy graduate",
-      "imageSrc": "https://images.pexels.com/photos/3764014/pexels-photo-3764014.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "imageAlt": "Elena, PMU artist, during a treatment consultation"
-    },
-    {
-      "id": "maya",
-      "name": "Maya",
-      "title": "Licensed esthetician",
-      "rating": 4.8,
-      "specialties": ["esthetician"],
-      "tags": ["Esthetician", "Skin"],
-      "description": "Maya focuses on corrective facials and barrier health, pairing clinical-grade protocols with a calming, educational experience.",
-      "certification": "State board licensed esthetician",
-      "imageSrc": "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "imageAlt": "Portrait of Maya, licensed esthetician"
     }
+    
   ]
 }

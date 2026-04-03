@@ -49,7 +49,7 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         <img
           src={imageSrc}
           alt={imageAlt}
-          className="h-full w-full object-cover object-center grayscale"
+          className="h-full w-full object-cover object-center "
           loading="lazy"
         />
       </div>

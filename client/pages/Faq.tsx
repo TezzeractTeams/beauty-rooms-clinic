@@ -28,7 +28,7 @@ export default function Faq() {
       <section className="relative w-full min-h-[calc(50vh-85px)] overflow-hidden bg-[#FAFAF5]">
         <div className="absolute inset-0">
           <img
-            src="/images/About%20us.webp"
+            src="/images/FAQHero.jpeg"
             alt=""
             className="h-full w-full object-cover object-center"
             aria-hidden
