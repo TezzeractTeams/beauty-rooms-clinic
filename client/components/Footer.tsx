@@ -128,7 +128,7 @@ export default function Footer() {
                 <input
                   id="footer-newsletter-email"
                   type="email"
-                  name="email"
+                  name="email_address"
                   autoComplete="email"
                   placeholder="Email Address"
                   value={email}
