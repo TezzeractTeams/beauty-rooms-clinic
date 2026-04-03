@@ -52,7 +52,7 @@ export default function WorkWithUs() {
       <section className="relative w-full min-h-[calc(65vh-85px)] overflow-hidden bg-[#FAFAF5]">
         <div className="absolute inset-0">
           <img
-            src="/images/workwithus.webp"
+            src="/images/Team.jpeg"
             alt="Beauty Rooms Clinic team and workspace"
             className="h-full w-full object-cover object-center"
           />
@@ -151,7 +151,7 @@ export default function WorkWithUs() {
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-12 xl:gap-16">
             <div className="order-2 aspect-[4/3] w-full overflow-hidden rounded-sm lg:order-1 lg:aspect-[4/5] lg:w-[42%] lg:max-w-xl lg:shrink-0">
               <img
-                src="/images/experts.webp"
+                src="/images/OurHands.jpeg"
                 alt="Clinical and aesthetic professionals in a premium treatment setting"
                 className="h-full w-full object-cover object-center"
               />

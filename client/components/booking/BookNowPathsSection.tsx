@@ -3,9 +3,9 @@ import { Calendar, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const IMG_FAST =
-  "https://images.unsplash.com/photo-1583001931099-4a6cfdc679db?w=900&q=80&auto=format&fit=crop";
+  "/images/rightside.jpeg";
 const IMG_CONSULT =
-  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80&auto=format&fit=crop";
+  "/images/OurHands.jpeg";
 
 function ServiceList({ items }: { items: string[] }) {
   return (
@@ -79,7 +79,7 @@ function PathColumn({
         <img
           src={imageSrc}
           alt={imageAlt}
-          className="h-full w-full object-cover object-center grayscale"
+          className="h-full w-full object-cover object-center"
         />
       </div>
       </div>
@@ -109,7 +109,7 @@ export function BookNowPathsSection() {
         />
         <PathColumn
           className="lg:pt-20"
-          imageSrc={IMG_CONSULT}
+          imageSrc={IMG_FAST}
           imageAlt="Clinic professional providing specialized care"
           eyebrow="Specialized care"
           title="Consultation Services"
