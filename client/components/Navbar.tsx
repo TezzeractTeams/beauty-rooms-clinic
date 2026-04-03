@@ -55,7 +55,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
   <Link
     to={to}
     onClick={onClick}
-    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
+    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-base tracking-[0.05em] transition-colors ${
       active
         ? "text-warm-brown border-b-2 border-warm-brown"
         : "text-warm-brown/70 hover:text-warm-brown"
@@ -90,7 +90,7 @@ export default function Navbar() {
             <div className="relative group">
               <Link
                 to="/services"
-                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
+                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-md tracking-[0.05em] transition-colors ${
                   isServicesActive
                     ? "text-warm-brown border-b-2 border-warm-brown"
                     : "text-warm-brown/70 hover:text-warm-brown"
@@ -123,7 +123,7 @@ export default function Navbar() {
               <div className="relative group">
                 <Link
                   to="/work-with-us"
-                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-sm tracking-[0.05em] transition-colors ${
+                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-base tracking-[0.05em] transition-colors ${
                     isProfessionalsActive
                       ? "text-warm-brown border-b-2 border-warm-brown"
                       : "text-warm-brown/70 hover:text-warm-brown"
@@ -152,7 +152,7 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              <NavLink to="/faq" label="Faq" active={isActive("/faq")} />
+              <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
               <NavLink to="/contact" label="Contact" active={isActive("/contact")} />
             </nav>
             <Link
