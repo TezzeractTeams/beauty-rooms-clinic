@@ -19,6 +19,7 @@ import Specialists from "./pages/Specialists";
 import BookNow from "./pages/BookNow";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
+import Privacy from "./pages/Privacy";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +50,7 @@ const App = () => (
           <Route path="/gallery" element={<Placeholder title="Results Gallery" />} />
           <Route path="/work-with-us" element={<WorkWithUs />} />
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
-          <Route path="/privacy" element={<Placeholder title="Privacy Policy" />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
