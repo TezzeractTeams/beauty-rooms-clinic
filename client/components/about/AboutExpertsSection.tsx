@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export function AboutExpertsSection() {
   return (
-    <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row min-h-[400px] md:min-h-[480px]">
+    <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row max-h-[80vh]">
       <div className="flex-1 bg-[#F4F4EF] flex flex-col justify-center px-8 md:px-12 lg:px-16 xl:px-20 py-14 md:py-16">
         <div className="flex flex-col gap-6 md:gap-8 max-w-[520px]">
           <h2 className="font-barlow font-extralight text-[clamp(32px,4vw,52px)] leading-[1.15] tracking-[-0.03em] text-charcoal">
@@ -26,8 +26,8 @@ export function AboutExpertsSection() {
 
       <div className="w-full md:w-[48%] lg:w-[50%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0">
         <img
-          src="/images/experts.webp"
-          alt="Beauty Rooms Clinic interior"
+          src="/images/our-experts.jpeg"
+          alt="Certified specialist performing a brow treatment while the client reviews progress in a hand mirror"
           className="w-full h-full object-cover object-center"
         />
       </div>

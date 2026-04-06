@@ -2,11 +2,10 @@ import Layout from "@/components/Layout";
 import { BookNowHero } from "@/components/booking/BookNowHero";
 import { BookNowPathsSection } from "@/components/booking/BookNowPathsSection";
 import { BookNowUnsureCta } from "@/components/booking/BookNowUnsureCta";
+import { BOULEVARD_INJECTOR_SCRIPT_SRC } from "@/lib/boulevardBooking";
 
-const BOULEVARD_BUSINESS_ID = "563b491d-6e0d-4898-b272-6a9565abde38";
-
-/** Inline embed: Boulevard’s injector only supports a full-page overlay; the widget loads here via the same URL. */
-const BOULEVARD_WIDGET_SRC = `https://www.joinblvd.com/b/${BOULEVARD_BUSINESS_ID}/widget?injector-version=1.0`;
+/** Inline iframe widget; global overlay uses `injector.min.js` in `index.html` head. */
+const BOULEVARD_WIDGET_SRC = BOULEVARD_INJECTOR_SCRIPT_SRC;
 
 export default function BookNow() {
   return (

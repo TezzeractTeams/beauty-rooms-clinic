@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/images/Logo.svg" type="image/svg+xml" />
     <title>Beauty Rooms Clinic</title>
+
+    <!-- Boulevard Self-Booking overlay -->
+    <script>
+      (function (a) {
+        var b = {
+          businessId: "563b491d-6e0d-4898-b272-6a9565abde38",
+        };
+
+        var c = a.createElement("script");
+        var d = a.querySelector("script");
+
+        c.src = "https://static.joinboulevard.com/injector.min.js";
+        c.async = true;
+        c.onload = function () {
+          blvd.init(b);
+        };
+
+        d.parentNode.insertBefore(c, d);
+      })(document);
+    </script>
+    <!-- End Boulevard Self-Booking overlay -->
   </head>
 
   <body>

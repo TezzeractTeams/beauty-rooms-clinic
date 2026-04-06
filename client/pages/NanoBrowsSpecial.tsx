@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
+import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { isHubSpotNanoBrowsConfigured, submitNanoBrowsLead } from "@/lib/hubspotNanoBrows";
 import { Clock, Droplets, Mail, Phone, ScanLine, Shield, User } from "lucide-react";
@@ -16,59 +16,6 @@ const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
 
 const BOOKING_ERICA = "/bookings?specialist=Erica#booking-embed";
-
-/** Nano brows offer — hero / detail photography */
-const NANO_BROW_OFFER_GALLERY: { src: string; alt: string }[] = [
-  {
-    src: "/images/nanobrowoffer/287670de-78a9-4edc-a134-b2474b016186.jpg",
-    alt: "Nano brows — natural healed look at Beauty Rooms Clinic",
-  },
-  {
-    src: "/images/nanobrowoffer/565284ee-7679-4fd1-a00d-f6464959604a.jpg",
-    alt: "Brow shaping and nano brow results",
-  },
-  { src: "/images/nanobrowoffer/IMG_1862.JPG", alt: "Nano brow procedure and mapping detail" },
-  { src: "/images/nanobrowoffer/IMG_1905.JPG", alt: "Soft nano brow strokes, close-up" },
-  { src: "/images/nanobrowoffer/IMG_1933.JPG", alt: "Nano brows — before and after style result" },
-  { src: "/images/nanobrowoffer/IMG_1954.JPG", alt: "Healed nano brows, natural finish" },
-  { src: "/images/nanobrowoffer/IMG_1965.JPG", alt: "Brow line and nano brow artistry" },
-];
-
-/** Additional strip images (same as LuxeLookLashOffer) — social proof + finished looks */
-const LASH_GALLERY_IMAGES: { src: string; alt: string }[] = [
-  { src: "/images/lashes.webp", alt: "Custom eyelash extension results" },
-  { src: "/images/home-lashes.jpg", alt: "Full lash set, natural finish" },
-  { src: "/images/curated.webp", alt: "Lash styling tailored to eye shape" },
-  { src: "/images/rightside.jpeg", alt: "Client after lash appointment" },
-  { src: "/images/HowWe.jpeg", alt: "Beauty Rooms Clinic lash service" },
-];
-
-const NANO_PAGE_GALLERY_IMAGES = [...NANO_BROW_OFFER_GALLERY, ...LASH_GALLERY_IMAGES];
-
-function LashImageCarousel({ ariaLabel }: { ariaLabel: string }) {
-  return (
-    <Carousel opts={{ align: "start", loop: true }} className="w-full" aria-label={ariaLabel}>
-      <CarouselContent className="-ml-3 md:-ml-4">
-        {NANO_PAGE_GALLERY_IMAGES.map((img) => (
-          <CarouselItem
-            key={img.src}
-            className="basis-[85%] pl-3 sm:basis-1/2 sm:pl-4 lg:basis-1/3"
-          >
-            <div className="overflow-hidden rounded-sm border border-[rgba(103,92,83,0.12)] bg-[#F4F4EF]">
-              <img
-                src={img.src}
-                alt={img.alt}
-                className="aspect-[4/5] w-full object-cover object-center"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
-  );
-}
 
 function SectionContainer({
   children,
@@ -309,29 +256,7 @@ export default function NanoBrowsSpecial() {
           </div>
         </section>
 
-        {/* Gallery carousel — nano brow offer photos + clinic looks */}
-        <section
-          className="w-full bg-[#F9F8F6] py-14 md:py-20 lg:py-24"
-          aria-labelledby="nano-brows-gallery-heading"
-        >
-          <div className="mx-auto max-w-6xl px-6 md:px-10">
-            <h2
-              id="nano-brows-gallery-heading"
-              className="mb-6 text-center font-barlow text-[clamp(28px,4vw,40px)] font-extralight tracking-[-0.03em] text-charcoal md:mb-8"
-            >
-              Your Face Is Unique. Your Brows Should Be Too.
-            </h2>
-            <h3 className="mb-3 text-center font-barlow text-[clamp(22px,3vw,30px)] font-extralight tracking-[-0.03em] text-charcoal">
-              Finished looks
-            </h3>
-            <p className="mb-10 text-center font-barlow text-sm font-light text-[rgba(45,41,38,0.65)] md:mb-12 md:text-base">
-              Results may vary based on skin type, healing, and natural features.
-            </p>
-          </div>
-          <div className="w-full overflow-hidden">
-            <LashImageCarousel ariaLabel="Beauty Rooms Clinic finished looks and services" />
-          </div>
-        </section>
+        <FinishedLooksGallerySection sectionHeadingId="nano-brows-gallery-heading" />
 
         {/* Life-proof benefits */}
         <section className="w-full bg-[#FAFAF5] py-14 md:py-20 lg:py-24" aria-labelledby="life-proof-heading">

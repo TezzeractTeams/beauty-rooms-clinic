@@ -1,22 +1,27 @@
+import { FaqServiceAccordion } from "@/components/FaqServiceAccordion";
+import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LIP_BLUSH_OFFER_GALLERY_IMAGES } from "@/data/lipBlushOfferGallery";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { cn } from "@/lib/utils";
+  FAQ_DATA_SERVICE_LIP_BLUSH_INITIAL,
+  getFaqItemsForCategoryService,
+} from "@/lib/faq-from-json";
+import {
+  LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS,
+  openBoulevardBookingWidget,
+} from "@/lib/boulevardBooking";
 import { isHubSpotLipBlushConfigured, submitLipBlushLead } from "@/lib/hubspotLipBlush";
+import { cn } from "@/lib/utils";
 import { Droplets, Mail, Palette, Phone, Sparkles, User } from "lucide-react";
 import { type ComponentProps, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-/** Lifestyle / environmental hero — no extreme lip close-up */
-const HERO_LIFESTYLE_SRC = "/images/FAQHero.jpeg";
+const HERO_IMAGE_SRC = "/images/LipBlush.jpg";
 
+/** Fallback when `window.blvd` is not ready (injector still loading). */
 const BOOKING_ERICA = "/bookings?specialist=Erica#booking-embed";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
@@ -67,6 +72,7 @@ type LeadFormProps = {
   onEmail: (v: string) => void;
   onConsent: (v: boolean) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  onBookAppointment: () => void;
 };
 
 function LipBlushLeadFormCard({
@@ -84,6 +90,7 @@ function LipBlushLeadFormCard({
   onEmail,
   onConsent,
   onSubmit,
+  onBookAppointment,
 }: LeadFormProps) {
   return (
     <div id={anchorId} className={`${cardBorder} scroll-mt-28 bg-[#FAFAF5] p-6 shadow-sm md:p-8`}>
@@ -203,12 +210,13 @@ function LipBlushLeadFormCard({
       </form>
       <p className="mt-5 font-barlow text-sm font-light text-[rgba(45,41,38,0.55)]">
         Ready to skip the wait?{" "}
-        <Link
-          to={BOOKING_ERICA}
+        <button
+          type="button"
+          onClick={onBookAppointment}
           className="text-warm-brown underline decoration-warm-brown/30 underline-offset-2 transition-colors hover:text-warm-brown/90"
         >
           Book your appointment now
-        </Link>
+        </button>
         .
       </p>
     </div>
@@ -216,12 +224,21 @@ function LipBlushLeadFormCard({
 }
 
 export default function LipBlushSpecialLaunchOffer() {
+  const navigate = useNavigate();
+  const lipBlushFaqItems = getFaqItemsForCategoryService("PMU", FAQ_DATA_SERVICE_LIP_BLUSH_INITIAL);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  const openLipBlushLaunchBooking = () => {
+    const opened = openBoulevardBookingWidget(LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS);
+    if (!opened) {
+      navigate(BOOKING_ERICA);
+    }
+  };
 
   const formProps: LeadFormProps = {
     idPrefix: "lip",
@@ -237,6 +254,7 @@ export default function LipBlushSpecialLaunchOffer() {
     onPhone: setPhone,
     onEmail: setEmail,
     onConsent: setConsent,
+    onBookAppointment: openLipBlushLaunchBooking,
     onSubmit: async (e) => {
       e.preventDefault();
       if (!firstName.trim() || !lastName.trim()) {
@@ -304,7 +322,7 @@ export default function LipBlushSpecialLaunchOffer() {
     <Layout>
       <article>
         <section className="w-full bg-[#FAFAF5]" aria-labelledby="lip-blush-hero-heading">
-          {/* Same split as NanoBrowsSpecial: copy + form (left), lifestyle image (right) */}
+          {/* Same split as NanoBrowsSpecial: copy + form (left), hero image (right) */}
           <div className="flex min-h-[min(100dvh,720px)] flex-col md:min-h-[calc(100dvh-85px)] md:flex-row">
             <div className="flex w-full flex-col justify-center bg-[#FAFAF5] px-6 pb-10 pt-24 md:w-1/2 md:max-w-[50%] md:py-16 md:pl-10 md:pr-8 lg:pl-14 lg:pr-10 xl:pl-20">
               <div className="mx-auto w-full max-w-xl md:mx-0">
@@ -317,8 +335,8 @@ export default function LipBlushSpecialLaunchOffer() {
 
             <div className="relative min-h-[min(42vh,380px)] w-full md:w-1/2 md:max-w-[50%] md:min-h-[calc(100dvh-85px)] md:flex-1">
               <img
-                src={HERO_LIFESTYLE_SRC}
-                alt="Client relaxing at Beauty Rooms Clinic — lifestyle setting"
+                src={HERO_IMAGE_SRC}
+                alt="Lip blush treatment at Beauty Rooms Clinic"
                 className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
                 fetchPriority="high"
                 decoding="async"
@@ -326,6 +344,14 @@ export default function LipBlushSpecialLaunchOffer() {
             </div>
           </div>
         </section>
+
+        <FinishedLooksGallerySection
+          sectionHeadingId="lip-blush-gallery-heading"
+          headline="Your lips are unique — your lip blush should be too."
+          subheadline="Finished looks"
+          images={LIP_BLUSH_OFFER_GALLERY_IMAGES}
+          carouselAriaLabel="Lip blush finished looks at Beauty Rooms Clinic"
+        />
 
         {/* 3 pillars */}
         <section className="w-full bg-[#FAFAF5] py-14 md:py-20 lg:py-24" aria-labelledby="lip-benefits-heading">
@@ -366,21 +392,20 @@ export default function LipBlushSpecialLaunchOffer() {
                 >
                   The Lip Lab
                 </h2>
-                <div className={`flex justify-center overflow-hidden rounded-sm ${cardBorder} bg-[#2a2a2a] py-4 sm:py-6`}>
-                  <div className="w-full max-w-[min(100%,320px)] sm:max-w-[min(100%,360px)] lg:max-w-[min(100%,400px)]">
+                <div className={`flex justify-center overflow-hidden rounded-sm ${cardBorder} `}>
+                  <div className="w-full">
                     <video
                       className="aspect-[9/16] w-full rounded-sm object-cover object-center shadow-lg"
                       controls
                       playsInline
                       preload="metadata"
-                      poster="/images/Permanent%20Makeup.webp"
-                      aria-label="Specialist bespoke lip color matching process — video placeholder"
-                    />
+                      poster="/images/LipBlush.jpg"
+                      aria-label="The Lip Lab — bespoke lip color matching"
+                    >
+                      <source src="/images/TheLipLab.mp4" type="video/mp4" />
+                    </video>
                   </div>
                 </div>
-                <p className="mt-3 font-barlow text-xs font-light text-[rgba(45,41,38,0.55)]">
-                  Video placeholder: add your bespoke color matching clip as the source when ready.
-                </p>
               </div>
               <div className="space-y-6 font-barlow font-light leading-[1.7] text-[rgba(45,41,38,0.78)]">
                 <h3 className="font-barlow text-xl font-extralight tracking-[-0.02em] text-charcoal md:text-2xl">
@@ -398,9 +423,9 @@ export default function LipBlushSpecialLaunchOffer() {
                 <Button
                   type="button"
                   className="rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em]"
-                  asChild
+                  onClick={openLipBlushLaunchBooking}
                 >
-                  <Link to={BOOKING_ERICA}>Book your appointment now</Link>
+                  Book your appointment now
                 </Button>
               </div>
             </div>
@@ -420,53 +445,7 @@ export default function LipBlushSpecialLaunchOffer() {
               Questions about lip blush
             </h2>
             <div className={faqCardClass}>
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="hurt" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    Does it hurt?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      We use professional-grade topical numbing for a gentle experience.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="longevity" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    How long does the color last?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      Typically up to 2 years.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="heavy" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    Will it look like heavy lipstick?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      No, it is a sheer, natural tint.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <FaqServiceAccordion items={lipBlushFaqItems} valuePrefix="lip-offer" />
             </div>
           </div>
         </section>
@@ -483,14 +462,25 @@ export default function LipBlushSpecialLaunchOffer() {
             <p className="mb-8 max-w-lg font-barlow text-sm font-light text-[rgba(45,41,38,0.72)] md:text-base">
               Request a callback to claim the $349 launch offer, or book directly with Erica.
             </p>
-            <Button
-              type="button"
-              size="lg"
-              className="rounded-none px-8 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em]"
-              asChild
-            >
-              <a href="#lip-blush-lead-form">Request a callback + claim the offer</a>
-            </Button>
+            <div className="flex w-full max-w-xl flex-col gap-3 sm:mx-auto sm:flex-row sm:flex-wrap sm:justify-center">
+              <Button
+                type="button"
+                size="lg"
+                className="w-full rounded-none px-8 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] sm:w-auto sm:min-w-[200px]"
+                asChild
+              >
+                <a href="#lip-blush-lead-form">Request a callback + claim the offer</a>
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                className="w-full rounded-none border-[rgba(103,92,83,0.35)] bg-transparent px-8 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-charcoal hover:border-primary hover:bg-primary hover:text-primary-foreground sm:w-auto sm:min-w-[200px]"
+                onClick={openLipBlushLaunchBooking}
+              >
+                Book your appointment now
+              </Button>
+            </div>
           </SectionContainer>
         </section>
 

@@ -1,6 +1,6 @@
 export function AboutExperienceSection() {
   return (
-    <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row min-h-[400px] md:min-h-[480px]">
+    <section className="w-full bg-[#FAFAF5] flex flex-col md:flex-row max-h-[80vh]">
       <div className="w-full md:w-[48%] lg:w-[50%] aspect-[4/3] md:aspect-auto overflow-hidden flex-shrink-0 order-2 md:order-1">
         <img
           src="/images/our-products.png"
