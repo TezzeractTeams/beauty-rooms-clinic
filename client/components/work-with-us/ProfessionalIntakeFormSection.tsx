@@ -18,21 +18,13 @@ export function ProfessionalIntakeFormSection({ professionSuggestions }: Profess
       aria-labelledby="professional-intake-heading"
     >
       <div className="mx-auto max-w-7xl">
-        <p className="mb-4 font-barlow font-normal text-[10px] tracking-[0.15em] text-warm-brown/80 md:text-xs">
-          Talent pipeline
-        </p>
+        
         <h2
           id="professional-intake-heading"
           className="mb-6 font-barlow font-extralight text-2xl tracking-[-0.02em] text-charcoal md:text-3xl"
         >
           Professional intake
         </h2>
-        <p className={`mb-10 max-w-4xl ${sectionIntroClass}`}>
-          We maintain a CRM-backed roster of professionals so we can scale coverage and stay less dependent
-          on any single provider. Share your details and resume—submissions will feed directly into our
-          system once live.
-        </p>
-
         <div className="border border-[rgba(103,92,83,0.12)] p-8 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset] md:p-10 [color-scheme:light]">
           <form
             className="professional-intake-form flex flex-col gap-8 [color-scheme:light]"

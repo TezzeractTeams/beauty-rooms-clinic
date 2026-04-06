@@ -74,9 +74,7 @@ export default function WorkWithUs() {
               Join Our Team
             </h1>
             <p className={`max-w-2xl ${bodyClass}`}>
-              Join a boutique clinic in Sarasota where clinical skill meets a calm, luxury experience. We
-              welcome talented specialists who share our commitment to thoughtful care and natural-looking
-              results.
+            Beauty Rooms Clinic is more than a workplace; it is a sanctuary for the modern aesthetic professional. We are seeking elite specialists who thrive at the intersection of clinical precision and high-end hospitality. If you are committed to delivering bespoke, natural results within a culture of shared excellence, we invite you to grow with us.
             </p>
             <div className="mt-8">
               <Link
