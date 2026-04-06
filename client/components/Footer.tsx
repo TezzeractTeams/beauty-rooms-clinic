@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, AtSign, Globe, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-
-const SOCIAL = {
-  instagram: "https://www.instagram.com/",
-  facebook: "https://www.facebook.com/",
-  linkedin: "https://www.linkedin.com/",
-} as const;
+import { SITE_EMAIL, SITE_PHONE_TEL, SITE_SOCIAL } from "@/lib/siteContact";
 
 const iconLinkClass =
   "inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#888888]/50 text-[#FAFAF5CC] transition-colors hover:border-[#FAFAF5]/40 hover:bg-white/5 hover:text-[#FAFAF5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAF5]";
@@ -53,10 +48,10 @@ export default function Footer() {
               <Link to="/" className={iconLinkClass} aria-label="Website home">
                 <Globe className="h-4 w-4" strokeWidth={1.5} />
               </Link>
-              <a href="mailto:hello@beautyroomsclinic.com" className={iconLinkClass} aria-label="Email us">
+              <a href={`mailto:${SITE_EMAIL}`} className={iconLinkClass} aria-label="Email us">
                 <AtSign className="h-4 w-4" strokeWidth={1.5} />
               </a>
-              <a href="tel:+19415551234" className={iconLinkClass} aria-label="Call us">
+              <a href={SITE_PHONE_TEL} className={iconLinkClass} aria-label="Call us">
                 <Phone className="h-4 w-4" strokeWidth={1.5} />
               </a>
             </div>
@@ -163,7 +158,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-wrap items-center gap-6 sm:gap-8">
             <a
-              href={SOCIAL.instagram}
+              href={SITE_SOCIAL.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="font-barlow text-[10px] md:text-[11px] tracking-[0.1em] uppercase text-[#FAFAF5CC] hover:text-[#FAFAF5] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAF5]"
@@ -171,7 +166,7 @@ export default function Footer() {
               Instagram
             </a>
             <a
-              href={SOCIAL.facebook}
+              href={SITE_SOCIAL.facebook}
               target="_blank"
               rel="noopener noreferrer"
               className="font-barlow text-[10px] md:text-[11px] tracking-[0.1em] uppercase text-[#FAFAF5CC] hover:text-[#FAFAF5] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAF5]"
@@ -179,7 +174,7 @@ export default function Footer() {
               Facebook
             </a>
             <a
-              href={SOCIAL.linkedin}
+              href={SITE_SOCIAL.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="font-barlow text-[10px] md:text-[11px] tracking-[0.1em] uppercase text-[#FAFAF5CC] hover:text-[#FAFAF5] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAFAF5]"

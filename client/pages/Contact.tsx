@@ -1,15 +1,12 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-
-const PHONE_DISPLAY = "+1 941-900-3866";
-const PHONE_HREF = "tel:+1 9419003866";
-const EMAIL = "hello@beautyroomsclinic.com";
+import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_SOCIAL } from "@/lib/siteContact";
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://instagram.com/beautyroomsclinic", Icon: Instagram },
-  { label: "Facebook", href: "https://www.facebook.com/share/1HcDip7pW4/?mibextid=wwXIfr", Icon: Facebook },
-  { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: Linkedin },
+  { label: "Instagram", href: SITE_SOCIAL.instagram, Icon: Instagram },
+  { label: "Facebook", href: SITE_SOCIAL.facebook, Icon: Facebook },
+  { label: "LinkedIn", href: SITE_SOCIAL.linkedin, Icon: Linkedin },
 ] as const;
 
 const cardClass =
@@ -73,10 +70,10 @@ export default function Contact() {
               <div>
                 <p className={cardEyebrowClass}>Phone</p>
                 <a
-                  href={PHONE_HREF}
+                  href={SITE_PHONE_TEL}
                   className="mt-2 inline-block font-barlow font-light text-lg text-charcoal transition-colors hover:text-warm-brown focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
                 >
-                  {PHONE_DISPLAY}
+                  {SITE_PHONE_DISPLAY}
                 </a>
               </div>
             </div>
@@ -88,10 +85,10 @@ export default function Contact() {
               <div>
                 <p className={cardEyebrowClass}>Email</p>
                 <a
-                  href={`mailto:${EMAIL}`}
+                  href={`mailto:${SITE_EMAIL}`}
                   className="mt-2 inline-block break-all font-barlow font-light text-lg text-charcoal transition-colors hover:text-warm-brown focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
                 >
-                  {EMAIL}
+                  {SITE_EMAIL}
                 </a>
               </div>
             </div>
@@ -121,14 +118,39 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mx-auto mt-14 max-w-2xl border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] px-8 py-10 text-center md:mt-20 md:px-12 md:py-12">
+          <div
+            className="mx-auto mt-14 max-w-2xl border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] px-8 py-10 text-center md:mt-20 md:px-12 md:py-12"
+            aria-labelledby="contact-location-heading"
+          >
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center border border-[rgba(103,92,83,0.15)] bg-white/60">
               <MapPin className="h-5 w-5 text-warm-brown" strokeWidth={1.25} aria-hidden />
             </div>
-            <p className={cardEyebrowClass}>Location</p>
+            <p id="contact-location-heading" className={cardEyebrowClass}>
+              Location
+            </p>
             <p className="mt-3 font-barlow font-light text-xl tracking-[-0.02em] text-charcoal md:text-2xl">
               Sarasota, Florida
             </p>
+
+            <div
+              className="mx-auto mt-10 max-w-lg border-t border-[rgba(103,92,83,0.12)] pt-10 text-left"
+              aria-labelledby="contact-legal-heading"
+            >
+              <p id="contact-legal-heading" className={cardEyebrowClass}>
+                Legal &amp; mailing
+              </p>
+              <p className="mt-4 font-barlow font-light text-sm leading-relaxed text-[rgba(45,41,38,0.8)] md:text-base md:leading-relaxed">
+                Beauty Rooms Clinic and Beauty Rooms by NJ are brands of NJ Beauty Rooms LLC.
+              </p>
+              <p className="mt-4 font-barlow font-light text-[10px] uppercase tracking-[0.12em] text-warm-brown/75 md:text-xs">
+                Legal / mailing address
+              </p>
+              <address className="mt-2 not-italic font-barlow font-light text-base leading-relaxed text-charcoal md:text-lg">
+                7308 Tori Way
+                <br />
+                Lakewood Ranch, FL 34202
+              </address>
+            </div>
           </div>
         </div>
       </section>
@@ -152,7 +174,7 @@ export default function Contact() {
             Book now
           </Link>
           <a
-            href={`mailto:${EMAIL}`}
+            href={`mailto:${SITE_EMAIL}`}
             className="inline-block border border-white/60 bg-transparent px-10 py-4 font-barlow font-light text-[11px] uppercase tracking-[0.12em] text-white/95 transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:px-12 md:py-5 md:text-xs"
           >
             Email us
