@@ -1,20 +1,18 @@
+import { FaqServiceAccordion } from "@/components/FaqServiceAccordion";
+import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  FAQ_DATA_SERVICE_MICRONEEDLING,
+  getFaqItemsForCategoryService,
+} from "@/lib/faq-from-json";
+import { MICRONEEDLING_HERO_BOOKING_URL_PARAMS, openBoulevardBookingWidget } from "@/lib/boulevardBooking";
 import { cn } from "@/lib/utils";
 import { Clock, ScanLine, Shield, Sparkles, TrendingUp } from "lucide-react";
 import { type ComponentProps } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-/**
- * Direct booking: opens Book Now with Erica pre-selected. When Boulevard provides a
- * service-specific widget URL, replace this constant (or use an absolute URL in CTAs).
- */
+/** Fallback when `window.blvd` is not ready (e.g. injector still loading). Hero uses overlay + PMU path via `openBoulevardBookingWidget`. */
 const BOOKING_MICRONEEDLING_LAUNCH = "/bookings?specialist=Erica#booking-embed";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
@@ -74,6 +72,16 @@ const radiantBenefits = [
 ] as const;
 
 export default function MicroneedlingSpecial() {
+  const navigate = useNavigate();
+  const microneedlingFaqItems = getFaqItemsForCategoryService("PMU", FAQ_DATA_SERVICE_MICRONEEDLING);
+
+  const openMicroneedlingHeroBooking = () => {
+    const opened = openBoulevardBookingWidget(MICRONEEDLING_HERO_BOOKING_URL_PARAMS);
+    if (!opened) {
+      navigate(BOOKING_MICRONEEDLING_LAUNCH);
+    }
+  };
+
   return (
     <Layout>
       <article>
@@ -105,9 +113,9 @@ export default function MicroneedlingSpecial() {
                     type="button"
                     size="lg"
                     className="w-full min-h-[48px] rounded-none px-8 py-6 font-barlow text-xs font-light uppercase tracking-[0.1em] sm:w-auto"
-                    asChild
+                    onClick={openMicroneedlingHeroBooking}
                   >
-                    <Link to={BOOKING_MICRONEEDLING_LAUNCH}>Claim the offer</Link>
+                    Claim the offer
                   </Button>
                 </div>
               </div>
@@ -123,6 +131,8 @@ export default function MicroneedlingSpecial() {
             </div>
           </div>
         </section>
+
+        <FinishedLooksGallerySection sectionHeadingId="microneedling-gallery-heading" />
 
         {/* Radiant Results — feature grid */}
         <section
@@ -345,56 +355,7 @@ export default function MicroneedlingSpecial() {
               <h3 className="mb-4 font-barlow text-xs font-extralight uppercase tracking-[0.12em] text-warm-brown/85">
                 Frequently asked questions
               </h3>
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="hurt" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    Does it hurt?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      Your comfort is a priority. We use a medical-grade topical numbing cream before your session.
-                      Most clients describe the sensation as a light, vibrating grittiness rather than sharp pain.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="downtime" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    What is the downtime?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      Expect a sunburn-like look for 24–48 hours: redness and tightness are common right after. Many
-                      people return to work the next day. We give you post-care steps so your skin heals smoothly.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="medical" className="border-[rgba(103,92,83,0.12)]">
-                  <AccordionTrigger
-                    className={cn(
-                      "py-4 text-left font-barlow font-light text-base text-charcoal hover:no-underline",
-                      "[&[data-state=open]]:text-warm-brown",
-                    )}
-                  >
-                    Is it medical-grade?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      Yes — we follow clinical hygiene standards, sterile single-use needle protocols, and
-                      provider-led treatment planning. All services are performed by certified specialists.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+              <FaqServiceAccordion items={microneedlingFaqItems} valuePrefix="mn-special" />
             </div>
           </div>
         </section>

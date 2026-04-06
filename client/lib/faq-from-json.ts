@@ -52,3 +52,22 @@ function buildGroups(): FaqCategoryGroup[] {
 }
 
 export const faqCategories = buildGroups();
+
+/** Matches `SERVICE` in faqdata.json — lip blush Q&A group */
+export const FAQ_DATA_SERVICE_LIP_BLUSH_INITIAL = "lip blush (Initial Session)";
+/** Matches `SERVICE` in faqdata.json — microneedling Q&A group */
+export const FAQ_DATA_SERVICE_MICRONEEDLING = "Microneedling";
+
+function norm(s: string) {
+  return s.trim().toLowerCase();
+}
+
+/** FAQ entries for a category + service row in faqdata.json (case-insensitive match). */
+export function getFaqItemsForCategoryService(category: string, service: string): FaqEntry[] {
+  const wantCat = norm(category);
+  const wantSvc = norm(service);
+  const catGroup = faqCategories.find((c) => norm(c.category) === wantCat);
+  if (!catGroup) return [];
+  const svcGroup = catGroup.services.find((s) => norm(s.service) === wantSvc);
+  return svcGroup?.items ?? [];
+}
