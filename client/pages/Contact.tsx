@@ -1,7 +1,19 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import { SITE_EMAIL, SITE_PHONE_DISPLAY, SITE_PHONE_TEL, SITE_SOCIAL } from "@/lib/siteContact";
+import {
+  SITE_ADDRESS_LINE1,
+  SITE_ADDRESS_LINE2,
+  SITE_COMPANY_NAME,
+  SITE_DBA_NAME,
+  SITE_EIN,
+  SITE_EMAIL,
+  SITE_PHONE_DISPLAY,
+  SITE_PHONE_TEL,
+  SITE_SOCIAL,
+  SITE_WEBSITE_DISPLAY,
+  SITE_WEBSITE_URL,
+} from "@/lib/siteContact";
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: SITE_SOCIAL.instagram, Icon: Instagram },
@@ -128,9 +140,11 @@ export default function Contact() {
             <p id="contact-location-heading" className={cardEyebrowClass}>
               Location
             </p>
-            <p className="mt-3 font-barlow font-light text-xl tracking-[-0.02em] text-charcoal md:text-2xl">
-              Sarasota, Florida
-            </p>
+            <address className="mt-3 not-italic font-barlow font-light text-xl tracking-[-0.02em] text-charcoal md:text-2xl">
+              {SITE_ADDRESS_LINE1}
+              <br />
+              {SITE_ADDRESS_LINE2}
+            </address>
 
             <div
               className="mx-auto mt-10 max-w-lg border-t border-[rgba(103,92,83,0.12)] pt-10 text-left"
@@ -140,15 +154,28 @@ export default function Contact() {
                 Legal &amp; mailing
               </p>
               <p className="mt-4 font-barlow font-light text-sm leading-relaxed text-[rgba(45,41,38,0.8)] md:text-base md:leading-relaxed">
-                Beauty Rooms Clinic and Beauty Rooms by NJ are brands of NJ Beauty Rooms LLC.
+                <span className="font-normal text-charcoal">{SITE_DBA_NAME}</span> is a DBA of{" "}
+                <span className="font-normal text-charcoal">{SITE_COMPANY_NAME}</span>.
+              </p>
+              <p className="mt-4 font-barlow font-light text-sm leading-relaxed text-[rgba(45,41,38,0.8)] md:text-base">
+                <span className="font-normal text-charcoal">EIN:</span> {SITE_EIN}
+              </p>
+              <p className="mt-2 font-barlow font-light text-sm leading-relaxed text-[rgba(45,41,38,0.8)] md:text-base">
+                <span className="font-normal text-charcoal">Website:</span>{" "}
+                <a
+                  href={SITE_WEBSITE_URL}
+                  className="text-warm-brown underline decoration-warm-brown/30 underline-offset-2 transition-colors hover:text-warm-brown/90"
+                >
+                  {SITE_WEBSITE_DISPLAY}
+                </a>
               </p>
               <p className="mt-4 font-barlow font-light text-[10px] uppercase tracking-[0.12em] text-warm-brown/75 md:text-xs">
                 Legal / mailing address
               </p>
               <address className="mt-2 not-italic font-barlow font-light text-base leading-relaxed text-charcoal md:text-lg">
-                7308 Tori Way
+                {SITE_ADDRESS_LINE1}
                 <br />
-                Lakewood Ranch, FL 34202
+                {SITE_ADDRESS_LINE2}
               </address>
             </div>
           </div>
