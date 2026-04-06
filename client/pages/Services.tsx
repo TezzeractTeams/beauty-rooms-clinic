@@ -10,9 +10,10 @@ export default function Services() {
     <Layout>
       <ServicesSplitHero
         headingId="services-page-heading"
-        eyebrow="Editorial excellence"
+        eyebrow="The BRC Standard: Where Precision Meets Tranquility
+"
         title={<>Beauty &amp; Aesthetic Services in Sarasota</>}
-        body="We offer a full range of advanced beauty treatments designed to enhance your natural features and improve overall skin and scalp health."
+        body="Beauty Rooms Clinic is Sarasota’s premier boutique destination for advanced aesthetic artistry. We don't believe in one-size-fits-all beauty; we specialize in hyper-personalized treatments—from bespoke lash design to medical-grade skin and scalp therapies—engineered to enhance your natural features and restore long-term vitality. Experience a higher standard of clinical care in a sanctuary of calm."
         imageSrc="/images/our-products.png"
         imageAlt="Close-up of lash extensions and a groomed brow"
         cta={

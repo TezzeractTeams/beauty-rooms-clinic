@@ -159,16 +159,11 @@ export default function WorkWithUs() {
                 id="disciplines-heading"
                 className="mb-6 font-barlow font-extralight text-2xl tracking-[-0.02em] text-charcoal md:text-3xl"
               >
-                Who we&apos;re looking for
-              </h2>
-              <p className={`mb-5 ${bodyClass}`}>
-                We partner with licensed and certified professionals who are reliable, client-focused, and
-                serious about growing their business.
-              </p>
+The BRC Standard of Excellence
+</h2>
+            
               <p className={`mb-8 ${bodyClass}`}>
-                Our platform is best suited to providers offering repeatable, high-demand services — those who
-                value consistency, professionalism, and want to maximize their earning potential within a
-                structured, growth-focused environment.
+              We partner with established, licensed specialists who view their work as an art form. Our ideal providers are reliable, results-driven, and committed to a medical-grade level of professionalism. If you are a high-performance professional looking for a sophisticated environment to maximize your craft and your earning potential, BRC is your platform
               </p>
               <ul className="list-disc space-y-3 pl-6 marker:text-[rgba(103,92,83,0.45)]">
                 {disciplines.map((item) => (

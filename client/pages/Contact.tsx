@@ -2,13 +2,13 @@ import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
-const PHONE_DISPLAY = "(941) 555-1234";
-const PHONE_HREF = "tel:+19415551234";
+const PHONE_DISPLAY = "+1 941-900-3866";
+const PHONE_HREF = "tel:+1 9419003866";
 const EMAIL = "hello@beautyroomsclinic.com";
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://www.instagram.com/", Icon: Instagram },
-  { label: "Facebook", href: "https://www.facebook.com/", Icon: Facebook },
+  { label: "Instagram", href: "https://instagram.com/beautyroomsclinic", Icon: Instagram },
+  { label: "Facebook", href: "https://www.facebook.com/share/1HcDip7pW4/?mibextid=wwXIfr", Icon: Facebook },
   { label: "LinkedIn", href: "https://www.linkedin.com/", Icon: Linkedin },
 ] as const;
 
