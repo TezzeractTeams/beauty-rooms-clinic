@@ -6,7 +6,7 @@ export function AboutHeroSection() {
     <section className="relative w-full min-h-[calc(70vh-85px)] overflow-hidden bg-[#FAFAF5]">
       <div className="absolute inset-0">
         <img
-          src="/images/aboutushero.jpeg"
+          src="/images/about.jpeg"
           alt="Beauty Rooms Clinic"
           className="h-full w-full object-cover"
           style={{ objectPosition: "30% 50%" }}

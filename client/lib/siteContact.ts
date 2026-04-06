@@ -5,6 +5,11 @@ export const SITE_EMAIL = "hello@beautyroomsclinic.com";
 
 export const SITE_COMPANY_NAME = "NJ Beauty Rooms";
 export const SITE_DBA_NAME = "Beauty Rooms Clinic";
+/** Visit / storefront address (Contact page “Location”) */
+export const SITE_CLINIC_LOCATION_LINE1 = "1188 N Tamiami Trail";
+export const SITE_CLINIC_LOCATION_LINE2 = "Sarasota, FL 34236";
+
+/** Legal / mailing address */
 export const SITE_ADDRESS_LINE1 = "7308 Tori Way";
 export const SITE_ADDRESS_LINE2 = "Lakewood Ranch, Sarasota, FL 34202";
 export const SITE_EIN = "92-3765208";

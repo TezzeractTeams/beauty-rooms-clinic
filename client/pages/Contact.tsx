@@ -4,6 +4,8 @@ import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react
 import {
   SITE_ADDRESS_LINE1,
   SITE_ADDRESS_LINE2,
+  SITE_CLINIC_LOCATION_LINE1,
+  SITE_CLINIC_LOCATION_LINE2,
   SITE_COMPANY_NAME,
   SITE_DBA_NAME,
   SITE_EIN,
@@ -141,9 +143,9 @@ export default function Contact() {
               Location
             </p>
             <address className="mt-3 not-italic font-barlow font-light text-xl tracking-[-0.02em] text-charcoal md:text-2xl">
-              {SITE_ADDRESS_LINE1}
+              {SITE_CLINIC_LOCATION_LINE1}
               <br />
-              {SITE_ADDRESS_LINE2}
+              {SITE_CLINIC_LOCATION_LINE2}
             </address>
 
             <div

@@ -21,6 +21,7 @@ import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
 import LuxeLookLashOffer from "./pages/LuxeLookLashOffer";
+import NanoBrowsSpecial from "./pages/NanoBrowsSpecial";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/luxe-look-lash-offer" element={<LuxeLookLashOffer />} />
+          <Route path="/nano-brows-special" element={<NanoBrowsSpecial />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
