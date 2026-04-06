@@ -42,7 +42,7 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
 
   return (
     <article
-      className="flex flex-col border border-[#E8E6E1] bg-white shadow-sm"
+      className="flex h-full min-h-0 flex-col border border-[#E8E6E1] bg-white shadow-sm"
       aria-labelledby={headingId}
     >
       <div className="aspect-square w-full overflow-hidden bg-[#2a2a2a]">
@@ -88,12 +88,12 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
 
         <p className="font-barlow text-sm font-light leading-[1.65] text-[#6B6560]">{description}</p>
 
-        <div className="flex items-center gap-2 border-t border-[#EFEDEA] pt-4">
+        {/* <div className="flex items-center gap-2 border-t border-[#EFEDEA] pt-4">
           <CertificationIcon />
           <p className="font-barlow text-[10px] font-light tracking-[0.12em] uppercase text-[#9A948C]">
             {certification}
           </p>
-        </div>
+        </div> */}
 
         <div className="mt-auto flex items-stretch gap-3 pt-2">
           <Link

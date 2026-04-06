@@ -46,7 +46,7 @@ export function SpecialistsDirectory() {
         ) : (
           <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
             {visible.map((s) => (
-              <li key={s.id}>
+              <li key={s.id} className="h-full">
                 <SpecialistCard specialist={s} headingId={`specialist-${s.id}-heading`} />
               </li>
             ))}
