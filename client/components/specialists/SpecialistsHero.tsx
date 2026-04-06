@@ -48,7 +48,7 @@ export function SpecialistsHero() {
           style={{ clipPath: imageClipPath }}
         >
           <img
-            src="/images/our-products.png"
+            src="/images/prof.jpeg"
             alt="Modern treatment room with professional chair, cabinetry, and natural light"
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
