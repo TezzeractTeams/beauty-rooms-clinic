@@ -6,14 +6,12 @@ import {
   SITE_COMPANY_NAME,
   SITE_DBA_NAME,
   SITE_EIN,
+  SITE_EMAIL,
   SITE_PHONE_DISPLAY,
   SITE_PHONE_TEL,
   SITE_WEBSITE_DISPLAY,
   SITE_WEBSITE_URL,
 } from "@/lib/siteContact";
-
-/** Privacy policy contact email per published policy document */
-const PRIVACY_EMAIL = "admin@beautyroomsclinic.com";
 
 const LAST_UPDATED = "April 6, 2024";
 
@@ -177,8 +175,8 @@ export default function Privacy() {
               <li>
                 <strong className="font-normal text-charcoal">Support:</strong> Text{" "}
                 <strong className="font-normal text-charcoal">HELP</strong> for assistance or email{" "}
-                <a href={`mailto:${PRIVACY_EMAIL}`} className={linkClass}>
-                  {PRIVACY_EMAIL}
+                <a href={`mailto:${SITE_EMAIL}`} className={linkClass}>
+                  {SITE_EMAIL}
                 </a>
                 .
               </li>
@@ -265,8 +263,8 @@ export default function Privacy() {
             <ul className={`${ulClass} list-none pl-0`}>
               <li>
                 <strong className="font-normal text-charcoal">Email:</strong>{" "}
-                <a href={`mailto:${PRIVACY_EMAIL}`} className={linkClass}>
-                  {PRIVACY_EMAIL}
+                <a href={`mailto:${SITE_EMAIL}`} className={linkClass}>
+                  {SITE_EMAIL}
                 </a>
               </li>
               <li>

@@ -1,7 +1,7 @@
 /** Canonical business contact — keep footer, contact page, and tel: links aligned */
 export const SITE_PHONE_DISPLAY = "+1 941-900-3866";
 export const SITE_PHONE_TEL = "tel:+19419003866";
-export const SITE_EMAIL = "hello@beautyroomsclinic.com";
+export const SITE_EMAIL = "info@beautyroomsclinic.com";
 
 export const SITE_COMPANY_NAME = "NJ Beauty Rooms";
 export const SITE_DBA_NAME = "Beauty Rooms Clinic";

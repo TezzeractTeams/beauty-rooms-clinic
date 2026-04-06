@@ -63,7 +63,7 @@ export function BenefitCard({
 
         <h3
           className={cn(
-            "font-barlow text-[#2D2926] mb-3 max-w-[22rem]",
+            "font-barlow text-[#2D2926] mb-3 max-w-full",
             !isLeft && "mx-auto",
             compact
               ? `${titleWeight} text-xl leading-snug tracking-[-0.02em]`
@@ -76,7 +76,7 @@ export function BenefitCard({
         {description ? (
           <p
             className={cn(
-              "font-barlow font-light text-[#2D2926]/65 leading-relaxed max-w-[19rem]",
+              "font-barlow font-light text-[#2D2926]/65 leading-relaxed ",
               !isLeft && "mx-auto",
               compact ? "text-sm leading-[1.55]" : "text-[0.9375rem] leading-[1.65]",
             )}
