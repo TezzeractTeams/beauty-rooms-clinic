@@ -17,7 +17,24 @@ const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45
 
 const BOOKING_ERICA = "/bookings?specialist=Erica#booking-embed";
 
-/** Same gallery strip as LuxeLookLashOffer — social proof + finished looks */
+/** Nano brows offer — hero / detail photography */
+const NANO_BROW_OFFER_GALLERY: { src: string; alt: string }[] = [
+  {
+    src: "/images/nanobrowoffer/287670de-78a9-4edc-a134-b2474b016186.jpg",
+    alt: "Nano brows — natural healed look at Beauty Rooms Clinic",
+  },
+  {
+    src: "/images/nanobrowoffer/565284ee-7679-4fd1-a00d-f6464959604a.jpg",
+    alt: "Brow shaping and nano brow results",
+  },
+  { src: "/images/nanobrowoffer/IMG_1862.JPG", alt: "Nano brow procedure and mapping detail" },
+  { src: "/images/nanobrowoffer/IMG_1905.JPG", alt: "Soft nano brow strokes, close-up" },
+  { src: "/images/nanobrowoffer/IMG_1933.JPG", alt: "Nano brows — before and after style result" },
+  { src: "/images/nanobrowoffer/IMG_1954.JPG", alt: "Healed nano brows, natural finish" },
+  { src: "/images/nanobrowoffer/IMG_1965.JPG", alt: "Brow line and nano brow artistry" },
+];
+
+/** Additional strip images (same as LuxeLookLashOffer) — social proof + finished looks */
 const LASH_GALLERY_IMAGES: { src: string; alt: string }[] = [
   { src: "/images/lashes.webp", alt: "Custom eyelash extension results" },
   { src: "/images/home-lashes.jpg", alt: "Full lash set, natural finish" },
@@ -26,11 +43,13 @@ const LASH_GALLERY_IMAGES: { src: string; alt: string }[] = [
   { src: "/images/HowWe.jpeg", alt: "Beauty Rooms Clinic lash service" },
 ];
 
+const NANO_PAGE_GALLERY_IMAGES = [...NANO_BROW_OFFER_GALLERY, ...LASH_GALLERY_IMAGES];
+
 function LashImageCarousel({ ariaLabel }: { ariaLabel: string }) {
   return (
     <Carousel opts={{ align: "start", loop: true }} className="w-full" aria-label={ariaLabel}>
       <CarouselContent className="-ml-3 md:-ml-4">
-        {LASH_GALLERY_IMAGES.map((img) => (
+        {NANO_PAGE_GALLERY_IMAGES.map((img) => (
           <CarouselItem
             key={img.src}
             className="basis-[85%] pl-3 sm:basis-1/2 sm:pl-4 lg:basis-1/3"
@@ -290,7 +309,7 @@ export default function NanoBrowsSpecial() {
           </div>
         </section>
 
-        {/* Gallery carousel (matches LuxeLookLashOffer) */}
+        {/* Gallery carousel — nano brow offer photos + clinic looks */}
         <section
           className="w-full bg-[#F9F8F6] py-14 md:py-20 lg:py-24"
           aria-labelledby="nano-brows-gallery-heading"
