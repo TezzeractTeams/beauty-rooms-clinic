@@ -5,6 +5,8 @@ export interface BenefitCardProps {
   /** Full-bleed image in the top half of the card (home / about style). */
   imageSrc?: string;
   imageAlt?: string;
+  /** Passed to `object-position` when using `object-cover` (e.g. `center 30%` to show more of the top). */
+  imageObjectPosition?: string;
   icon?: ReactNode;
   title: string;
   description?: string;
@@ -18,6 +20,7 @@ export interface BenefitCardProps {
 export function BenefitCard({
   imageSrc,
   imageAlt = "",
+  imageObjectPosition,
   icon,
   title,
   description,
@@ -38,7 +41,12 @@ export function BenefitCard({
     >
       {hasImage ? (
         <div className="relative w-full shrink-0 aspect-[4/3] overflow-hidden bg-[#2D2926]/5">
-          <img src={imageSrc} alt={imageAlt} className="h-full w-full object-cover object-center" />
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className={cn("h-full w-full object-cover", !imageObjectPosition && "object-center")}
+            style={imageObjectPosition ? { objectPosition: imageObjectPosition } : undefined}
+          />
         </div>
       ) : null}
 

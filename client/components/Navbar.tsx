@@ -1,3 +1,4 @@
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -165,12 +166,13 @@ export default function Navbar() {
               <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
               <NavLink to="/contact" label="Contact" active={isActive("/contact")} />
             </nav>
-            <Link
-              to="/bookings"
+            <button
+              type="button"
+              onClick={() => openMainMenuBoulevardBooking()}
               className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
             >
               Book Now
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -243,13 +245,16 @@ export default function Navbar() {
           </div>
           <NavLink to="/faq" label="Faq" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
           <NavLink to="/contact" label="Contact" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
-          <Link
-            to="/bookings"
-            onClick={() => setMobileOpen(false)}
-            className="flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+          <button
+            type="button"
+            onClick={() => {
+              setMobileOpen(false);
+              openMainMenuBoulevardBooking();
+            }}
+            className="flex w-full items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
           >
             Book Now
-          </Link>
+          </button>
         </div>
       )}
     </header>

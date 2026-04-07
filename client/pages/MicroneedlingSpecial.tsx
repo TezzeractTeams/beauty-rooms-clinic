@@ -6,15 +6,10 @@ import {
   FAQ_DATA_SERVICE_MICRONEEDLING,
   getFaqItemsForCategoryService,
 } from "@/lib/faq-from-json";
-import { MICRONEEDLING_HERO_BOOKING_URL_PARAMS, openBoulevardBookingWidget } from "@/lib/boulevardBooking";
+import { MICRONEEDLING_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
 import { cn } from "@/lib/utils";
 import { Clock, ScanLine, Shield, Sparkles, TrendingUp } from "lucide-react";
 import { type ComponentProps } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-/** Fallback when `window.blvd` is not ready (e.g. injector still loading). Hero uses overlay + PMU path via `openBoulevardBookingWidget`. */
-const BOOKING_MICRONEEDLING_LAUNCH = "/bookings?specialist=Erica#booking-embed";
-
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
 
@@ -72,14 +67,10 @@ const radiantBenefits = [
 ] as const;
 
 export default function MicroneedlingSpecial() {
-  const navigate = useNavigate();
   const microneedlingFaqItems = getFaqItemsForCategoryService("PMU", FAQ_DATA_SERVICE_MICRONEEDLING);
 
   const openMicroneedlingHeroBooking = () => {
-    const opened = openBoulevardBookingWidget(MICRONEEDLING_HERO_BOOKING_URL_PARAMS);
-    if (!opened) {
-      navigate(BOOKING_MICRONEEDLING_LAUNCH);
-    }
+    tryOpenBoulevardBooking(MICRONEEDLING_HERO_BOOKING_URL_PARAMS);
   };
 
   return (
@@ -211,10 +202,10 @@ export default function MicroneedlingSpecial() {
               </p>
               <Button
                 type="button"
+                onClick={openMicroneedlingHeroBooking}
                 className="w-full min-h-[48px] rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em] sm:w-auto"
-                asChild
               >
-                <Link to={BOOKING_MICRONEEDLING_LAUNCH}>Claim the offer</Link>
+                Claim the offer
               </Button>
             </div>
           </div>
@@ -290,10 +281,10 @@ export default function MicroneedlingSpecial() {
               <div className="pt-1">
                 <Button
                   type="button"
+                  onClick={openMicroneedlingHeroBooking}
                   className="w-full min-h-[48px] rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em] sm:w-auto"
-                  asChild
                 >
-                  <Link to={BOOKING_MICRONEEDLING_LAUNCH}>Claim the offer</Link>
+                  Claim the offer
                 </Button>
               </div>
             </div>
@@ -343,10 +334,10 @@ export default function MicroneedlingSpecial() {
                 <Button
                   type="button"
                   size="lg"
+                  onClick={openMicroneedlingHeroBooking}
                   className="w-full min-h-[48px] rounded-none px-8 py-6 font-barlow text-xs font-light uppercase tracking-[0.1em] sm:w-auto"
-                  asChild
                 >
-                  <Link to={BOOKING_MICRONEEDLING_LAUNCH}>Claim the offer</Link>
+                  Claim the offer
                 </Button>
               </div>
             </div>
