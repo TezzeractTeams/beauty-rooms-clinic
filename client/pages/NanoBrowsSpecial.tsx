@@ -2,11 +2,15 @@ import Layout from "@/components/Layout";
 import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  NANO_BROWS_HERO_BOOKING_URL_PARAMS,
+  openBoulevardBookingWidget,
+} from "@/lib/boulevardBooking";
 import { cn } from "@/lib/utils";
 import { isHubSpotNanoBrowsConfigured, submitNanoBrowsLead } from "@/lib/hubspotNanoBrows";
 import { Clock, Droplets, Mail, Phone, ScanLine, Shield, User } from "lucide-react";
 import { type ComponentProps, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 /** Full-face / lifestyle hero (no brow close-up) */
@@ -15,6 +19,7 @@ const HERO_LIFESTYLE_SRC = "/images/OurStanderd.jpeg";
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
 
+/** Fallback when `window.blvd` is not ready (injector still loading). */
 const BOOKING_ERICA = "/bookings?specialist=Erica#booking-embed";
 
 function SectionContainer({
@@ -48,6 +53,7 @@ const benefitIcons = [
 ] as const;
 
 export default function NanoBrowsSpecial() {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -93,6 +99,13 @@ export default function NanoBrowsSpecial() {
     setPhone("");
     setEmail("");
     setConsent(false);
+  };
+
+  const openNanoBrowsBooking = () => {
+    const opened = openBoulevardBookingWidget(NANO_BROWS_HERO_BOOKING_URL_PARAMS);
+    if (!opened) {
+      navigate(BOOKING_ERICA);
+    }
   };
 
   return (
@@ -232,12 +245,13 @@ export default function NanoBrowsSpecial() {
                   </form>
                   <p className="mt-5 font-barlow text-sm font-light text-[rgba(45,41,38,0.55)]">
                     Ready to skip the wait?{" "}
-                    <Link
-                      to={BOOKING_ERICA}
+                    <button
+                      type="button"
+                      onClick={openNanoBrowsBooking}
                       className="text-warm-brown underline decoration-warm-brown/30 underline-offset-2 transition-colors hover:text-warm-brown/90"
                     >
                       Book your appointment now
-                    </Link>
+                    </button>
                     .
                   </p>
                 </div>
@@ -327,8 +341,12 @@ export default function NanoBrowsSpecial() {
                   Every stroke follows a custom map of your bone structure and facial symmetry, so the result looks
                   like yours—not a template.
                 </p>
-                <Button type="button" className="rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em]" asChild>
-                  <Link to={BOOKING_ERICA}>Book your appointment now</Link>
+                <Button
+                  type="button"
+                  className="rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em]"
+                  onClick={openNanoBrowsBooking}
+                >
+                  Book your appointment now
                 </Button>
               </div>
             </div>
@@ -372,9 +390,9 @@ export default function NanoBrowsSpecial() {
                 <Button
                   type="button"
                   className="rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em]"
-                  asChild
+                  onClick={openNanoBrowsBooking}
                 >
-                  <Link to={BOOKING_ERICA}>Book with Erica</Link>
+                  Book with Erica
                 </Button>
               </div>
             </div>

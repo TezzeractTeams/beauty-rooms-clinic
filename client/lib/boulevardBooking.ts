@@ -21,6 +21,13 @@ export const LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS = {
   visitType: "SELF_VISIT",
 } as const satisfies Record<string, string>;
 
+/** Nano brows special — pre-selected PMU menu path in Boulevard overlay. */
+export const NANO_BROWS_HERO_BOOKING_URL_PARAMS = {
+  locationId: "e3e0275b-4bbb-4c7c-a020-0dbb7ef96e2f",
+  path: "/cart/menu/PMU%20SERVICES/s_b9ede027-ab6b-4797-ae08-3c106b6001a4",
+  visitType: "SELF_VISIT",
+} as const satisfies Record<string, string>;
+
 declare global {
   interface Window {
     blvd?: {
