@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { Calendar, ChevronRight } from "lucide-react";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { cn } from "@/lib/utils";
+import { Calendar, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const IMG_FAST =
   "/images/rightside.jpeg";
@@ -30,7 +31,10 @@ interface PathColumnProps {
   title: string;
   items: string[];
   ctaLabel: string;
-  ctaTo: string;
+  ctaTo?: string;
+  /** Plain `<a href>` (e.g. `/#book-now` for Boulevard default menu). */
+  ctaNativeHref?: string;
+  onCtaClick?: () => void;
   variant: "solid" | "outline";
   className?: string;
 }
@@ -43,9 +47,41 @@ function PathColumn({
   items,
   ctaLabel,
   ctaTo,
+  ctaNativeHref,
+  onCtaClick,
   variant,
   className,
 }: PathColumnProps) {
+  const solidCtaClass =
+    "inline-flex w-full items-center justify-center gap-2.5 bg-primary px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto";
+  const outlineCtaClass =
+    "inline-flex w-full items-center justify-center gap-2.5 border border-charcoal/35 bg-transparent px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-charcoal/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal sm:w-auto";
+
+  const ctaInner = (
+    <>
+      <span>{ctaLabel}</span>
+      <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden />
+    </>
+  );
+
+  const cta =
+    onCtaClick != null ? (
+      <button type="button" onClick={onCtaClick} className={variant === "solid" ? solidCtaClass : outlineCtaClass}>
+        {ctaInner}
+      </button>
+    ) : ctaNativeHref != null ? (
+      <a href={ctaNativeHref} className={variant === "solid" ? solidCtaClass : outlineCtaClass}>
+        {ctaInner}
+      </a>
+    ) : (
+      <Link
+        to={ctaTo ?? "/bookings"}
+        className={variant === "solid" ? solidCtaClass : outlineCtaClass}
+      >
+        {ctaInner}
+      </Link>
+    );
+
   return (
     <div className={cn("flex flex-col", className)}>
       
@@ -58,23 +94,7 @@ function PathColumn({
       <div className="my-6 h-px w-full bg-charcoal/[0.12]" />
       <ServiceList items={items} />
       <div className="mt-10">
-        {variant === "solid" ? (
-          <Link
-            to={ctaTo}
-            className="inline-flex w-full items-center justify-center gap-2.5 bg-primary px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
-          >
-            <span>{ctaLabel}</span>
-            <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden />
-          </Link>
-        ) : (
-          <Link
-            to={ctaTo}
-            className="inline-flex w-full items-center justify-center gap-2.5 border border-charcoal/35 bg-transparent px-8 py-4 font-barlow text-xs font-light uppercase tracking-[0.1em] text-charcoal transition-colors hover:bg-charcoal/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal sm:w-auto"
-          >
-            <span>{ctaLabel}</span>
-            <Calendar className="h-4 w-4" strokeWidth={1.5} aria-hidden />
-          </Link>
-        )}
+        {cta}
         <div className="relative mt-8 aspect-[4/5] w-full overflow-hidden bg-charcoal/10 md:mt-10">
         <img
           src={imageSrc}
@@ -104,7 +124,7 @@ export function BookNowPathsSection() {
           title="Fast Booking Services"
           items={["Lash Extensions", "Lash Fills", "Basic Facials"]}
           ctaLabel="Book now"
-          ctaTo="/bookings#booking-embed"
+          onCtaClick={() => openMainMenuBoulevardBooking()}
           variant="solid"
         />
         <PathColumn
@@ -115,7 +135,7 @@ export function BookNowPathsSection() {
           title="Consultation Services"
           items={["Microblading", "Lip Blush", "Powder Brows", "Advanced Skin Treatments"]}
           ctaLabel="Book consultation"
-          ctaTo="/bookings#booking-embed"
+          onCtaClick={() => openMainMenuBoulevardBooking()}
           variant="outline"
         />
       </div>

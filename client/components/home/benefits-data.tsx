@@ -7,7 +7,8 @@ export const benefits = [
       "Your time is your most valuable asset. Experience effortless scheduling directly through our integrated booking platform. Whether you book online or call us, our AI-enhanced phone system ensures your inquiries are handled instantly, so your journey to beauty begins without a single hurdle.",
   },
   {
-    imageSrc: "/images/curated.webp",
+    imageSrc: "/images/Hospitality-First Reception.JPG",
+    imageObjectPosition: "center 32%",
     imageAlt: "Welcoming clinic reception and personalized care",
     title: "Hospitality-First Reception",
     description:

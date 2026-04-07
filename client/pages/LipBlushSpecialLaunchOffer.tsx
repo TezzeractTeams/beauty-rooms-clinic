@@ -8,21 +8,15 @@ import {
   FAQ_DATA_SERVICE_LIP_BLUSH_INITIAL,
   getFaqItemsForCategoryService,
 } from "@/lib/faq-from-json";
-import {
-  LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS,
-  openBoulevardBookingWidget,
-} from "@/lib/boulevardBooking";
+import { LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
 import { isHubSpotLipBlushConfigured, submitLipBlushLead } from "@/lib/hubspotLipBlush";
 import { cn } from "@/lib/utils";
 import { Droplets, Mail, Palette, Phone, Sparkles, User } from "lucide-react";
 import { type ComponentProps, FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const HERO_IMAGE_SRC = "/images/LipBlush.jpg";
-
-/** Fallback when `window.blvd` is not ready (injector still loading). */
-const BOOKING_ERICA = "/bookings?specialist=Erica#booking-embed";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
@@ -224,7 +218,6 @@ function LipBlushLeadFormCard({
 }
 
 export default function LipBlushSpecialLaunchOffer() {
-  const navigate = useNavigate();
   const lipBlushFaqItems = getFaqItemsForCategoryService("PMU", FAQ_DATA_SERVICE_LIP_BLUSH_INITIAL);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -234,10 +227,7 @@ export default function LipBlushSpecialLaunchOffer() {
   const [submitting, setSubmitting] = useState(false);
 
   const openLipBlushLaunchBooking = () => {
-    const opened = openBoulevardBookingWidget(LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS);
-    if (!opened) {
-      navigate(BOOKING_ERICA);
-    }
+    tryOpenBoulevardBooking(LIP_BLUSH_LAUNCH_BOOKING_URL_PARAMS);
   };
 
   const formProps: LeadFormProps = {
