@@ -9,8 +9,9 @@ export const NANO_BROW_OFFER_GALLERY: LashCarouselImage[] = [
     alt: "Nano brows — natural healed look at Beauty Rooms Clinic",
   },
   {
-    src: "/images/nanobrowoffer/565284ee-7679-4fd1-a00d-f6464959604a.jpg",
-    alt: "Brow shaping and nano brow results",
+    src: "/images/nano-beforeafter.jpg",
+    alt: "Nano brows — before and after comparison",
+    imageClassName: "object-contain bg-[#ebe9e4]",
   },
   { src: "/images/nanobrowoffer/IMG_1862.JPG", alt: "Nano brow procedure and mapping detail" },
   { src: "/images/nanobrowoffer/IMG_1905.JPG", alt: "Soft nano brow strokes, close-up" },
