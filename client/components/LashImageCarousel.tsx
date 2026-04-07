@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 export type LashCarouselImage = {
   src: string;
   alt: string;
+  /** Merged onto the img; use e.g. object-contain for tall before/after shots */
+  imageClassName?: string;
 };
 
 export const DEFAULT_LASH_GALLERY_IMAGES: LashCarouselImage[] = [
@@ -37,7 +39,10 @@ export function LashImageCarousel({ images, ariaLabel, className }: LashImageCar
               <img
                 src={img.src}
                 alt={img.alt}
-                className="aspect-[4/5] w-full object-cover object-center"
+                className={cn(
+                  "aspect-[4/5] w-full object-cover object-center",
+                  img.imageClassName,
+                )}
                 loading="lazy"
                 decoding="async"
               />

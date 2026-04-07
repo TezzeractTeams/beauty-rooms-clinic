@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 /** Full-face / lifestyle hero (no brow close-up) */
-const HERO_LIFESTYLE_SRC = "/images/about.jpeg";
+const HERO_LIFESTYLE_SRC = "/images/OurStanderd.jpeg";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
