@@ -56,7 +56,8 @@ const App = () => (
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/luxe-look-lash-offer" element={<LuxeLookLashOffer />} />
-          <Route path="/nano-brows-special" element={<NanoBrowsSpecial />} />
+          <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
+          <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
           <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
           <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />

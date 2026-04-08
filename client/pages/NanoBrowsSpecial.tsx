@@ -1,21 +1,11 @@
 import Layout from "@/components/Layout";
 import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
+import { NanoBrowsHeroWizard } from "@/components/nanoBrows/NanoBrowsHeroWizard";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { NANO_BROWS_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
 import { cn } from "@/lib/utils";
-import { isHubSpotNanoBrowsConfigured, submitNanoBrowsLead } from "@/lib/hubspotNanoBrows";
-import { Clock, Droplets, Mail, Phone, ScanLine, Shield, User } from "lucide-react";
-import { type ComponentProps, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "sonner";
+import { Clock, Droplets, ScanLine, Shield } from "lucide-react";
+import { type ComponentProps } from "react";
 
 /** Full-face / lifestyle hero (no brow close-up) */
 const HERO_LIFESTYLE_SRC = "/images/OurStanderd.jpeg";
@@ -54,55 +44,6 @@ const benefitIcons = [
 ] as const;
 
 export default function NanoBrowsSpecial() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [callbackDialogOpen, setCallbackDialogOpen] = useState(false);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!firstName.trim() || !lastName.trim()) {
-      toast.error("Please enter your first and last name.");
-      return;
-    }
-    if (!phone.trim() || !email.trim()) {
-      toast.error("Please fill in all fields.");
-      return;
-    }
-    if (!consent) {
-      toast.error("Please agree to the Privacy Policy and communications consent to continue.");
-      return;
-    }
-    if (!isHubSpotNanoBrowsConfigured()) {
-      toast.error(
-        "Form connection is not configured. Add VITE_HUBSPOT_PORTAL_ID and VITE_HUBSPOT_NANO_BROWS_FORM_GUID.",
-      );
-      return;
-    }
-    setSubmitting(true);
-    const result = await submitNanoBrowsLead({
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      phone,
-      email,
-    });
-    setSubmitting(false);
-    if (result.ok === false) {
-      toast.error(result.message);
-      return;
-    }
-    toast.success("Thank you — we’ll call you back shortly.");
-    setFirstName("");
-    setLastName("");
-    setPhone("");
-    setEmail("");
-    setConsent(false);
-    setCallbackDialogOpen(false);
-  };
-
   const openNanoBrowsBooking = () => {
     tryOpenBoulevardBooking(NANO_BROWS_HERO_BOOKING_URL_PARAMS);
   };
@@ -110,11 +51,11 @@ export default function NanoBrowsSpecial() {
   return (
     <Layout>
       <article>
-        {/* Hero — same split as LuxeLookLashOffer: left cream panel (copy + form), right lifestyle image */}
+        {/* Hero — same split as Lip Blush offer: left cream panel (copy + lead form), right lifestyle image */}
         <section className="w-full bg-[#FAFAF5]" aria-labelledby="nano-brows-hero-heading">
           <div className="flex min-h-[min(100dvh,720px)] flex-col md:min-h-[calc(100dvh-85px)] md:flex-row">
-            <div className="flex w-full flex-col justify-center bg-[#FAFAF5] px-6 pb-10 pt-24 md:w-1/2 md:max-w-[50%] md:py-16 md:pl-10 md:pr-8 lg:pl-14 lg:pr-10 xl:pl-20">
-              <div className="mx-auto w-full max-w-xl md:mx-0">
+            <div className="flex w-full flex-col justify-center bg-[#FAFAF5] px-6 pb-10 pt-24 md:min-w-0 md:flex-[0_0_65%] md:max-w-[65%] md:py-16 md:pl-10 md:pr-8 lg:pl-14 lg:pr-10 xl:pl-20">
+              <div className="mx-auto w-full max-w-5xl md:mx-0">
                 <p className="font-barlow text-[10px] font-light uppercase tracking-[0.15em] text-warm-brown/85 md:text-xs">
                   Nano brows launch
                 </p>
@@ -134,164 +75,20 @@ export default function NanoBrowsSpecial() {
                 </p>
                 <div className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
                   <span className="font-barlow text-2xl font-light tracking-[-0.02em] text-charcoal md:text-3xl">
-                    $399 launch offer
+                    Claim the Exclusive Launch Offer: $399 
                   </span>
                   <span className="font-barlow text-lg font-light text-[rgba(45,41,38,0.45)] line-through md:text-xl">
                     $500
                   </span>
                 </div>
 
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                  <Button
-                    type="button"
-                    size="lg"
-                    onClick={() => setCallbackDialogOpen(true)}
-                    className={cn(
-                      "w-full rounded-none border border-charcoal bg-charcoal px-8 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-[#FAFAF5] hover:bg-charcoal/90 sm:w-auto",
-                    )}
-                  >
-                    Request a call back
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="lg"
-                    onClick={openNanoBrowsBooking}
-                    className={cn(
-                      "w-full rounded-none border-charcoal/25 bg-transparent px-8 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-charcoal hover:border-charcoal hover:bg-charcoal hover:text-[#FAFAF5] sm:w-auto",
-                    )}
-                  >
-                    Book your consultation now
-                  </Button>
+                <div className="mt-8">
+                  <NanoBrowsHeroWizard anchorId="nano-brows-lead-form" onBookAppointment={openNanoBrowsBooking} />
                 </div>
-
-                <Dialog open={callbackDialogOpen} onOpenChange={setCallbackDialogOpen}>
-                  <DialogContent
-                    className={cn(
-                      "max-h-[min(90dvh,720px)] max-w-lg overflow-y-auto rounded-none border-[rgba(103,92,83,0.15)] bg-[#FAFAF5] p-6 sm:p-8",
-                    )}
-                    aria-describedby="nano-callback-dialog-desc"
-                  >
-                    <DialogHeader className="text-left">
-                      <DialogTitle className="font-barlow text-lg font-extralight tracking-[-0.02em] text-charcoal md:text-xl">
-                        Request a callback
-                      </DialogTitle>
-                      <DialogDescription
-                        id="nano-callback-dialog-desc"
-                        className="font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.65)]"
-                      >
-                        Claim your launch pricing — we’ll reach out shortly.
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <form
-                      id="nano-lead-form"
-                      className="professional-intake-form mt-2 space-y-4"
-                      onSubmit={handleSubmit}
-                      noValidate
-                    >
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        <div className="relative">
-                          <User
-                            className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-warm-brown/70"
-                            strokeWidth={1.25}
-                            aria-hidden
-                          />
-                          <Input
-                            id="nano-firstname"
-                            name="firstname"
-                            autoComplete="given-name"
-                            placeholder="First name"
-                            value={firstName}
-                            onChange={(ev) => setFirstName(ev.target.value)}
-                            className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                            required
-                          />
-                        </div>
-                        <div className="relative">
-                          <User
-                            className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-warm-brown/70"
-                            strokeWidth={1.25}
-                            aria-hidden
-                          />
-                          <Input
-                            id="nano-lastname"
-                            name="lastname"
-                            autoComplete="family-name"
-                            placeholder="Last name"
-                            value={lastName}
-                            onChange={(ev) => setLastName(ev.target.value)}
-                            className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="relative">
-                        <Mail
-                          className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-warm-brown/70"
-                          strokeWidth={1.25}
-                          aria-hidden
-                        />
-                        <Input
-                          id="nano-email"
-                          name="email"
-                          type="email"
-                          autoComplete="email"
-                          placeholder="Email"
-                          value={email}
-                          onChange={(ev) => setEmail(ev.target.value)}
-                          className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                          required
-                        />
-                      </div>
-                      <div className="relative">
-                        <Phone
-                          className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-warm-brown/70"
-                          strokeWidth={1.25}
-                          aria-hidden
-                        />
-                        <Input
-                          id="nano-phone"
-                          name="phone"
-                          type="tel"
-                          autoComplete="tel"
-                          placeholder="Phone number"
-                          value={phone}
-                          onChange={(ev) => setPhone(ev.target.value)}
-                          className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                          required
-                        />
-                      </div>
-                      <label className="flex cursor-pointer gap-3 text-left font-barlow text-xs font-light leading-relaxed text-[rgba(45,41,38,0.72)]">
-                        <input
-                          type="checkbox"
-                          checked={consent}
-                          onChange={(ev) => setConsent(ev.target.checked)}
-                          className="mt-0.5 h-4 w-4 shrink-0 rounded-sm border-[rgba(103,92,83,0.35)] accent-[hsl(var(--warm-brown))]"
-                        />
-                        <span>
-                          By clicking, I agree to the{" "}
-                          <Link to="/privacy" className="text-warm-brown underline decoration-warm-brown/30 underline-offset-2">
-                            Privacy Policy
-                          </Link>{" "}
-                          and consent to receive SMS/Email communications.
-                        </span>
-                      </label>
-                      <Button
-                        type="submit"
-                        size="lg"
-                        disabled={submitting}
-                        className="w-full rounded-none border border-charcoal bg-charcoal px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-[#FAFAF5] hover:bg-charcoal/90 disabled:opacity-60"
-                      >
-                        {submitting ? "Sending…" : "Request a callback + claim the offer"}
-                      </Button>
-                    </form>
-                  </DialogContent>
-                </Dialog>
               </div>
             </div>
 
-            <div className="relative min-h-[min(42vh,380px)] w-full md:w-1/2 md:max-w-[50%] md:min-h-[calc(100dvh-85px)] md:flex-1">
+            <div className="relative min-h-[min(42vh,380px)] w-full md:min-h-[calc(100dvh-85px)] md:flex-[0_0_35%] md:max-w-[35%]">
               <img
                 src={HERO_LIFESTYLE_SRC}
                 alt="Woman at the clinic — natural, polished look"
@@ -444,7 +241,7 @@ export default function NanoBrowsSpecial() {
           className="border-t border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] px-6 py-10 md:px-10"
           aria-label="Legal notice"
         >
-          <p className="mx-auto max-w-3xl text-center font-barlow text-xs font-light leading-relaxed text-[rgba(45,41,38,0.65)] md:text-sm">
+          <p className="mx-auto max-w-xl text-center font-barlow text-xs font-light leading-relaxed text-[rgba(45,41,38,0.65)] md:text-sm">
             Results may vary. This site is not a part of the Meta website or Meta Platforms, Inc. All treatments are
             performed by certified specialists.
           </p>
