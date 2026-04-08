@@ -39,10 +39,10 @@ export const NANO_BROWS_HERO_BOOKING_URL_PARAMS = {
   visitType: "SELF_VISIT",
 } as const satisfies Record<string, string>;
 
-/** Nano Brows qualified wizard — “Book initial consultation” CTA. */
+/** Nano Brows qualified wizard — primary “Book your Nano Brows session” CTA (same service as hero). */
 export const NANO_BROWS_QUALIFIED_INITIAL_CONSULTATION_BOOKING_URL_PARAMS = {
   locationId: "e3e0275b-4bbb-4c7c-a020-0dbb7ef96e2f",
-  path: "/cart/menu/PMU%20SERVICES/s_f6271e87-15d7-4019-90d1-b10eb845d7a0",
+  path: "/cart/menu/PMU%20SERVICES/s_b9ede027-ab6b-4797-ae08-3c106b6001a4",
   visitType: "SELF_VISIT",
 } as const satisfies Record<string, string>;
 
