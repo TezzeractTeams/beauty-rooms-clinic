@@ -39,6 +39,20 @@ export const NANO_BROWS_HERO_BOOKING_URL_PARAMS = {
   visitType: "SELF_VISIT",
 } as const satisfies Record<string, string>;
 
+/** Nano Brows qualified wizard — “Book initial consultation” CTA. */
+export const NANO_BROWS_QUALIFIED_INITIAL_CONSULTATION_BOOKING_URL_PARAMS = {
+  locationId: "e3e0275b-4bbb-4c7c-a020-0dbb7ef96e2f",
+  path: "/cart/menu/PMU%20SERVICES/s_f6271e87-15d7-4019-90d1-b10eb845d7a0",
+  visitType: "SELF_VISIT",
+} as const satisfies Record<string, string>;
+
+/** Nano Brows qualified wizard — “Book a call with specialist” CTA. */
+export const NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS = {
+  locationId: "e3e0275b-4bbb-4c7c-a020-0dbb7ef96e2f",
+  path: "/cart/menu/PMU%20SERVICES/s_66a3dbb8-d7bb-4700-a735-45ada1cc063b",
+  visitType: "SELF_VISIT",
+} as const satisfies Record<string, string>;
+
 /**
  * Boulevard’s injector opens the **default** booking overlay when the URL ends with this hash
  * (e.g. `https://yoursite.com/#book-now`). Prefer this over `openBookingWidget` without a path,

@@ -7,9 +7,10 @@ const IMG_LASHES_BROWS = "/images/home-lashes.jpg";
 /** Placeholder until dedicated Aesthetics photography is added */
 const IMG_AESTHETICS = "/images/our-products.png";
 
-const tileMinH = "max-h-[45vh]";
+/** Cap tile height on md+ only; on mobile a max-height + justify-center caused text to overflow upward over the image. */
+const tileMaxHMd = "md:max-h-[45vh]";
 
-const splitCardClass = `h-full min-h-[180px] ${tileMinH} py-6 px-6 sm:px-8 md:py-8 md:px-10 lg:px-12`;
+const splitCardClass = `h-full min-h-[180px] ${tileMaxHMd} justify-start py-6 px-6 sm:px-8 md:py-8 md:px-10 lg:px-12`;
 
 interface ServiceSplitTileProps {
   imageSrc: string;
@@ -21,15 +22,17 @@ interface ServiceSplitTileProps {
 
 function ServiceSplitTile({ imageSrc, imageAlt, title, description, to }: ServiceSplitTileProps) {
   return (
-    <div className={`flex flex-col md:flex-row w-full min-h-0 ${tileMinH}`}>
-      <div className={`w-full md:w-1/2 h-[min(38vw,220px)] md:h-auto ${tileMinH} shrink-0 overflow-hidden`}>
+    <div className={`flex flex-col md:flex-row w-full min-h-0 ${tileMaxHMd}`}>
+      <div
+        className={`w-full md:w-1/2 h-[min(38vw,220px)] md:h-auto ${tileMaxHMd} shrink-0 overflow-hidden`}
+      >
         <img
           src={imageSrc}
           alt={imageAlt}
           className="w-full h-full object-cover object-center"
         />
       </div>
-      <div className={`w-full md:w-1/2 flex flex-col min-h-0 ${tileMinH}`}>
+      <div className={`w-full md:w-1/2 flex flex-col min-h-0 ${tileMaxHMd}`}>
         <ServiceTextCard
           title={title}
           description={description}

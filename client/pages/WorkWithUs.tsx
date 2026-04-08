@@ -52,9 +52,9 @@ export default function WorkWithUs() {
       <section className="relative w-full min-h-[calc(65vh-85px)] overflow-hidden bg-[#FAFAF5]">
         <div className="absolute inset-0">
           <img
-            src="/images/Team.jpeg"
-            alt="Beauty Rooms Clinic team and workspace"
-            className="h-full w-full object-cover object-center"
+            src="/images/work-with-us.png"
+            alt="Aesthetician and client during a treatment at Beauty Rooms Clinic"
+            className="h-full w-full object-cover object-[center_right] md:object-center"
           />
         </div>
         <div
