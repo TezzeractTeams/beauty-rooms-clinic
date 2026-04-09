@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { BookingOrderSummary } from "../BookingOrderSummary";
 import { BookableDate, BookableTime } from "../utils/boulevardApi";
 import {
   formatSlotTime,
@@ -18,6 +19,8 @@ interface Props {
   selectedTime: BookableTime | null;
   loading: boolean;
   error: string | null;
+  serviceName: string;
+  serviceTotalUsd: number | null;
   onSelectDate: (date: string) => void;
   onSelectTime: (time: BookableTime) => void;
   onConfirm: () => void;
@@ -49,6 +52,8 @@ export function DateTimeStep({
   selectedTime,
   loading,
   error,
+  serviceName,
+  serviceTotalUsd,
   onSelectDate,
   onSelectTime,
   onConfirm,
@@ -65,6 +70,14 @@ export function DateTimeStep({
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   /** false = show slots in salon Pacific time; true = convert display to visitor's local timezone */
   const [useLocalTime, setUseLocalTime] = useState(false);
+
+  useEffect(() => {
+    if (!selectedDate) return;
+    const [y, m] = selectedDate.split("-").map(Number);
+    if (!y || !m) return;
+    setViewYear(y);
+    setViewMonth(m - 1);
+  }, [selectedDate]);
 
   const showTimezoneHeadsUp = userDiffersFromSalonTimezone();
   const salonTzLabel = useMemo(() => {
@@ -100,6 +113,13 @@ export function DateTimeStep({
 
   return (
     <div className="flex w-full flex-col gap-8">
+      <BookingOrderSummary
+        className="mb-1"
+        serviceName={serviceName}
+        serviceTotalUsd={serviceTotalUsd}
+        providerLabel="First available"
+      />
+
       <h3 className="font-barlow text-lg font-light tracking-[-0.02em] text-charcoal md:text-xl">
         Select a Date &amp; Time
       </h3>
@@ -258,7 +278,7 @@ export function DateTimeStep({
             Please wait…
           </span>
         ) : (
-          "Continue"
+          "Proceed to payment"
         )}
       </button>
     </div>

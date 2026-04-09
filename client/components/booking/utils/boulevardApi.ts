@@ -1,18 +1,23 @@
-const API_KEY = import.meta.env.VITE_BLVD_API_KEY as string;
-const BUSINESS_ID = import.meta.env.VITE_BLVD_BUSINESS_ID as string;
+/** Server proxies to Boulevard; API key never ships in the client bundle. */
+const BLVD_GRAPHQL_URL = "/api/blvd/graphql";
 
-const API_BASE = `https://sandbox.joinblvd.com/api/2020-01/${BUSINESS_ID}/client`;
-
-function authHeader(): string {
-  return `Basic ${btoa(`${API_KEY}:`)}`;
+export async function getBookingLocationId(): Promise<string> {
+  const res = await fetch("/api/blvd/booking-config");
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err || `Booking config error: ${res.status}`);
+  }
+  const data = (await res.json()) as { locationId?: string };
+  const id = data.locationId?.trim();
+  if (!id) throw new Error("Booking config did not return locationId");
+  return id;
 }
 
 async function gql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
-  const res = await fetch(API_BASE, {
+  const res = await fetch(BLVD_GRAPHQL_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: authHeader(),
     },
     body: JSON.stringify({ query, variables }),
   });
@@ -54,6 +59,21 @@ export interface ClientInformation {
   lastName: string;
   email: string;
   phoneNumber: string;
+}
+
+/**
+ * Boulevard `PhoneNumber` expects E.164 (e.g. +13105551234), not formatted strings like "+1 (310) 555-1234".
+ */
+export function normalizePhoneForBoulevard(input: string): string {
+  const raw = input.trim();
+  if (!raw) return "";
+  const hasPlus = raw.startsWith("+");
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  if (hasPlus) return `+${digits}`;
+  if (digits.length === 10) return `+1${digits}`;
+  if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
+  return `+${digits}`;
 }
 
 export interface AppointmentDetails {
@@ -109,6 +129,41 @@ export async function addCartSelectedBookableItem(
     }`,
     { cartId, itemId },
   );
+}
+
+/** `Money` scalar is in cents; sums all bookable line totals on the cart. */
+export async function getCartBookableLineTotalUsd(cartId: string): Promise<number | null> {
+  const data = await gql<{
+    cart: {
+      selectedItems: Array<{
+        __typename?: string;
+        lineTotal?: number;
+      } | null> | null;
+    } | null;
+  }>(
+    `query CartLineTotals($cartId: ID!) {
+      cart(id: $cartId) {
+        selectedItems {
+          __typename
+          ... on CartBookableItem {
+            lineTotal
+          }
+        }
+      }
+    }`,
+    { cartId },
+  );
+
+  let cents = 0;
+  let found = false;
+  for (const item of data.cart?.selectedItems ?? []) {
+    if (item?.lineTotal != null && typeof item.lineTotal === "number") {
+      cents += item.lineTotal;
+      found = true;
+    }
+  }
+  if (!found) return null;
+  return cents / 100;
 }
 
 export async function cartBookableDates(
@@ -170,13 +225,21 @@ export async function updateCart(
   cartId: string,
   clientInformation: ClientInformation,
 ): Promise<void> {
+  const phoneNumber = normalizePhoneForBoulevard(clientInformation.phoneNumber);
+  if (!phoneNumber || phoneNumber.length < 8) {
+    throw new Error("Please enter a valid phone number.");
+  }
+  const payload: ClientInformation = {
+    ...clientInformation,
+    phoneNumber,
+  };
   await gql<{ updateCart: { cart: BlvdCart } }>(
     `mutation UpdateCart($cartId: ID!, $clientInformation: CartClientInformationInput!) {
       updateCart(input: { id: $cartId, clientInformation: $clientInformation }) {
         cart { id }
       }
     }`,
-    { cartId, clientInformation },
+    { cartId, clientInformation: payload },
   );
 }
 

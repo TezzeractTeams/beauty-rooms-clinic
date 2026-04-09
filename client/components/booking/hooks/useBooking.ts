@@ -11,14 +11,14 @@ import {
   checkoutCart,
   ClientInformation,
   createCart,
+  getBookingLocationId,
+  getCartBookableLineTotalUsd,
   getCartSpecialistDisplayName,
   reserveCartBookableItems,
   updateCart,
 } from "../utils/boulevardApi";
-import { SALON_TIMEZONE } from "../utils/salonTimezone";
+import { SALON_TIMEZONE, salonTodayYmd } from "../utils/salonTimezone";
 import { CardData, tokenizeCard } from "../utils/tokenize";
-
-const LOCATION_ID = import.meta.env.VITE_BLVD_LOCATION_ID as string;
 
 export type BookingStep = "datetime" | "payment" | "confirmed";
 
@@ -32,6 +32,8 @@ interface BookingState {
   appointments: AppointmentDetails[];
   /** Specialist name from cart after time is reserved; shown on confirmation. */
   specialistName: string | null;
+  /** Service line total in USD from cart `lineTotal` (Money cents) after item is added. */
+  serviceTotalUsd: number | null;
   loading: boolean;
   error: string | null;
 }
@@ -47,6 +49,7 @@ type BookingAction =
   | { type: "ADVANCE_TO"; payload: { step: BookingStep } }
   | { type: "CHECKOUT_DONE"; payload: { appointments: AppointmentDetails[] } }
   | { type: "SPECIALIST_SET"; payload: string | null }
+  | { type: "SERVICE_TOTAL_SET"; payload: number | null }
   | { type: "RESET" };
 
 const initialState: BookingState = {
@@ -58,6 +61,7 @@ const initialState: BookingState = {
   selectedTime: null,
   appointments: [],
   specialistName: null,
+  serviceTotalUsd: null,
   loading: false,
   error: null,
 };
@@ -84,6 +88,8 @@ function reducer(state: BookingState, action: BookingAction): BookingState {
       return { ...state, appointments: action.payload.appointments, step: "confirmed", loading: false };
     case "SPECIALIST_SET":
       return { ...state, specialistName: action.payload };
+    case "SERVICE_TOTAL_SET":
+      return { ...state, serviceTotalUsd: action.payload };
     case "RESET":
       return initialState;
     default:
@@ -131,13 +137,34 @@ export function useBooking(
   const initialize = useCallback(async (): Promise<{ ok: boolean; error?: string }> => {
     dispatch({ type: "SET_LOADING", payload: true });
     try {
-      const cartId = await createCart(LOCATION_ID);
+      const locationId = await getBookingLocationId();
+      const cartId = await createCart(locationId);
       dispatch({ type: "CART_CREATED", payload: { cartId } });
       await addCartSelectedBookableItem(cartId, serviceId);
+
+      let serviceTotalUsd: number | null = null;
+      try {
+        serviceTotalUsd = await getCartBookableLineTotalUsd(cartId);
+      } catch {
+        /* cart pricing optional for booking */
+      }
+      dispatch({ type: "SERVICE_TOTAL_SET", payload: serviceTotalUsd });
 
       const { lower, upper } = buildDateRange();
       const dates = await cartBookableDates(cartId, lower, upper, SALON_TIMEZONE);
       dispatch({ type: "DATES_LOADED", payload: { dates } });
+
+      const todayStr = salonTodayYmd();
+      const sorted = [...dates].sort((a, b) => a.date.localeCompare(b.date));
+      const autoDate =
+        sorted.find((d) => d.date > todayStr)?.date ?? sorted[0]?.date ?? null;
+      if (autoDate) {
+        dispatch({ type: "DATE_SELECTED", payload: { date: autoDate } });
+        dispatch({ type: "SET_LOADING", payload: true });
+        const times = await cartBookableTimes(cartId, autoDate, SALON_TIMEZONE);
+        dispatch({ type: "TIMES_LOADED", payload: { times } });
+      }
+
       return { ok: true };
     } catch (err) {
       const message = (err as Error).message;

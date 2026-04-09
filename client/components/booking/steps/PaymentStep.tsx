@@ -1,15 +1,26 @@
 import { Input } from "@/components/ui/input";
 import { CreditCard, Loader2, Lock } from "lucide-react";
 import { type FormEvent, useState } from "react";
+import { BookingOrderSummary } from "../BookingOrderSummary";
 import { CardData } from "../utils/tokenize";
 
 interface Props {
   loading: boolean;
   error: string | null;
+  serviceName: string;
+  serviceTotalUsd: number | null;
+  specialistName: string | null;
   onSubmit: (card: CardData) => void;
 }
 
-export function PaymentStep({ loading, error, onSubmit }: Props) {
+export function PaymentStep({
+  loading,
+  error,
+  serviceName,
+  serviceTotalUsd,
+  specialistName,
+  onSubmit,
+}: Props) {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [cvv, setCvv] = useState("");
@@ -52,8 +63,18 @@ export function PaymentStep({ loading, error, onSubmit }: Props) {
   const inputClass =
     "h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] font-barlow text-sm font-light focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0";
 
+  const providerLabel = specialistName?.trim() || "First available";
+
   return (
-    <form className="professional-intake-form flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
+    <div className="flex flex-col gap-6">
+      <BookingOrderSummary
+        serviceName={serviceName}
+        serviceTotalUsd={serviceTotalUsd}
+        providerLabel={providerLabel}
+        emphasizeBookingCharge
+      />
+
+      <form className="professional-intake-form flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
       <div>
         <h3 className="font-barlow text-base font-light uppercase tracking-[0.12em] text-charcoal">
           Payment Details
@@ -195,5 +216,6 @@ export function PaymentStep({ loading, error, onSubmit }: Props) {
         )}
       </button>
     </form>
+    </div>
   );
 }

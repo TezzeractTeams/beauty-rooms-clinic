@@ -14,7 +14,7 @@ export type BookingFlowPanelProps = Omit<ReturnType<typeof useBooking>, "initial
 const STEPS = [
   { id: "datetime", label: "Date & Time" },
   { id: "payment", label: "Payment" },
-  { id: "confirmed", label: "Confirmed" },
+  { id: "confirmed", label: "Confirmation" },
 ] as const;
 
 export function BookingFlowPanel({
@@ -46,7 +46,7 @@ export function BookingFlowPanel({
               Back
             </button>
           )}
-          {!canGoBack && state.step !== "confirmed" && (
+          {!canGoBack && (
             <span className="truncate font-barlow text-xs font-light uppercase tracking-[0.1em] text-warm-brown/70">
               {serviceName}
             </span>
@@ -54,51 +54,65 @@ export function BookingFlowPanel({
         </div>
       </div>
 
-      {state.step !== "confirmed" && (
-        <div className="shrink-0 border-b border-[rgba(103,92,83,0.08)] px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-0">
-            {STEPS.filter((s) => s.id !== "confirmed").map((step, i) => {
-              const stepIndex = STEPS.findIndex((s) => s.id === step.id);
-              const isComplete = stepIndex < currentStepIndex;
-              const isActive = step.id === state.step;
-              return (
-                <div key={step.id} className="flex flex-1 items-center">
-                  <div className="flex flex-col items-center gap-1">
-                    <div
-                      className={cn(
-                        "flex h-5 w-5 items-center justify-center text-[10px] font-barlow font-light transition-colors",
-                        isComplete
-                          ? "bg-warm-brown/80 text-white"
-                          : isActive
-                            ? "border border-charcoal bg-charcoal text-white"
-                            : "border border-charcoal/20 text-charcoal/35",
-                      )}
-                    >
-                      {isComplete ? "✓" : i + 1}
-                    </div>
-                    <span
-                      className={cn(
-                        "whitespace-nowrap font-barlow text-[9px] font-light uppercase leading-none tracking-[0.07em]",
-                        isActive ? "text-charcoal" : "text-charcoal/40",
-                      )}
-                    >
-                      {step.label}
-                    </span>
-                  </div>
-                  {i < STEPS.filter((s) => s.id !== "confirmed").length - 1 && (
-                    <div
-                      className={cn(
-                        "mx-1 h-px flex-1 transition-colors",
-                        isComplete ? "bg-warm-brown/40" : "bg-charcoal/12",
-                      )}
-                    />
+      <div className="shrink-0 border-b border-[rgba(103,92,83,0.08)] px-4 py-3 sm:px-6" aria-label="Booking progress">
+        <div className="flex items-center gap-0">
+          {STEPS.map((step, i) => {
+            const stepIndex = STEPS.findIndex((s) => s.id === step.id);
+            const isComplete = stepIndex < currentStepIndex;
+            const isActive = step.id === state.step;
+            const isConfirmationLocked = step.id === "confirmed" && state.step !== "confirmed";
+
+            return (
+              <div key={step.id} className="flex flex-1 items-center">
+                <div
+                  className={cn(
+                    "flex flex-col items-center gap-1",
+                    isConfirmationLocked && "opacity-45",
                   )}
+                  aria-current={isActive ? "step" : undefined}
+                  aria-disabled={isConfirmationLocked ? true : undefined}
+                >
+                  <div
+                    className={cn(
+                      "flex h-5 w-5 items-center justify-center text-[10px] font-barlow font-light transition-colors",
+                      isComplete
+                        ? "bg-warm-brown/80 text-white"
+                        : isActive
+                          ? "border border-charcoal bg-charcoal text-white"
+                          : isConfirmationLocked
+                            ? "border border-charcoal/15 text-charcoal/25"
+                            : "border border-charcoal/20 text-charcoal/35",
+                    )}
+                  >
+                    {isComplete ? "✓" : i + 1}
+                  </div>
+                  <span
+                    className={cn(
+                      "whitespace-nowrap font-barlow text-[9px] font-light uppercase leading-none tracking-[0.07em]",
+                      isActive
+                        ? "text-charcoal"
+                        : isConfirmationLocked
+                          ? "text-charcoal/30"
+                          : "text-charcoal/40",
+                    )}
+                  >
+                    {step.label}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
+                {i < STEPS.length - 1 && (
+                  <div
+                    className={cn(
+                      "mx-1 h-px flex-1 transition-colors",
+                      isComplete ? "bg-warm-brown/40" : "bg-charcoal/12",
+                    )}
+                    aria-hidden
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
-      )}
+      </div>
 
       <div className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">
         {state.step === "datetime" && (
@@ -109,6 +123,8 @@ export function BookingFlowPanel({
             selectedTime={state.selectedTime}
             loading={state.loading}
             error={state.error}
+            serviceName={serviceName}
+            serviceTotalUsd={state.serviceTotalUsd}
             onSelectDate={selectDate}
             onSelectTime={selectTime}
             onConfirm={confirmDateTime}
@@ -116,13 +132,22 @@ export function BookingFlowPanel({
         )}
 
         {state.step === "payment" && (
-          <PaymentStep loading={state.loading} error={state.error} onSubmit={submitPayment} />
+          <PaymentStep
+            loading={state.loading}
+            error={state.error}
+            serviceName={serviceName}
+            serviceTotalUsd={state.serviceTotalUsd}
+            specialistName={state.specialistName}
+            onSubmit={submitPayment}
+          />
         )}
 
         {state.step === "confirmed" && (
           <ConfirmationStep
             appointments={state.appointments}
             serviceName={serviceName}
+            serviceTotalUsd={state.serviceTotalUsd}
+            specialistName={state.specialistName}
             onClose={onConfirmedClose ?? (() => {})}
           />
         )}

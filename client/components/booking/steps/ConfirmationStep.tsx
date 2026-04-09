@@ -1,10 +1,13 @@
 import { CalendarCheck, Clock, MapPin, Sparkles, User, UserRound } from "lucide-react";
+import { BookingOrderSummary } from "../BookingOrderSummary";
 import { AppointmentDetails } from "../utils/boulevardApi";
 import { formatAppointmentInSalon } from "../utils/salonTimezone";
 
 interface Props {
   appointments: AppointmentDetails[];
   serviceName: string;
+  serviceTotalUsd: number | null;
+  specialistName: string | null;
   onClose: () => void;
 }
 
@@ -15,13 +18,20 @@ function formatDuration(minutes: number): string {
   return m > 0 ? `${h}h ${m}min` : `${h}h`;
 }
 
-export function ConfirmationStep({ appointments, serviceName, onClose }: Props) {
+export function ConfirmationStep({
+  appointments,
+  serviceName,
+  serviceTotalUsd,
+  specialistName,
+  onClose,
+}: Props) {
   const appt = appointments[0];
   const salonWhen = appt?.startAt ? formatAppointmentInSalon(appt.startAt) : null;
+  const providerLabel =
+    specialistName?.trim() || appt?.specialistName?.trim() || "First available";
 
   return (
-    <div className="flex flex-col items-center gap-6 py-2 text-center">
-      {/* Icon */}
+    <div className="flex w-full flex-col items-center gap-6 py-2 text-center">
       <div className="flex h-16 w-16 items-center justify-center border border-[rgba(103,92,83,0.15)] bg-white/60">
         <Sparkles className="h-7 w-7 text-warm-brown" strokeWidth={1.25} aria-hidden />
       </div>
@@ -35,10 +45,17 @@ export function ConfirmationStep({ appointments, serviceName, onClose }: Props) 
         </p>
       </div>
 
+      <BookingOrderSummary
+        className="w-full text-left"
+        serviceName={appt?.appointmentServices?.[0]?.service?.name ?? serviceName}
+        serviceTotalUsd={serviceTotalUsd}
+        providerLabel={providerLabel}
+      />
+
       {appt ? (
         <div className="w-full border border-[rgba(103,92,83,0.15)] bg-[#F4F4EF] px-6 py-5 text-left">
           <p className="mb-4 font-barlow text-[10px] font-light uppercase tracking-[0.14em] text-warm-brown/80">
-            Appointment Summary
+            Appointment details
           </p>
 
           <ul className="space-y-3">
@@ -105,7 +122,7 @@ export function ConfirmationStep({ appointments, serviceName, onClose }: Props) 
           </ul>
         </div>
       ) : (
-        <div className="w-full border border-[rgba(103,92,83,0.15)] bg-[#F4F4EF] px-6 py-5">
+        <div className="w-full border border-[rgba(103,92,83,0.15)] bg-[#F4F4EF] px-6 py-5 text-left">
           <p className="font-barlow text-sm font-light text-charcoal/70">
             Your appointment for <span className="text-charcoal">{serviceName}</span> has been confirmed.
           </p>
@@ -116,7 +133,13 @@ export function ConfirmationStep({ appointments, serviceName, onClose }: Props) 
         We look forward to seeing you. Please arrive 5–10 minutes early for your appointment.
       </p>
 
-    
+      <button
+        type="button"
+        onClick={onClose}
+        className="w-full max-w-md border border-charcoal/20 bg-transparent px-6 py-4 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-charcoal transition-colors hover:border-charcoal/40 hover:bg-charcoal/5"
+      >
+        Close
+      </button>
     </div>
   );
 }

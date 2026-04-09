@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import { handleBlvdBookingConfig, handleBlvdGraphql } from "./routes/blvd";
 import { handleDemo } from "./routes/demo";
 import { handleWebsiteFormLead } from "./routes/website-form-lead";
 
@@ -21,6 +22,9 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
 
   app.post("/api/website-form-lead", handleWebsiteFormLead);
+
+  app.get("/api/blvd/booking-config", handleBlvdBookingConfig);
+  app.post("/api/blvd/graphql", handleBlvdGraphql);
 
   return app;
 }
