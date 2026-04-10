@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { Globe, Star } from "lucide-react";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import type { Specialist } from "./specialists-data";
 
 function CertificationIcon() {
@@ -34,7 +34,6 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
     imageSrc,
     imageAlt,
     websiteUrl,
-    id,
   } = specialist;
 
   const ratingLabel = rating.toFixed(1);
@@ -96,12 +95,13 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         </div> */}
 
         <div className="mt-auto flex items-stretch gap-3 pt-2">
-          <Link
-            to={`/bookings?specialist=${encodeURIComponent(id)}`}
+          <button
+            type="button"
+            onClick={() => openMainMenuBoulevardBooking()}
             className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             {bookLabel}
-          </Link>
+          </button>
           {websiteUrl ? (
             <a
               href={websiteUrl}

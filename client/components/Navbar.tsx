@@ -82,6 +82,9 @@ export default function Navbar() {
 
   const isSpecialistsActive = location.pathname === "/experts";
 
+  /** Nano brows launch funnel uses its own booking CTAs; hide global header Book Now here only. */
+  const hideHeaderBookNow = location.pathname === "/nano-brows-launch-offer";
+
   return (
     <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 md:px-10 py-6">
@@ -166,13 +169,15 @@ export default function Navbar() {
               <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
               <NavLink to="/contact" label="Contact" active={isActive("/contact")} />
             </nav>
-            <button
-              type="button"
-              onClick={() => openMainMenuBoulevardBooking()}
-              className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
-            >
-              Book Now
-            </button>
+            {!hideHeaderBookNow ? (
+              <button
+                type="button"
+                onClick={() => openMainMenuBoulevardBooking()}
+                className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
+              >
+                Book Now
+              </button>
+            ) : null}
           </div>
         </div>
 
@@ -245,16 +250,18 @@ export default function Navbar() {
           </div>
           <NavLink to="/faq" label="Faq" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
           <NavLink to="/contact" label="Contact" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
-          <button
-            type="button"
-            onClick={() => {
-              setMobileOpen(false);
-              openMainMenuBoulevardBooking();
-            }}
-            className="flex w-full items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
-          >
-            Book Now
-          </button>
+          {!hideHeaderBookNow ? (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileOpen(false);
+                openMainMenuBoulevardBooking();
+              }}
+              className="flex w-full items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+            >
+              Book Now
+            </button>
+          ) : null}
         </div>
       )}
     </header>

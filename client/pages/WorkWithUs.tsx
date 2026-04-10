@@ -81,7 +81,7 @@ export default function WorkWithUs() {
                 to="/contact"
                 className="inline-flex items-center gap-3 bg-primary px-10 py-5 font-barlow font-normal text-xs uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
-                <span>Contact us</span>
+                <span>Apply now</span>
                 <ArrowRightIcon />
               </Link>
             </div>
