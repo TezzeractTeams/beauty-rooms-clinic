@@ -7,4 +7,6 @@ interface ImportMetaEnv {
 
 interface Window {
   fbq?: (...args: unknown[]) => void;
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
 }
