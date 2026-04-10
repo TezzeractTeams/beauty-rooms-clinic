@@ -2,7 +2,6 @@ import Layout from "@/components/Layout";
 import { ConsultationCtaSection } from "@/components/home/ConsultationCtaSection";
 import { ArrowRightIcon } from "@/components/home/icons";
 import { ProfessionalIntakeFormSection } from "@/components/work-with-us/ProfessionalIntakeFormSection";
-import { Link } from "react-router-dom";
 
 const BEAUTY_ROOMS_NJ_URL = "https://www.beautyroomsbynj.com/";
 
@@ -46,6 +45,10 @@ const disciplines = [
   "Regenerative service (peptides, etc.)",
 ] as const;
 
+function scrollToProfessionalIntake() {
+  document.getElementById("professional-intake")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
 export default function WorkWithUs() {
   return (
     <Layout>
@@ -77,13 +80,14 @@ export default function WorkWithUs() {
             Beauty Rooms Clinic is more than a workplace; it is a sanctuary for the modern aesthetic professional. We are seeking elite specialists who thrive at the intersection of clinical precision and high-end hospitality. If you are committed to delivering bespoke, natural results within a culture of shared excellence, we invite you to grow with us.
             </p>
             <div className="mt-8">
-              <Link
-                to="/contact"
+              <button
+                type="button"
+                onClick={scrollToProfessionalIntake}
                 className="inline-flex items-center gap-3 bg-primary px-10 py-5 font-barlow font-normal text-xs uppercase tracking-[0.1em] text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 <span>Apply now</span>
                 <ArrowRightIcon />
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -177,7 +181,7 @@ The BRC Standard of Excellence
         </div>
       </section>
 
-      <ProfessionalIntakeFormSection professionSuggestions={disciplines} />
+      <ProfessionalIntakeFormSection />
 
       <section className={sectionClass} aria-labelledby="nj-heading">
         <div className="mx-auto max-w-7xl border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] px-8 py-10 md:px-12 md:py-12">
