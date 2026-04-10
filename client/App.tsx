@@ -18,7 +18,6 @@ import ServiceCategoryDetail from "./pages/ServiceCategoryDetail";
 import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
 import Specialists from "./pages/Specialists";
-import BookNow from "./pages/BookNow";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
@@ -53,7 +52,10 @@ const App = () => (
           <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/experts" element={<Specialists />} />
-          <Route path="/bookings" element={<BookNow />} />
+          <Route
+            path="/bookings"
+            element={<Navigate to={{ pathname: "/", hash: "book-now" }} replace />}
+          />
           <Route path="/blog" element={<Placeholder title="Our Blog" />} />
           <Route path="/gallery" element={<Placeholder title="Results Gallery" />} />
           <Route path="/work-with-us" element={<WorkWithUs />} />

@@ -1,9 +1,11 @@
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { Link } from "react-router-dom";
 
 const DEFAULT_LINES = ["Ready to transform", "your look?"] as const;
 const DEFAULT_SUBTEXT = "Secure your consultation at our Sarasota today.";
 const DEFAULT_CTA = "Book a consultation";
-const DEFAULT_TO = "/bookings";
+
+const ctaClassName = `font-barlow font-light text-[11px] md:text-xs tracking-[0.12em] uppercase text-white border border-white bg-transparent px-10 py-4 md:px-12 md:py-5 rounded-none inline-block transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white`;
 
 export interface ConsultationCtaSectionProps {
   /** Unique id for aria-labelledby on the section heading */
@@ -12,6 +14,10 @@ export interface ConsultationCtaSectionProps {
   titleLines?: readonly string[];
   subtext?: string | null;
   ctaLabel?: string;
+  /**
+   * When set, the CTA navigates to this route. When omitted, the CTA opens the Boulevard booking overlay
+   * (same behavior as the header “Book Now” control).
+   */
   ctaTo?: string;
 }
 
@@ -20,9 +26,27 @@ export function ConsultationCtaSection({
   titleLines = DEFAULT_LINES,
   subtext = DEFAULT_SUBTEXT,
   ctaLabel = DEFAULT_CTA,
-  ctaTo = DEFAULT_TO,
+  ctaTo,
 }: ConsultationCtaSectionProps) {
   const lines = [...titleLines];
+
+  const marginTopClass =
+    subtext == null || subtext === "" ? "mt-4 md:mt-6" : "";
+
+  const cta =
+    ctaTo != null ? (
+      <Link to={ctaTo} className={`${ctaClassName} ${marginTopClass}`}>
+        {ctaLabel}
+      </Link>
+    ) : (
+      <button
+        type="button"
+        onClick={() => openMainMenuBoulevardBooking()}
+        className={`${ctaClassName} ${marginTopClass}`}
+      >
+        {ctaLabel}
+      </button>
+    );
 
   return (
     <section
@@ -44,12 +68,7 @@ export function ConsultationCtaSection({
           {subtext}
         </p>
       )}
-      <Link
-        to={ctaTo}
-        className={`font-barlow font-light text-[11px] md:text-xs tracking-[0.12em] uppercase text-white border border-white bg-transparent px-10 py-4 md:px-12 md:py-5 rounded-none inline-block transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${subtext == null || subtext === "" ? "mt-4 md:mt-6" : ""}`}
-      >
-        {ctaLabel}
-      </Link>
+      {cta}
     </section>
   );
 }

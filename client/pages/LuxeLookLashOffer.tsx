@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
-import { Link } from "react-router-dom";
 import { Shield } from "lucide-react";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -235,9 +235,9 @@ export default function LuxeLookLashOffer() {
                 <Button
                   type="button"
                   className="rounded-none px-8 py-5 font-barlow text-xs font-light uppercase tracking-[0.1em]"
-                  asChild
+                  onClick={() => openMainMenuBoulevardBooking()}
                 >
-                  <Link to="/bookings?specialist=Andrezza#booking-embed">Book with Andrezza</Link>
+                  Book with Andrezza
                 </Button>
               </div>
             </div>
@@ -343,8 +343,8 @@ export default function LuxeLookLashOffer() {
                   </AccordionTrigger>
                   <AccordionContent>
                     <p className="pb-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-                      Choose a time below or on our bookings page. If you prefer Andrezza, use &quot;Book with
-                      Andrezza&quot;—we&apos;ll match you to her availability when possible.
+                      Choose a time below, or use &quot;Book with Andrezza&quot; above to open our scheduler—we&apos;ll
+                      match you to her availability when possible.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
