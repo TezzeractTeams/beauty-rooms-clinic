@@ -5,6 +5,7 @@ import {
   NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS,
   tryOpenBoulevardBooking,
 } from "@/lib/boulevardBooking";
+import { trackMetaPixelCustom } from "@/lib/metaPixel";
 import { cn } from "@/lib/utils";
 import { Mail, Phone, User } from "lucide-react";
 import { type FormEvent, useState } from "react";
@@ -48,6 +49,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
       return;
     }
 
+    trackMetaPixelCustom("NanoBrowsContactComplete");
     setView("checklist");
   };
 
