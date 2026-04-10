@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { handleBlvdBookingConfig, handleBlvdGraphql } from "./routes/blvd";
-import { handleDemo } from "./routes/demo";
-import { handleWebsiteFormLead } from "./routes/website-form-lead";
+import { handleBlvdBookingConfig, handleBlvdGraphql } from "./routes/blvd.js";
+import { handleDemo } from "./routes/demo.js";
+import { handleWebsiteFormLead } from "./routes/website-form-lead.js";
 
 export function createServer() {
   const app = express();
