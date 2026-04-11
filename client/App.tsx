@@ -21,6 +21,7 @@ import Specialists from "./pages/Specialists";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
+import CancellationPolicy from "./pages/CancellationPolicy";
 import LuxeLookLashOffer from "./pages/LuxeLookLashOffer";
 import NanoBrowsSpecial from "./pages/NanoBrowsSpecial";
 import LipBlushSpecialLaunchOffer from "./pages/LipBlushSpecialLaunchOffer";
@@ -61,6 +62,7 @@ const App = () => (
           <Route path="/work-with-us" element={<WorkWithUs />} />
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/luxe-look-lash-offer" element={<LuxeLookLashOffer />} />
           <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
           <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
