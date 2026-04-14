@@ -141,7 +141,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                   id={`${idPrefix}-lastname`}
                   name="lastname"
                   autoComplete="family-name"
-                  placeholder="Last name (optional)"
+                  placeholder="Last name"
                   value={lastName}
                   onChange={(ev) => setLastName(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
