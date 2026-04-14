@@ -54,12 +54,16 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
 
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!firstName.trim() || !lastName.trim()) {
-      toast.error("Please enter your first and last name.");
+    if (!firstName.trim()) {
+      toast.error("Please enter your first name.");
       return;
     }
-    if (!phone.trim() || !email.trim()) {
-      toast.error("Please fill in all fields.");
+    if (!phone.trim()) {
+      toast.error("Please enter your phone number.");
+      return;
+    }
+    if (!email.trim()) {
+      toast.error("Please enter your email address.");
       return;
     }
     if (!consent) {
@@ -107,7 +111,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
             Please provide your details to begin the checklist:
           </p>
 
-          <form className="professional-intake-form mt-6 space-y-4" onSubmit={handleContactSubmit} noValidate>
+          <form className="professional-intake-form mt-6 space-y-4" onSubmit={handleContactSubmit}>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="relative">
                 <User
@@ -119,11 +123,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                   id={`${idPrefix}-firstname`}
                   name="firstname"
                   autoComplete="given-name"
-                  placeholder="First name"
+                  placeholder="First name *"
                   value={firstName}
                   onChange={(ev) => setFirstName(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
               <div className="relative">
@@ -136,11 +141,10 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                   id={`${idPrefix}-lastname`}
                   name="lastname"
                   autoComplete="family-name"
-                  placeholder="Last name"
+                  placeholder="Last name (optional)"
                   value={lastName}
                   onChange={(ev) => setLastName(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                  required
                 />
               </div>
             </div>
@@ -156,11 +160,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                   name="phone"
                   type="tel"
                   autoComplete="tel"
-                  placeholder="Phone number"
+                  placeholder="Phone number *"
                   value={phone}
                   onChange={(ev) => setPhone(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
               <div className="relative min-w-0">
@@ -174,11 +179,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="Email"
+                  placeholder="Email *"
                   value={email}
                   onChange={(ev) => setEmail(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
             </div>
@@ -187,6 +193,8 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
                 type="checkbox"
                 checked={consent}
                 onChange={(ev) => setConsent(ev.target.checked)}
+                required
+                aria-required
                 className="mt-0.5 h-4 w-4 shrink-0 rounded-sm border-[rgba(103,92,83,0.35)] accent-[hsl(var(--warm-brown))]"
               />
               <span>
