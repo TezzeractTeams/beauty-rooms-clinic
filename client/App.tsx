@@ -26,6 +26,7 @@ import LuxeLookLashOffer from "./pages/LuxeLookLashOffer";
 import NanoBrowsSpecial from "./pages/NanoBrowsSpecial";
 import LipBlushSpecialLaunchOffer from "./pages/LipBlushSpecialLaunchOffer";
 import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
+import Academy from "./pages/Academy";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
           <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
+          <Route path="/academy" element={<Academy />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
      
