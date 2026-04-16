@@ -17,6 +17,12 @@ export interface Specialist {
   certification: string;
   imageSrc: string;
   imageAlt: string;
+  /** Optional override for the primary CTA text */
+  ctaLabel?: string;
+  /** Optional flag for non-bookable specialists */
+  bookingDisabled?: boolean;
+  /** Optional Boulevard deep-link params used by "Book with <name>" button */
+  bookingUrlParams?: Record<string, string>;
   /** Optional profile / external site link (globe icon) */
   websiteUrl?: string;
 }

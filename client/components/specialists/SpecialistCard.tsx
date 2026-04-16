@@ -1,5 +1,5 @@
 import { Globe, Star } from "lucide-react";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
+import { openMainMenuBoulevardBooking, openBoulevardBookingWidget } from "@/lib/boulevardBooking";
 import type { Specialist } from "./specialists-data";
 
 function CertificationIcon() {
@@ -33,11 +33,14 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
     certification,
     imageSrc,
     imageAlt,
+    ctaLabel,
+    bookingDisabled,
+    bookingUrlParams,
     websiteUrl,
   } = specialist;
 
   const ratingLabel = rating.toFixed(1);
-  const bookLabel = `Book with ${name}`;
+  const bookLabel = ctaLabel ?? `Book with ${name}`;
 
   return (
     <article
@@ -97,8 +100,18 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         <div className="mt-auto flex items-stretch gap-3 pt-2">
           <button
             type="button"
-            onClick={() => openMainMenuBoulevardBooking()}
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            disabled={bookingDisabled}
+            onClick={() => {
+              if (bookingDisabled) return;
+              if (bookingUrlParams && !openBoulevardBookingWidget({ ...bookingUrlParams })) {
+                openMainMenuBoulevardBooking();
+                return;
+              }
+              if (!bookingUrlParams) {
+                openMainMenuBoulevardBooking();
+              }
+            }}
+            className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:bg-primary/50 disabled:hover:bg-primary/50"
           >
             {bookLabel}
           </button>
