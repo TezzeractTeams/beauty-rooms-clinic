@@ -92,6 +92,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/academy" className={footerLinkClass}>
+                  Academy
+                </Link>
+              </li>
+              <li>
                 <button
                   type="button"
                   onClick={() => openMainMenuBoulevardBooking()}
