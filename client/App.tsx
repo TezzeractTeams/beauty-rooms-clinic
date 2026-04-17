@@ -27,6 +27,8 @@ import NanoBrowsSpecial from "./pages/NanoBrowsSpecial";
 import LipBlushSpecialLaunchOffer from "./pages/LipBlushSpecialLaunchOffer";
 import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
 import Academy from "./pages/Academy";
+import HeadSpaDetoxExperience from "./pages/HeadSpaDetoxExperience";
+import LashesLaunchOffer from "./pages/LashesLaunchOffer";
 
 const queryClient = new QueryClient();
 
@@ -65,7 +67,9 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/luxe-look-lash-offer" element={<LuxeLookLashOffer />} />
+          <Route path="/lashes-launch-offer" element={<LashesLaunchOffer />} />
           <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
+          <Route path="/Head-Spa-Detox-Experience" element={<HeadSpaDetoxExperience />} />
           <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
           <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
           <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />
