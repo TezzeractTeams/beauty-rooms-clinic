@@ -11,11 +11,26 @@ export type WebsiteFormLeadPayload = {
   consent: boolean;
 };
 
-export async function submitWebsiteFormLead(
-  payload: WebsiteFormLeadPayload,
+export type HeadSpaFormLeadPayload = {
+  source: string;
+  form: "head_spa_detox";
+  step: "contact";
+  pageUri: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  consent: boolean;
+  providerSlug: string;
+  serviceName: string;
+};
+
+async function postFormLead(
+  path: "/api/website-form-lead" | "/api/website-headspa-form-lead",
+  payload: Record<string, unknown>,
 ): Promise<{ ok: true } | { ok: false; message: string }> {
   try {
-    const res = await fetch("/api/website-form-lead", {
+    const res = await fetch(path, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -34,4 +49,16 @@ export async function submitWebsiteFormLead(
   } catch {
     return { ok: false, message: "Network error. Please check your connection and try again." };
   }
+}
+
+export async function submitWebsiteFormLead(
+  payload: WebsiteFormLeadPayload,
+): Promise<{ ok: true } | { ok: false; message: string }> {
+  return postFormLead("/api/website-form-lead", payload);
+}
+
+export async function submitHeadSpaFormLead(
+  payload: HeadSpaFormLeadPayload,
+): Promise<{ ok: true } | { ok: false; message: string }> {
+  return postFormLead("/api/website-headspa-form-lead", payload);
 }
