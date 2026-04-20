@@ -3,12 +3,7 @@ import { useBooking } from "@/components/booking/hooks/useBooking";
 import type { ClientInformation } from "@/components/booking/utils/boulevardApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  NANO_BROWS_HERO_BOOKING_URL_PARAMS,
-  NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS,
-  tryOpenBoulevardBooking,
-} from "@/lib/boulevardBooking";
-import { trackMetaPixelCustom } from "@/lib/metaPixel";
+import { NANO_BROWS_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
 import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { Loader2, Mail, Phone, User } from "lucide-react";
@@ -18,7 +13,7 @@ import { toast } from "sonner";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 
-type WizardView = "contact" | "checklist" | "reject" | "qualified" | "qualifiedClinicianCall" | "booking";
+type WizardView = "contact" | "checklist" | "reject" | "booking";
 
 const SOURCE = "beauty_rooms_clinic_website";
 
@@ -50,7 +45,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
   void reset;
   const [consent, setConsent] = useState(false);
 
-  /** Primary “I confirm that” + bullet list (required). Secondary = medical / prefer clinician call (client-only routing). */
+  /** Either “I confirm that” or the medical/clinician line ticked → same date/time booking step. */
   const [primaryConfirm, setPrimaryConfirm] = useState(false);
   const [prefersClinicianCall, setPrefersClinicianCall] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -103,17 +98,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
     setView("checklist");
   };
 
-  /**
-   * Eligible path: create cart + load dates on this click, then show inline booking (no intermediate screen).
-   * Clinician path: unchanged — no cart API here (handled later).
-   */
+  /** Create cart + load dates, then inline date/time picker if either checklist option is selected. */
   const handleChecklistNext = async () => {
-    if (prefersClinicianCall) {
-      setView("qualifiedClinicianCall");
-      return;
-    }
-    if (!primaryConfirm) {
-      toast.error("Please confirm the eligibility statements above to continue.");
+    if (!primaryConfirm && !prefersClinicianCall) {
+      toast.error(
+        "Please tick “I confirm that” above, or tick the medical / clinician option, to continue to booking.",
+      );
       return;
     }
     const result = await initialize();
@@ -359,29 +349,6 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
             serviceName={serviceName}
             className="border-0 bg-transparent shadow-none"
           />
-        </div>
-      )}
-
-      {view === "qualifiedClinicianCall" && (
-        <div className="space-y-5 font-barlow font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-          <h2 className="text-xl font-extralight tracking-[-0.02em] text-charcoal md:text-2xl">
-            Almost Ready! We Just Need a Quick Note.
-          </h2>
-          <p className="text-sm md:text-base">
-            The next step is a complimentary 15-minute call with our clinic specialist.
-          </p>
-          <ul className="list-disc space-y-2 pl-5 text-sm md:text-base">
-            <li>Understand the requirements for medical clearance (if needed).</li>
-            <li>Get professional answers to any questions you have before starting.</li>
-          </ul>
-          <Button
-            type="button"
-            size="lg"
-            onClick={() => tryOpenBoulevardBooking({ ...NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS })}
-            className="mt-2 w-full rounded-none px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em]"
-          >
-            Book a 15 minutes call with our specialist
-          </Button>
         </div>
       )}
     </div>
