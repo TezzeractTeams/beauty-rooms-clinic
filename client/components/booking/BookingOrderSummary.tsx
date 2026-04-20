@@ -3,6 +3,7 @@ import {
   computeDepositSplit,
   DEFAULT_BOOKING_DEPOSIT_USD,
   formatUsd,
+  isComplimentaryCartTotal,
 } from "./bookingPricing";
 
 export interface BookingOrderSummaryProps {
@@ -42,6 +43,7 @@ export function BookingOrderSummary({
   emphasizeBookingCharge,
   className,
 }: BookingOrderSummaryProps) {
+  const complimentary = isComplimentaryCartTotal(serviceTotalUsd);
   const { payNow, balance } = computeDepositSplit(serviceTotalUsd, depositUsd);
   const totalLabel =
     serviceTotalUsd != null && Number.isFinite(serviceTotalUsd) ? formatUsd(serviceTotalUsd) : "—";
@@ -60,18 +62,22 @@ export function BookingOrderSummary({
       </p>
       <div className="space-y-2.5">
         <Row label="Selected service" value={serviceName} />
-        <Row label="Item cost" value={totalLabel} />
-        <Row label="You pay now" value={payNowLabel} valueClassName="text-primary" />
-        <Row label="Pay when you arrive" value={balanceLabel} />
+        {!complimentary ? (
+          <>
+            <Row label="Item cost" value={totalLabel} />
+            <Row label="You pay now" value={payNowLabel} valueClassName="text-primary" />
+            <Row label="Pay when you arrive" value={balanceLabel} />
+          </>
+        ) : null}
         <div className="border-t border-[rgba(103,92,83,0.1)] pt-2.5">
           <Row label="Service provider" value={providerLabel} valueClassName="font-normal" />
         </div>
       </div>
-      {emphasizeBookingCharge && payNow != null ? (
+      {!complimentary && emphasizeBookingCharge && payNow != null ? (
         <p className="mt-3 border-t border-[rgba(103,92,83,0.08)] pt-3 font-barlow text-xs font-light leading-relaxed text-charcoal/60">
           Only {formatUsd(payNow)} is charged today to secure this booking. The remainder is due at your appointment.
         </p>
-      ) : !emphasizeBookingCharge && serviceTotalUsd != null && payNow != null && payNow < serviceTotalUsd ? (
+      ) : !complimentary && !emphasizeBookingCharge && serviceTotalUsd != null && payNow != null && payNow < serviceTotalUsd ? (
         <p className="mt-3 border-t border-[rgba(103,92,83,0.08)] pt-3 font-barlow text-xs font-light leading-relaxed text-charcoal/55">
           Booking deposit {formatUsd(payNow)}; balance {formatUsd(balance ?? 0)} due at check-in.
         </p>

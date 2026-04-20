@@ -7,6 +7,10 @@ import { cn } from "@/lib/utils";
 import { Clock, Droplets, ScanLine, Shield } from "lucide-react";
 import { type ComponentProps } from "react";
 
+const NANO_BROWS_SERVICE_ID = "urn:blvd:Service:786e1942-2960-4a0e-bb5d-f03ad53fe1e7";
+//const NANO_BROWS_SERVICE_ID = "urn:blvd:Service:3433016c-159c-4108-8015-c3810f5084ea";
+const NANO_BROWS_SERVICE_NAME = "Nano brows test";
+
 /** Full-face / lifestyle hero (no brow close-up) */
 const HERO_LIFESTYLE_SRC = "/images/OurStanderd.jpeg";
 
@@ -83,7 +87,11 @@ export default function NanoBrowsSpecial() {
                 </div>
 
                 <div className="mt-8">
-                  <NanoBrowsHeroWizard anchorId="nano-brows-lead-form" onBookAppointment={openNanoBrowsBooking} />
+                  <NanoBrowsHeroWizard
+                    anchorId="nano-brows-lead-form"
+                    serviceId={NANO_BROWS_SERVICE_ID}
+                    serviceName={NANO_BROWS_SERVICE_NAME}
+                  />
                 </div>
               </div>
             </div>

@@ -138,7 +138,7 @@ export function ConfirmationStep({
         onClick={onClose}
         className="w-full max-w-md border border-charcoal/20 bg-transparent px-6 py-4 font-barlow text-[11px] font-light uppercase tracking-[0.1em] text-charcoal transition-colors hover:border-charcoal/40 hover:bg-charcoal/5"
       >
-        Close
+        Got it
       </button>
     </div>
   );
