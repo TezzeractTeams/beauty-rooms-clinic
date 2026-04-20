@@ -1,7 +1,10 @@
+import { BookingFlowPanel } from "@/components/booking/BookingFlowPanel";
+import { useBooking } from "@/components/booking/hooks/useBooking";
+import type { ClientInformation } from "@/components/booking/utils/boulevardApi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  NANO_BROWS_QUALIFIED_INITIAL_CONSULTATION_BOOKING_URL_PARAMS,
+  NANO_BROWS_HERO_BOOKING_URL_PARAMS,
   NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS,
   tryOpenBoulevardBooking,
 } from "@/lib/boulevardBooking";
@@ -9,28 +12,42 @@ import { trackMetaPixelCustom } from "@/lib/metaPixel";
 import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { Loader2, Mail, Phone, User } from "lucide-react";
-import { type FormEvent, useCallback, useState } from "react";
+import { type FormEvent, useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 
-const SOURCE = "beauty_rooms_clinic_website";
+type WizardView = "contact" | "checklist" | "reject" | "qualified" | "qualifiedClinicianCall" | "booking";
 
-type WizardView = "contact" | "checklist" | "reject" | "qualified" | "qualifiedClinicianCall";
+const SOURCE = "beauty_rooms_clinic_website";
 
 type Props = {
   idPrefix?: string;
   anchorId?: string;
-  onBookAppointment: () => void;
+  serviceId: string;
+  serviceName: string;
 };
 
-export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppointment }: Props) {
+export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, serviceName }: Props) {
   const [view, setView] = useState<WizardView>("contact");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  const bookingClientInfo = useMemo(
+    (): ClientInformation => ({
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.trim(),
+      phoneNumber: phone.trim(),
+    }),
+    [firstName, lastName, email, phone],
+  );
+
+  const { initialize, reset, ...bookingPanel } = useBooking(serviceId, serviceName, bookingClientInfo);
+  void reset;
   const [consent, setConsent] = useState(false);
 
   /** Primary “I confirm that” + bullet list (required). Secondary = medical / prefer clinician call (client-only routing). */
@@ -83,12 +100,14 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
       return;
     }
 
-    trackMetaPixelCustom("NanoBrowsContactComplete");
     setView("checklist");
   };
 
-  /** Eligibility routing is client-only: medical/clinician path does not require the primary list tick. */
-  const handleChecklistNext = () => {
+  /**
+   * Eligible path: create cart + load dates on this click, then show inline booking (no intermediate screen).
+   * Clinician path: unchanged — no cart API here (handled later).
+   */
+  const handleChecklistNext = async () => {
     if (prefersClinicianCall) {
       setView("qualifiedClinicianCall");
       return;
@@ -97,7 +116,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
       toast.error("Please confirm the eligibility statements above to continue.");
       return;
     }
-    setView("qualified");
+    const result = await initialize();
+    if (result.ok) {
+      setView("booking");
+    } else {
+      toast.error(result.error ?? "Could not start booking. Please try again.");
+    }
   };
 
   return (
@@ -235,7 +259,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
             Ready to skip the wait?{" "}
             <button
               type="button"
-              onClick={onBookAppointment}
+              onClick={() => tryOpenBoulevardBooking({ ...NANO_BROWS_HERO_BOOKING_URL_PARAMS })}
               className="text-warm-brown underline decoration-warm-brown/30 underline-offset-2 transition-colors hover:text-warm-brown/90"
             >
               Book your appointment now
@@ -291,10 +315,18 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
           <Button
             type="button"
             size="lg"
-            onClick={handleChecklistNext}
-            className="mt-8 w-full rounded-none px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em]"
+            disabled={bookingPanel.state.loading}
+            onClick={() => void handleChecklistNext()}
+            className="mt-8 w-full rounded-none px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] disabled:opacity-60"
           >
-            I Confirm & Continue to Booking
+            {bookingPanel.state.loading ? (
+              <span className="inline-flex items-center justify-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} aria-hidden />
+                Starting booking…
+              </span>
+            ) : (
+              "I Confirm & Continue to Booking"
+            )}
           </Button>
         </>
       )}
@@ -320,59 +352,13 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, onBookAppoint
         </div>
       )}
 
-      {view === "qualified" && (
-        <div className="space-y-5 font-barlow font-light leading-relaxed text-[rgba(45,41,38,0.78)]">
-          <h2 className="text-xl font-extralight tracking-[-0.02em] text-charcoal md:text-2xl">
-            Let&apos;s Get Your Dream Brows.
-          </h2>
-          <p className="text-sm md:text-base">
-            Great news! Based on your screening, you are a perfect candidate for Nano Brows. Please review our Detailed
-            Eligibility &amp; Prep Checklist before your visit—we&apos;ll also cover everything during your consultation.
-          </p>
-          <div>
-            <p className="text-base font-light text-charcoal md:text-lg">
-              Claim the Exclusive Launch Offer:{" "}
-              <span className="tracking-[-0.02em]">$399</span>{" "}
-              <span className="text-[rgba(45,41,38,0.45)] line-through">$500</span>
-            </p>
-            <p className="mt-3 text-sm md:text-base">
-              We want to make your transformation as seamless as possible. Secure this limited-time pricing by following
-              our simple two-step booking process:
-            </p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm md:text-base">
-              <li>
-                <span className="font-normal text-charcoal">Step 1:</span> Book your Initial Consultation for just{" "}
-                <span className="tracking-[-0.02em]">$50</span>{" "}
-                <span className="text-[rgba(45,41,38,0.45)] line-through">$100</span> to lock in this special offer.
-              </li>
-              <li>
-                <span className="font-normal text-charcoal">Step 2:</span> Meet our specialist, get the special
-                consultation, then book your service. You&apos;ll pay the remaining $349 at the time of your procedure.
-              </li>
-            </ul>
-          </div>
-          <p className="pt-1 text-sm font-light uppercase tracking-[0.08em] text-warm-brown/90">Ready to Begin?</p>
-          <div className="grid grid-cols-2 gap-3 pt-1">
-            <Button
-              type="button"
-              size="lg"
-              onClick={() =>
-                tryOpenBoulevardBooking({ ...NANO_BROWS_QUALIFIED_INITIAL_CONSULTATION_BOOKING_URL_PARAMS })
-              }
-              className="h-auto min-h-11 min-w-0 whitespace-normal rounded-none px-3 py-5 text-center font-barlow text-[10px] font-light uppercase leading-snug tracking-[0.08em] sm:px-4 sm:text-[11px] sm:tracking-[0.1em]"
-            >
-              Book your Nano Brows Session Now
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              onClick={() => tryOpenBoulevardBooking({ ...NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS })}
-              className="h-auto min-h-11 min-w-0 whitespace-normal rounded-none border-charcoal/25 bg-transparent px-3 py-5 text-center font-barlow text-[10px] font-light uppercase leading-snug tracking-[0.08em] text-charcoal hover:border-charcoal hover:bg-[#433243] hover:text-[#FAFAF5] sm:px-4 sm:text-[11px] sm:tracking-[0.1em]"
-            >
-              Book a 15 minutes call with our specialist
-            </Button>
-          </div>
+      {view === "booking" && (
+        <div className="w-full min-w-0 -mx-1 sm:mx-0">
+          <BookingFlowPanel
+            {...bookingPanel}
+            serviceName={serviceName}
+            className="border-0 bg-transparent shadow-none"
+          />
         </div>
       )}
 

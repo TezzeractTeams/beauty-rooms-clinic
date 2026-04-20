@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BookingOrderSummary } from "../BookingOrderSummary";
+import { isComplimentaryCartTotal } from "../bookingPricing";
 import { BookableDate, BookableTime } from "../utils/boulevardApi";
 import {
   formatSlotTime,
@@ -79,6 +80,7 @@ export function DateTimeStep({
     setViewMonth(m - 1);
   }, [selectedDate]);
 
+  const complimentary = isComplimentaryCartTotal(serviceTotalUsd);
   const showTimezoneHeadsUp = userDiffersFromSalonTimezone();
   const salonTzLabel = useMemo(() => {
     const ref =
@@ -277,6 +279,8 @@ export function DateTimeStep({
             <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
             Please wait…
           </span>
+        ) : complimentary ? (
+          "Confirm booking"
         ) : (
           "Proceed to payment"
         )}
