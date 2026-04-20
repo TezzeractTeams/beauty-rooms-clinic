@@ -84,13 +84,13 @@ export default function HeadSpaDetoxExperience() {
                   Head Spa: Save $35 on your next Deep Scalp Detox!
                 </h1>
                 <p className={`mt-4 ${mutedBody}`}>
-                  Discover the Head Spa Detox Experience: a relaxing, multi-step treatment that deep-cleanses your
-                  scalp to remove buildup, restore hydration, and leave your hair soft, clean, and revitalized.
-                  Limited spots available!
+                  A deep-cleansing scalp treatment designed to remove buildup, restore hydration, and promote healthier
+                  hair. This relaxing, multi-step experience combines exfoliation, steam, and massage to leave your
+                  scalp refreshed and your hair soft, clean, and revitalized.
                 </p>
                 <div className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1" id="head-spa-booking-form">
                   <span className="font-barlow text-2xl font-light tracking-[-0.02em] text-charcoal md:text-3xl">
-                    Introductory Offer: $140
+                    Claim the Exclusive Launch Offer: $140
                   </span>
                   <span className="font-barlow text-lg font-light text-[rgba(45,41,38,0.45)] line-through md:text-xl">
                     $175
@@ -125,8 +125,16 @@ export default function HeadSpaDetoxExperience() {
               id="head-spa-results-heading"
               className="mb-10 text-center font-barlow text-[clamp(26px,3.5vw,36px)] font-extralight tracking-[-0.03em] text-charcoal md:mb-14"
             >
-              Visible Results: A Foundation for Healthier, Shinier Hair
+              Healthy Scalp. Stronger, Shinier Hair. Total Relaxation.
             </h2>
+            <p className="mx-auto mb-10 max-w-4xl text-center font-barlow text-base font-light leading-[1.7] text-[rgba(45,41,38,0.78)] md:mb-12 md:text-lg">
+              A deep-cleansing scalp treatment that removes buildup, restores balance, and leaves your hair feeling
+              clean, soft, and revitalized. By gently exfoliating and hydrating the scalp, this treatment supports
+              healthier hair growth while improving shine and overall hair quality. Designed to target oil, dryness,
+              and buildup, it creates the ideal foundation for stronger, healthier hair. Combined with a relaxing
+              massage, the experience not only refreshes your scalp but also helps relieve tension and stress-leaving
+              you feeling calm, restored, and completely refreshed from root to end.
+            </p>
           </SectionContainer>
           <ContinuousImageCarousel
             images={resultsImages}
@@ -190,12 +198,16 @@ export default function HeadSpaDetoxExperience() {
                   id="head-spa-offer-heading"
                   className="mb-6 font-barlow text-[clamp(26px,3.5vw,36px)] font-extralight tracking-[-0.03em] text-charcoal lg:mb-8"
                 >
-                  Limited-Time Introductory Offer
+                  The Art of Precision Mapping
                 </h2>
                 <p className="text-base md:text-lg">
-                  The Head Spa Detox Experience is a relaxing, multi-step process that utilizes exfoliation, steam, and
-                  massage to deeply cleanse your scalp. This luxurious treatment is designed to restore balance by
-                  removing buildup and infusing hydration, resulting in softer, cleaner, and revitalized hair.
+                  Nano Brows use ultra-fine technique and careful pigment placement for a softer grow-out and a more
+                  natural look than traditional microblading-often with less trauma to the skin when performed by a
+                  trained specialist.
+                </p>
+                <p className="text-base md:text-lg">
+                  Every stroke follows a custom map of your bone structure and facial symmetry, so the result looks
+                  like yours-not a template.
                 </p>
                 <div
                   className="bg-[#E8E3D8] px-5 py-4 font-barlow text-sm font-light leading-relaxed text-charcoal md:text-base"
@@ -217,28 +229,36 @@ export default function HeadSpaDetoxExperience() {
             >
               Maximize Your Results (Packages and Add-ons)
             </h2>
-            <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+            <div className="grid gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-3">
               <div className={`${cardBorder} bg-[#F4F4EF] px-6 py-8 md:px-8`}>
                 <h3 className="font-barlow text-xl font-extralight tracking-[-0.02em] text-charcoal">
-                  The Scalp Reset Series (Package)
+                  ADDONS:
                 </h3>
-                <p className="mt-4 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
-                  For long-term scalp health and maintenance, clients often choose the Scalp Reset Series. This package
-                  locks in your transformation with 3 Head Spa Treatments for $399 (save approximately $50 to $75).
-                  This series is recommended for best results as a 3-session reset.
-                </p>
+                <ul className="mt-4 space-y-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
+                  <li>Blowout: $50</li>
+                  <li>Extended Scalp Massage: $35</li>
+                  <li>Mini Facial: $50</li>
+                  <li>Mini Massage $40</li>
+                </ul>
               </div>
               <div className={`${cardBorder} bg-[#F4F4EF] px-6 py-8 md:px-8`}>
                 <h3 className="font-barlow text-xl font-extralight tracking-[-0.02em] text-charcoal">
-                  Customized Enhancements
+                  Head Spa Detox Experience (3 PACK)
                 </h3>
-                <p className="mt-4 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
-                  Maximize your relaxation and beauty with these high-value add-ons during your visit:
-                </p>
-                <ul className="mt-4 list-disc space-y-2 pl-5 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
-                  <li>Extended Scalp Massage (+$30-$50)</li>
-                  <li>Mini Facial (+$40-$60)</li>
-                  <li>Blowout (+$50-$70)</li>
+                <ul className="mt-4 space-y-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
+                  <li>Normal Price $525</li>
+                  <li>3 Sessions for $420</li>
+                  <li>Savings $105 (20%)</li>
+                </ul>
+              </div>
+              <div className={`${cardBorder} bg-[#F4F4EF] px-6 py-8 md:px-8`}>
+                <h3 className="font-barlow text-xl font-extralight tracking-[-0.02em] text-charcoal">
+                  Head Spa Detox Experiences (6 PACK)
+                </h3>
+                <ul className="mt-4 space-y-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.78)] md:text-base">
+                  <li>Usually $1,050</li>
+                  <li>$780 package Price</li>
+                  <li>Savings - $270 (25% discount)</li>
                 </ul>
               </div>
             </div>
@@ -251,6 +271,9 @@ export default function HeadSpaDetoxExperience() {
         >
           <div className="order-2 flex flex-1 flex-col justify-center px-8 py-12 md:order-1 md:px-12 lg:px-16 xl:px-20">
             <div className="mx-auto flex max-w-[540px] flex-col gap-5">
+              <p className="font-barlow text-xs font-light uppercase tracking-[0.12em] text-[rgba(45,41,38,0.55)]">
+                CERTIFIED SPECIALIST CARE
+              </p>
               <h2
                 id="kelsey-heading"
                 className="font-barlow text-[clamp(28px,4vw,40px)] font-extralight leading-[1.15] tracking-[-0.03em] text-charcoal"
@@ -258,12 +281,15 @@ export default function HeadSpaDetoxExperience() {
                 Meet the Specialist: Kelsey
               </h2>
               <p className="font-barlow text-xs font-light uppercase tracking-[0.12em] text-[rgba(45,41,38,0.55)]">
-                Qualified Hairdresser, Blonding Specialist, and Certified Head Spa Expert.
+                CERTIFIED HEAD SPA EXPERT
               </p>
               <p className="font-barlow text-base font-light leading-[1.7] text-[rgba(45,41,38,0.72)]">
-                Kelsey is a qualified hairdresser and blonding specialist, as well as a certified Head Spa expert. She
-                focuses on scalp health as the foundation for beautiful hair, delivering customized treatments that
-                cleanse, hydrate, and restore while providing a deeply relaxing experience.
+                Erica Kelsey is a qualified hairdresser and blonding specialist with a passion for creating healthy,
+                beautiful hair from the scalp up. As a certified Head Spa specialist, she focuses on restoring scalp
+                balance, removing buildup, and improving overall hair health through advanced cleansing and hydration
+                techniques. Known for her attention to detail and calming approach, Kelsey combines results-driven
+                treatments with a deeply relaxing experience-leaving your hair refreshed, your scalp revitalized, and
+                you feeling completely restored.
               </p>
               <div className="pt-1">
                 <Button
@@ -316,7 +342,7 @@ export default function HeadSpaDetoxExperience() {
                     document.getElementById("head-spa-lead-form")?.scrollIntoView({ behavior: "smooth" });
                   }}
                 >
-                  Don&apos;t Miss This Intro Offer
+                  DON&apos;T MISS THIS INTRO OFFER, CLAIM NOW!
                 </Button>
               </div>
             </div>
@@ -324,7 +350,7 @@ export default function HeadSpaDetoxExperience() {
         </section>
 
         <section
-          className="border-t border-[rgba(103,92,83,0.12)] bg-primary px-6 py-10 md:px-10"
+          className="border-t border-[rgba(103,92,83,0.12)] bg-charcoal px-6 py-10 md:px-10"
           aria-label="Legal notice"
         >
           <p className="mx-auto max-w-xl text-center font-barlow text-xs font-light leading-relaxed text-[rgba(250,250,245,0.82)] md:text-sm">

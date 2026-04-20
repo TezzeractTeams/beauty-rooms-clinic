@@ -185,7 +185,7 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
                   Loading availability...
                 </span>
               ) : (
-                "View Available Appointments"
+                "Book your slot now"
               )}
             </Button>
           </form>
