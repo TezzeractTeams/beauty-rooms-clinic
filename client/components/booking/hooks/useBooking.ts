@@ -17,6 +17,7 @@ import {
   reserveCartBookableItems,
   updateCart,
 } from "../utils/boulevardApi";
+import { isComplimentaryCartTotal } from "../bookingPricing";
 import { SALON_TIMEZONE, salonTodayYmd } from "../utils/salonTimezone";
 import { CardData, tokenizeCard } from "../utils/tokenize";
 
@@ -200,11 +201,22 @@ export function useBooking(
       const specialistName = await getCartSpecialistDisplayName(state.cartId);
       dispatch({ type: "SPECIALIST_SET", payload: specialistName });
       await updateCart(state.cartId, clientInformation);
-      dispatch({ type: "ADVANCE_TO", payload: { step: "payment" } });
+      if (isComplimentaryCartTotal(state.serviceTotalUsd)) {
+        const cartAppointments = await checkoutCart(state.cartId);
+        const appointments = mapCartAppointmentsToDisplay(cartAppointments, {
+          selectedTime: state.selectedTime,
+          clientInfo: clientInformation,
+          serviceName,
+          specialistName,
+        });
+        dispatch({ type: "CHECKOUT_DONE", payload: { appointments } });
+      } else {
+        dispatch({ type: "ADVANCE_TO", payload: { step: "payment" } });
+      }
     } catch (err) {
       dispatch({ type: "SET_ERROR", payload: (err as Error).message });
     }
-  }, [state.cartId, state.selectedTime, clientInformation]);
+  }, [state.cartId, state.selectedTime, state.serviceTotalUsd, clientInformation, serviceName]);
 
   const submitPayment = useCallback(
     async (card: CardData) => {

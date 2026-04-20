@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
+import { useMemo } from "react";
+import { isComplimentaryCartTotal } from "./bookingPricing";
 import { useBooking } from "./hooks/useBooking";
 import { ConfirmationStep } from "./steps/ConfirmationStep";
 import { DateTimeStep } from "./steps/DateTimeStep";
@@ -10,12 +12,6 @@ export type BookingFlowPanelProps = Omit<ReturnType<typeof useBooking>, "initial
   onConfirmedClose?: () => void;
   className?: string;
 };
-
-const STEPS = [
-  { id: "datetime", label: "Date & Time" },
-  { id: "payment", label: "Payment" },
-  { id: "confirmed", label: "Confirmation" },
-] as const;
 
 export function BookingFlowPanel({
   serviceName,
@@ -28,7 +24,21 @@ export function BookingFlowPanel({
   onConfirmedClose,
   className,
 }: BookingFlowPanelProps) {
-  const currentStepIndex = STEPS.findIndex((s) => s.id === state.step);
+  const steps = useMemo(() => {
+    if (isComplimentaryCartTotal(state.serviceTotalUsd)) {
+      return [
+        { id: "datetime" as const, label: "Date & Time" },
+        { id: "confirmed" as const, label: "Confirmation" },
+      ];
+    }
+    return [
+      { id: "datetime" as const, label: "Date & Time" },
+      { id: "payment" as const, label: "Payment" },
+      { id: "confirmed" as const, label: "Confirmation" },
+    ];
+  }, [state.serviceTotalUsd]);
+
+  const currentStepIndex = steps.findIndex((s) => s.id === state.step);
   const canGoBack = state.step !== "datetime" && state.step !== "confirmed" && !state.loading;
 
   return (
@@ -56,8 +66,8 @@ export function BookingFlowPanel({
 
       <div className="shrink-0 border-b border-[rgba(103,92,83,0.08)] px-4 py-3 sm:px-6" aria-label="Booking progress">
         <div className="flex items-center gap-0">
-          {STEPS.map((step, i) => {
-            const stepIndex = STEPS.findIndex((s) => s.id === step.id);
+          {steps.map((step, i) => {
+            const stepIndex = steps.findIndex((s) => s.id === step.id);
             const isComplete = stepIndex < currentStepIndex;
             const isActive = step.id === state.step;
             const isConfirmationLocked = step.id === "confirmed" && state.step !== "confirmed";
@@ -99,7 +109,7 @@ export function BookingFlowPanel({
                     {step.label}
                   </span>
                 </div>
-                {i < STEPS.length - 1 && (
+                {i < steps.length - 1 && (
                   <div
                     className={cn(
                       "mx-1 h-px flex-1 transition-colors",

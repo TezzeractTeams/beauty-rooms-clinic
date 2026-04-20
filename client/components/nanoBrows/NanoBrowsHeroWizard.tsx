@@ -8,10 +8,10 @@ import {
   NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS,
   tryOpenBoulevardBooking,
 } from "@/lib/boulevardBooking";
-import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
+// import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { Loader2, Mail, Phone, User } from "lucide-react";
-import { type FormEvent, useCallback, useMemo, useState } from "react";
+import { type FormEvent, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -19,7 +19,8 @@ const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 
 type WizardView = "contact" | "checklist" | "reject" | "booking" | "qualifiedClinicianCall";
 
-const SOURCE = "beauty_rooms_clinic_website";
+// Webhook payload (n8n via /api/website-form-lead) — uncomment with submitWebsiteFormLead when ready.
+// const SOURCE = "beauty_rooms_clinic_website";
 
 type Props = {
   idPrefix?: string;
@@ -54,19 +55,19 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
   const [primaryConfirm, setPrimaryConfirm] = useState(false);
   const [prefersClinicianCall, setPrefersClinicianCall] = useState(false);
 
-  const baseLead = useCallback(
-    () => ({
-      source: SOURCE,
-      form: "nano_brows_wizard" as const,
-      pageUri: typeof window !== "undefined" ? window.location.href : "",
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      phone: phone.trim(),
-      email: email.trim(),
-      consent,
-    }),
-    [firstName, lastName, phone, email, consent],
-  );
+  // const baseLead = useCallback(
+  //   () => ({
+  //     source: SOURCE,
+  //     form: "nano_brows_wizard" as const,
+  //     pageUri: typeof window !== "undefined" ? window.location.href : "",
+  //     firstName: firstName.trim(),
+  //     lastName: lastName.trim(),
+  //     phone: phone.trim(),
+  //     email: email.trim(),
+  //     consent,
+  //   }),
+  //   [firstName, lastName, phone, email, consent],
+  // );
 
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,17 +85,17 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
     }
 
     setSubmitting(true);
-    const result = await submitWebsiteFormLead({
-      ...baseLead(),
-      step: "contact",
-    });
+    // Temporarily skip n8n webhook — restore submitWebsiteFormLead + baseLead + SOURCE above when ready.
+    // const result = await submitWebsiteFormLead({
+    //   ...baseLead(),
+    //   step: "contact",
+    // });
+    // setSubmitting(false);
+    // if (result.ok === false) {
+    //   toast.error(result.message);
+    //   return;
+    // }
     setSubmitting(false);
-
-    if (result.ok === false) {
-      toast.error(result.message);
-      return;
-    }
-
     setView("checklist");
   };
 

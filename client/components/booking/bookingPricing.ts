@@ -17,3 +17,8 @@ export function computeDepositSplit(
   const balance = Math.max(total - payNow, 0);
   return { payNow, balance };
 }
+
+/** Strict: only explicit $0 cart total (not unknown/null) skips payment. */
+export function isComplimentaryCartTotal(serviceTotalUsd: number | null): boolean {
+  return serviceTotalUsd !== null && Number.isFinite(serviceTotalUsd) && serviceTotalUsd === 0;
+}
