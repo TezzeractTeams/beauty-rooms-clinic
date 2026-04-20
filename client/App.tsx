@@ -29,6 +29,7 @@ import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
 import Academy from "./pages/Academy";
 import HeadSpaDetoxExperience from "./pages/HeadSpaDetoxExperience";
 import LashesLaunchOffer from "./pages/LashesLaunchOffer";
+import Booking from "./pages/Booking";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App = () => (
             path="/bookings"
             element={<Navigate to={{ pathname: "/", hash: "book-now" }} replace />}
           />
+          <Route path="/booking" element={<Booking />} />
           <Route path="/blog" element={<Placeholder title="Our Blog" />} />
           <Route path="/gallery" element={<Placeholder title="Results Gallery" />} />
           <Route path="/work-with-us" element={<WorkWithUs />} />
