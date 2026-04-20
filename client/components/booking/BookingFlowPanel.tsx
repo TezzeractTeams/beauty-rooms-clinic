@@ -158,7 +158,12 @@ export function BookingFlowPanel({
             serviceName={serviceName}
             serviceTotalUsd={state.serviceTotalUsd}
             specialistName={state.specialistName}
-            onClose={onConfirmedClose ?? (() => {})}
+            onClose={
+              onConfirmedClose ??
+              (() => {
+                window.location.reload();
+              })
+            }
           />
         )}
       </div>
