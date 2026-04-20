@@ -92,9 +92,7 @@ export default function Booking() {
     const next = new URLSearchParams(searchParams);
     let changed = false;
 
-    const category =
-      selectedCategory?.id ??
-      (catalog.categories.find((c) => c.id === "pmu")?.id ?? catalog.categories[0].id);
+    const category = selectedCategory?.id ?? catalog.categories[0]?.id ?? "";
     if (next.get("category") !== category) {
       next.set("category", category);
       changed = true;
@@ -236,7 +234,7 @@ export default function Booking() {
     );
   }
 
-  const activeCategory = selectedCategory?.id ?? catalog.categories[0]?.id ?? "pmu";
+  const activeCategory = selectedCategory?.id ?? catalog.categories[0]?.id ?? "";
   const tabServices = catalog.services.filter((service) => service.category === activeCategory);
   const shouldShowCatalog = activeStage === "catalog";
 
@@ -287,24 +285,28 @@ export default function Booking() {
                         <div>
                           <p className="font-barlow text-xl font-extralight tracking-[-0.02em] text-charcoal">{service.name}</p>
                           <p className="mt-2 font-barlow text-sm font-light text-charcoal/80">
-                            Providers:{" "}
-                            {service.providers
-                              .filter((provider) => provider.slug !== "first-available")
-                              .map((provider) => provider.name)
-                              .join(", ")}
+                            {(() => {
+                              const named = service.providers.filter((p) => p.slug !== "first-available");
+                              if (named.length === 0) return "Provider: First available";
+                              return `Providers: ${named.map((p) => p.name).join(", ")}`;
+                            })()}
                           </p>
                         </div>
                         <div className="text-left md:text-right">
                           <div className="font-barlow text-lg font-light text-charcoal">
                             {formatUsd(service.discountedPriceUsd)}
-                            <span className="ml-2 text-base text-charcoal/45 line-through">
-                              {formatUsd(service.actualPriceUsd)}
-                            </span>
+                            {service.actualPriceUsd > service.discountedPriceUsd + 0.005 ? (
+                              <span className="ml-2 text-base text-charcoal/45 line-through">
+                                {formatUsd(service.actualPriceUsd)}
+                              </span>
+                            ) : null}
                           </div>
-                          <p className="mt-1 inline-flex items-center gap-1 font-barlow text-sm font-light text-charcoal/70 md:justify-end">
-                            <Clock3 className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
-                            {service.durationMinutes} min
-                          </p>
+                          {service.durationMinutes > 0 ? (
+                            <p className="mt-1 inline-flex items-center gap-1 font-barlow text-sm font-light text-charcoal/70 md:justify-end">
+                              <Clock3 className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
+                              {service.durationMinutes} min
+                            </p>
+                          ) : null}
                         </div>
                       </div>
                     </button>

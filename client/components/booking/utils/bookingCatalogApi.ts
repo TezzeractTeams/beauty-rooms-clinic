@@ -1,4 +1,5 @@
-export type BookingCategoryId = "pmu" | "head-spa" | "lashes";
+/** Tab / URL param id for a menu category (from Boulevard `availableCategories`). */
+export type BookingCategoryId = string;
 
 export interface BookingProviderOption {
   id: string;

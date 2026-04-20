@@ -69,7 +69,7 @@ export function DateTimeStep({
   const todayStr = salonTodayYmd(today);
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
-  /** false = show slots in salon Pacific time; true = convert display to visitor's local timezone */
+  /** false = show slots in salon Eastern time; true = convert display to visitor's local timezone */
   const [useLocalTime, setUseLocalTime] = useState(false);
 
   useEffect(() => {

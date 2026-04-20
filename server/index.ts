@@ -26,8 +26,5 @@ export function createServer() {
   app.get("/api/blvd/booking-catalog", handleBlvdBookingCatalog);
   app.post("/api/blvd/graphql", handleBlvdGraphql);
 
-  app.get("/api/blvd/booking-config", handleBlvdBookingConfig);
-  app.post("/api/blvd/graphql", handleBlvdGraphql);
-
   return app;
 }
