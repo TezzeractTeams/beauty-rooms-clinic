@@ -129,7 +129,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
       {view === "contact" && (
         <>
           <h2 className="font-barlow text-lg font-extralight tracking-[-0.02em] text-charcoal md:text-xl">
-            Start Your Eligibility Checklist Now!
+          Book your Free Brow Design Consultation
           </h2>
           <p className="mt-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.65)]">
             Please provide your details to begin the checklist:

@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { ContinuousImageCarousel } from "@/components/ContinuousImageCarousel";
+import { HeroLocationGoogleMapsCta } from "@/components/HeroLocationGoogleMapsCta";
 import { HeadSpaBookingFlow } from "@/components/headSpa/HeadSpaBookingFlow";
 import { Button } from "@/components/ui/button";
 import { NANO_BROWS_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
@@ -111,10 +112,15 @@ export default function HeadSpaDetoxExperience() {
               <img
                 src={HERO_LIFESTYLE_SRC}
                 alt="Client enjoying a head spa detox treatment"
-                className="absolute inset-0 h-full w-full object-cover object-center"
+                className="absolute inset-0 z-0 h-full w-full object-cover object-center"
                 fetchPriority="high"
                 decoding="async"
               />
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] bg-black/30"
+                aria-hidden
+              />
+              <HeroLocationGoogleMapsCta />
             </div>
           </div>
         </section>

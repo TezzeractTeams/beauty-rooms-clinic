@@ -6,6 +6,21 @@
     <link rel="icon" href="/images/Logo.svg" type="image/svg+xml" />
     <title>Beauty Rooms Clinic</title>
 
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-NN8S839V");
+    </script>
+    <!-- End Google Tag Manager -->
+
     <!-- Boulevard Self-Booking overlay (default widget: navigate site URL to /#book-now) -->
     <script>
       (function (a) {
@@ -30,6 +45,17 @@
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NN8S839V"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
 
     <script type="module" src="/client/App.tsx"></script>
