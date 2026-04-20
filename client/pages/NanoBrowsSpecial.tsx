@@ -8,8 +8,8 @@ import { Clock, Droplets, ScanLine, Shield } from "lucide-react";
 import { type ComponentProps } from "react";
 
 //const NANO_BROWS_SERVICE_ID = "urn:blvd:Service:786e1942-2960-4a0e-bb5d-f03ad53fe1e7";
-const NANO_BROWS_SERVICE_ID = "urn:blvd:Service:3433016c-159c-4108-8015-c3810f5084ea";
-const NANO_BROWS_SERVICE_NAME = "Nano brows test";
+const NANO_BROWS_SERVICE_ID = "urn:blvd:Service:66a3dbb8-d7bb-4700-a735-45ada1cc063b";
+const NANO_BROWS_SERVICE_NAME = "15 Minute PMU Phone Consultation";
 
 /** Full-face / lifestyle hero (no brow close-up) */
 const HERO_LIFESTYLE_SRC = "/images/OurStanderd.jpeg";

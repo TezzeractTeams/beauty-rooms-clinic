@@ -126,27 +126,6 @@ export function DateTimeStep({
         Select a Date &amp; Time
       </h3>
 
-      {showTimezoneHeadsUp && (
-        <div
-          role="status"
-          className="border border-amber-200/80 bg-amber-50/90 px-4 py-3 text-left font-barlow text-sm font-light leading-relaxed text-charcoal"
-        >
-          <p className="font-medium uppercase tracking-[0.06em] text-amber-900/90">Heads up!</p>
-          <p className="mt-1.5 text-charcoal/85">
-            It looks like you&apos;re in a different timezone ({getUserTimeZone()}). Times below are shown in{" "}
-            <span className="font-medium">{salonTzLabel}</span> ({SALON_TIMEZONE.replace(/_/g, " ")}).{" "}
-            <button
-              type="button"
-              onClick={() => setUseLocalTime((v) => !v)}
-              className="font-medium text-warm-brown underline decoration-warm-brown/35 underline-offset-2 hover:text-warm-brown/90"
-            >
-              {useLocalTime ? `Switch to ${salonTzLabel}` : "Switch to local time"}
-            </button>
-            .
-          </p>
-        </div>
-      )}
-
       <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10">
         {/* Left: calendar (Calendly-style) */}
         <div className="w-full shrink-0 lg:max-w-[min(100%,380px)]">
@@ -219,8 +198,29 @@ export function DateTimeStep({
           </div>
         </div>
 
-        {/* Right: time slots — vertical list */}
-        <div className="min-h-[240px] flex-1 lg:max-h-[min(60vh,420px)] lg:overflow-y-auto lg:pr-1">
+        {/* Right: timezone heads-up (if needed), then time slots */}
+        <div className="flex min-h-[240px] flex-1 flex-col gap-4 lg:max-h-[min(60vh,420px)] lg:overflow-y-auto lg:pr-1">
+          {showTimezoneHeadsUp && (
+            <div
+              role="status"
+              className="shrink-0 border border-amber-200/80 bg-amber-50/90 px-4 py-3 text-left font-barlow text-sm font-light leading-relaxed text-charcoal"
+            >
+              <p className="font-medium uppercase tracking-[0.06em] text-amber-900/90">Heads up!</p>
+              <p className="mt-1.5 text-charcoal/85">
+                It looks like you&apos;re in a different timezone ({getUserTimeZone()}). Times below are shown in{" "}
+                <span className="font-medium">{salonTzLabel}</span> ({SALON_TIMEZONE.replace(/_/g, " ")}).{" "}
+                <button
+                  type="button"
+                  onClick={() => setUseLocalTime((v) => !v)}
+                  className="font-medium text-warm-brown underline decoration-warm-brown/35 underline-offset-2 hover:text-warm-brown/90"
+                >
+                  {useLocalTime ? `Switch to ${salonTzLabel}` : "Switch to local time"}
+                </button>
+                .
+              </p>
+            </div>
+          )}
+
           {!selectedDate ? (
             <p className="font-barlow text-sm font-light text-charcoal/50">
               Select a date to see available times.
@@ -239,14 +239,14 @@ export function DateTimeStep({
                   No times available for this date. Please choose another day.
                 </p>
               ) : (
-                <div className="flex flex-col gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   {availableTimes.map((t) => (
                     <button
                       key={t.id}
                       type="button"
                       onClick={() => onSelectTime(t)}
                       className={cn(
-                        "w-full border px-4 py-3 text-left font-barlow text-sm font-medium transition-colors",
+                        "min-w-0 border px-3 py-3 text-center font-barlow text-sm font-medium transition-colors sm:px-4",
                         selectedTime?.id === t.id
                           ? "border-primary bg-primary text-primary-foreground"
                           : "border-primary/25 bg-white text-primary hover:border-primary/50 hover:bg-primary/5",
