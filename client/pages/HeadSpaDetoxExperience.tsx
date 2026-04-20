@@ -284,7 +284,7 @@ export default function HeadSpaDetoxExperience() {
                 CERTIFIED HEAD SPA EXPERT
               </p>
               <p className="font-barlow text-base font-light leading-[1.7] text-[rgba(45,41,38,0.72)]">
-                Erica Kelsey is a qualified hairdresser and blonding specialist with a passion for creating healthy,
+                Kelsey is a qualified hairdresser and blonding specialist with a passion for creating healthy,
                 beautiful hair from the scalp up. As a certified Head Spa specialist, she focuses on restoring scalp
                 balance, removing buildup, and improving overall hair health through advanced cleansing and hydration
                 techniques. Known for her attention to detail and calming approach, Kelsey combines results-driven

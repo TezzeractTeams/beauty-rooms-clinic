@@ -1,10 +1,9 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-
-const GA_MEASUREMENT_ID = "G-PRYKX5EC9S";
+import { GA_MEASUREMENT_ID } from "@/lib/loadOptionalAnalytics";
 
 /**
- * Sends a page_view on client-side route changes. The first view is handled by gtag in index.html.
+ * Sends a page_view on client-side route changes. The first view is handled when optional analytics load.
  */
 export function GoogleAnalytics() {
   const { pathname, search } = useLocation();
