@@ -199,4 +199,23 @@
     -webkit-text-fill-color: rgb(45 41 38) !important;
     background-color: transparent !important;
   }
+
+  @keyframes lashes-continuous-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  .continuous-carousel-track {
+    animation: lashes-continuous-scroll 40s linear infinite;
+    will-change: transform;
+  }
+
+  .lashes-continuous-track {
+    animation: lashes-continuous-scroll 40s linear infinite;
+    will-change: transform;
+  }
 }
