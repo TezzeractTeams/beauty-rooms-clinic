@@ -98,7 +98,7 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
   };
 
   return (
-    <div id={anchorId} className={cn(cardBorder, "scroll-mt-28 bg-[#FAFAF5] p-6 shadow-sm md:p-8")}>
+    <div id={anchorId} className={cn(cardBorder, "scroll-mt-28 bg-[#FAFAF5] shadow-sm")}>
       {view === "contact" && (
         <BookingIntakePanel
           idPrefix={idPrefix}

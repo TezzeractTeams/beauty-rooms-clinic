@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { FinishedLooksGallerySection } from "@/components/FinishedLooksGallerySection";
+import { HeroLocationGoogleMapsCta } from "@/components/HeroLocationGoogleMapsCta";
 import { NanoBrowsHeroWizard } from "@/components/nanoBrows/NanoBrowsHeroWizard";
 import { Button } from "@/components/ui/button";
 import { NANO_BROWS_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
@@ -100,10 +101,15 @@ export default function NanoBrowsSpecial() {
               <img
                 src={HERO_LIFESTYLE_SRC}
                 alt="Woman at the clinic — natural, polished look"
-                className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
+                className="absolute inset-0 z-0 h-full w-full object-cover object-[center_20%]"
                 fetchPriority="high"
                 decoding="async"
               />
+              <div
+                className="pointer-events-none absolute inset-0 z-[1] bg-black/30"
+                aria-hidden
+              />
+              <HeroLocationGoogleMapsCta />
             </div>
           </div>
         </section>
