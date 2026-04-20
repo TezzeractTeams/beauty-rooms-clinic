@@ -10,7 +10,7 @@ import { type ComponentProps, useEffect } from "react";
 const HERO_LIFESTYLE_SRC = "/images/head-spa-hero.png";
 const SPECIALIST_IMAGE_SRC = "/images/head-spa-kelsey.png";
 const CTA_BACKGROUND_IMAGE_SRC = "/images/headspa-wide.png";
-const HEAD_SPA_BOOKING_SERVICE_ID = "urn:blvd:Service:786e1942-2960-4a0e-bb5d-f03ad53fe1e7";
+const HEAD_SPA_BOOKING_SERVICE_ID = "urn:blvd:Service:ad63b326-e0e2-4d0a-b615-c658f053e7d2";
 const HEAD_SPA_BOOKING_SERVICE_NAME = "Head Spa Detox Experience";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";

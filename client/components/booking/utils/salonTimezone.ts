@@ -1,5 +1,5 @@
-/** Salon schedule & Boulevard `tz` — US Pacific (PDT / PST). */
-export const SALON_TIMEZONE = "America/Los_Angeles";
+/** Salon schedule & Boulevard `tz` — Sarasota, FL (US Eastern: EDT / EST). */
+export const SALON_TIMEZONE = "America/New_York";
 
 /**
  * True if the string already specifies an instant (UTC `Z` or numeric offset).
@@ -57,7 +57,7 @@ function salonWallMatches(
 /**
  * Boulevard often returns `YYYY-MM-DDTHH:mm:ss` with **no** `Z` meaning **salon local** wall time.
  * `new Date()` would interpret that as the **visitor's** local zone → wrong time vs dashboard.
- * This finds the UTC instant with that wall time in America/Los_Angeles.
+ * This finds the UTC instant with that wall time in the salon zone (`SALON_TIMEZONE`).
  */
 function utcInstantForSalonWall(
   y: number,
@@ -80,7 +80,7 @@ function utcInstantForSalonWall(
 /**
  * Parse `startTime` from the API for display and comparison.
  * - Values with `Z` / offset: real instant (same as Boulevard when they send UTC).
- * - Naive `YYYY-MM-DDTHH:mm:ss`: treat as **salon** (Pacific) wall time (matches Boulevard UI).
+ * - Naive `YYYY-MM-DDTHH:mm:ss`: treat as **salon** (Eastern) wall time (matches Boulevard UI).
  */
 export function parseBoulevardInstant(iso: string): Date {
   const s = iso.trim();
@@ -123,9 +123,9 @@ export function getTzShortLabel(forDate: Date, timeZone: string): string {
   return parts.find((p) => p.type === "timeZoneName")?.value ?? "";
 }
 
-/** Short label for the salon zone e.g. "PDT", "PST". */
+/** Short label for the salon zone e.g. "EDT", "EST". */
 export function getSalonTzShortLabel(forDate: Date = new Date()): string {
-  return getTzShortLabel(forDate, SALON_TIMEZONE) || "PT";
+  return getTzShortLabel(forDate, SALON_TIMEZONE) || "ET";
 }
 
 /** Format that instant in a specific IANA zone (e.g. visitor’s local time). */
