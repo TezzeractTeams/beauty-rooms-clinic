@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { BenefitCard } from "@/components/home/BenefitCard";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { ArrowRightIcon, BadgeCheckIcon, ClockIcon, SparkleIcon } from "@/components/home/icons";
 import type { ServiceCategory } from "./service-types";
 
@@ -83,13 +84,14 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         </div>
 
         <div>
-          <Link
-            to="/bookings"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+          <button
+            type="button"
+            onClick={() => openMainMenuBoulevardBooking()}
+            className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span>{ctaLabel}</span>
             <ArrowRightIcon />
-          </Link>
+          </button>
         </div>
       </div>
     </section>

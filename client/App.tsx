@@ -6,6 +6,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { MetaPixel } from "@/components/MetaPixel";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -16,14 +18,17 @@ import ServiceCategoryDetail from "./pages/ServiceCategoryDetail";
 import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
 import Specialists from "./pages/Specialists";
-import BookNow from "./pages/BookNow";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
+import CancellationPolicy from "./pages/CancellationPolicy";
 import LuxeLookLashOffer from "./pages/LuxeLookLashOffer";
 import NanoBrowsSpecial from "./pages/NanoBrowsSpecial";
 import LipBlushSpecialLaunchOffer from "./pages/LipBlushSpecialLaunchOffer";
 import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
+import Academy from "./pages/Academy";
+import HeadSpaDetoxExperience from "./pages/HeadSpaDetoxExperience";
+import LashesLaunchOffer from "./pages/LashesLaunchOffer";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +42,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <GoogleAnalytics />
+        <MetaPixel />
         <Routes>
           {/*<Route path="*" element={<ComingSoon />} />*/}
 
@@ -49,18 +56,25 @@ const App = () => (
           <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
           <Route path="/services" element={<Services />} />
           <Route path="/experts" element={<Specialists />} />
-          <Route path="/bookings" element={<BookNow />} />
+          <Route
+            path="/bookings"
+            element={<Navigate to={{ pathname: "/", hash: "book-now" }} replace />}
+          />
           <Route path="/blog" element={<Placeholder title="Our Blog" />} />
           <Route path="/gallery" element={<Placeholder title="Results Gallery" />} />
           <Route path="/work-with-us" element={<WorkWithUs />} />
           <Route path="/careers" element={<Navigate to="/work-with-us" replace />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cancellation-policy" element={<CancellationPolicy />} />
           <Route path="/luxe-look-lash-offer" element={<LuxeLookLashOffer />} />
+          <Route path="/lashes-launch-offer" element={<LashesLaunchOffer />} />
           <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
+          <Route path="/Head-Spa-Detox-Experience" element={<HeadSpaDetoxExperience />} />
           <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
           <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
           <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />
           <Route path="/terms" element={<Placeholder title="Terms of Service" />} />
+          <Route path="/academy" element={<Academy />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
           <Route path="*" element={<NotFound />} />
      

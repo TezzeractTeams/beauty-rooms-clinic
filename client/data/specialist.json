@@ -6,7 +6,7 @@
       "title": "Specialist in Eyelash Extensions, Lift & Tint, and Eyebrows.",
       "rating": 5,
       "specialties": ["lash"],
-      "tags": ["Lash Extentions", "Lash Fills", "Brow Lamination","Hair Removal", "Lash lift Lash Tine"],
+      "tags": ["Lash Extentions", "Lash Fills", "Brow Lamination","Hair Removal", "Lash Lift & Lash Line"],
       "description": "Andreza is our resident Lash Expert, specializing in 100% bespoke, custom eyelash extensions that are perfectly tailored to your unique eye shape. Driven by a passion for advanced beauty and client care, Andreza is currently continuing her education to become a Registered Nurse (RN), with the goal of expanding her expertise to offer cutting-edge medical aesthetics in the future.",
       "certification": "Board certified specialist",
       "imageSrc": "images/Andrezza.jpeg",
@@ -24,7 +24,37 @@
       "certification": "Master lash artist certified",
       "imageSrc": "images/Erica.JPG",
       "imageAlt": "Portrait of Sarah, lash specialist"
+    },
+    {
+      "id": "Kelsey",
+      "name": "Kelsey",
+      "title": "Hairdresser and blonding specialist",
+      "rating": 5,
+      "specialties": ["head-spa"],
+      "tags": ["Head Spa", "Blonding", "Scalp health", "Clense", "Hydrate"],
+      "description": "Kelsey is a qualified hairdresser and blonding specialist, as well as a certified Head Spa expert. She focuses on scalp health as the foundation for beautiful hair, delivering customized treatments that cleanse, hydrate, and restore-while providing a deeply relaxing experience.",
+      "certification": "Certified Head Spa specialist",
+      "imageSrc": "images/Kelsey_Bio_Pic.png",
+      "imageAlt": "Portrait of Kelsey, head spa specialist",
+      "bookingUrlParams": {
+        "locationId": "e3e0275b-4bbb-4c7c-a020-0dbb7ef96e2f",
+        "path": "/cart/menu/HEADSPA%20SERVICES",
+        "visitType": "SELF_VISIT"
+      }
+    },
+    {
+      "id": "Carolina",
+      "name": "Carolina",
+      "title": "Medical Esthetician",
+      "rating": 5,
+      "specialties": ["esthetician"],
+      "tags": ["Aesthetic Treatments", "Laser", "Electrology", "Skin Health"],
+      "description": "Carolina is a highly skilled medical esthetician with over a decade of experience in advanced skin and aesthetic treatments. Specializing in laser, electrology, and results-driven skin therapies, she combines clinical expertise with a personalized approach to deliver safe, effective, and natural-looking results. With a strong background in biomedical science, Carolina focuses on enhancing skin health from within-helping clients achieve long-term confidence through tailored, high-performance treatments.",
+      "certification": "Medical esthetician",
+      "imageSrc": "images/Carolina.png",
+      "imageAlt": "Portrait of Carolina, medical esthetician",
+      "ctaLabel": "Coming Soon",
+      "bookingDisabled": true
     }
-    
   ]
 }

@@ -8,7 +8,8 @@ import {
   NANO_BROWS_QUALIFIED_SPECIALIST_CALL_BOOKING_URL_PARAMS,
   tryOpenBoulevardBooking,
 } from "@/lib/boulevardBooking";
-// import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
+import { trackMetaPixelCustom } from "@/lib/metaPixel";
+
 import { cn } from "@/lib/utils";
 import { Loader2, Mail, Phone, User } from "lucide-react";
 import { type FormEvent, useMemo, useState } from "react";
@@ -17,7 +18,7 @@ import { toast } from "sonner";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 
-type WizardView = "contact" | "checklist" | "reject" | "booking" | "qualifiedClinicianCall";
+type WizardView = "contact" | "checklist" | "reject" | "qualified" | "qualifiedClinicianCall" | "booking";
 
 // Webhook payload (n8n via /api/website-form-lead) — uncomment with submitWebsiteFormLead when ready.
 // const SOURCE = "beauty_rooms_clinic_website";
@@ -49,11 +50,11 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
   const { initialize, reset, ...bookingPanel } = useBooking(serviceId, serviceName, bookingClientInfo);
   void reset;
   const [consent, setConsent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   /** Primary “I confirm that” + bullet list (required). Secondary = medical / prefer clinician call (client-only routing). */
   const [primaryConfirm, setPrimaryConfirm] = useState(false);
   const [prefersClinicianCall, setPrefersClinicianCall] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   // const baseLead = useCallback(
   //   () => ({
@@ -71,12 +72,16 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
 
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!firstName.trim() || !lastName.trim()) {
-      toast.error("Please enter your first and last name.");
+    if (!firstName.trim()) {
+      toast.error("Please enter your first name.");
       return;
     }
-    if (!phone.trim() || !email.trim()) {
-      toast.error("Please fill in all fields.");
+    if (!phone.trim()) {
+      toast.error("Please enter your phone number.");
+      return;
+    }
+    if (!email.trim()) {
+      toast.error("Please enter your email address.");
       return;
     }
     if (!consent) {
@@ -131,7 +136,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
             Please provide your details to begin the checklist:
           </p>
 
-          <form className="professional-intake-form mt-6 space-y-4" onSubmit={handleContactSubmit} noValidate>
+          <form className="professional-intake-form mt-6 space-y-4" onSubmit={handleContactSubmit}>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="relative">
                 <User
@@ -143,11 +148,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
                   id={`${idPrefix}-firstname`}
                   name="firstname"
                   autoComplete="given-name"
-                  placeholder="First name"
+                  placeholder="First name *"
                   value={firstName}
                   onChange={(ev) => setFirstName(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
               <div className="relative">
@@ -164,7 +170,6 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
                   value={lastName}
                   onChange={(ev) => setLastName(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
-                  required
                 />
               </div>
             </div>
@@ -180,11 +185,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
                   name="phone"
                   type="tel"
                   autoComplete="tel"
-                  placeholder="Phone number"
+                  placeholder="Phone number *"
                   value={phone}
                   onChange={(ev) => setPhone(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
               <div className="relative min-w-0">
@@ -198,11 +204,12 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="Email"
+                  placeholder="Email *"
                   value={email}
                   onChange={(ev) => setEmail(ev.target.value)}
                   className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
                   required
+                  aria-required
                 />
               </div>
             </div>
@@ -211,6 +218,8 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
                 type="checkbox"
                 checked={consent}
                 onChange={(ev) => setConsent(ev.target.checked)}
+                required
+                aria-required
                 className="mt-0.5 h-4 w-4 shrink-0 rounded-sm border-[rgba(103,92,83,0.35)] accent-[hsl(var(--warm-brown))]"
               />
               <span>
@@ -235,9 +244,16 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
               type="submit"
               size="lg"
               disabled={submitting}
-              className="w-full rounded-none px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em] disabled:opacity-60"
+              className="w-full rounded-none px-6 py-6 font-barlow text-[11px] font-light uppercase tracking-[0.1em]"
             >
-              {submitting ? "Sending…" : "Next"}
+              {submitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden />
+                  Sending…
+                </>
+              ) : (
+                "Next"
+              )}
             </Button>
           </form>
           <p className="mt-5 font-barlow text-sm font-light text-[rgba(45,41,38,0.55)]">

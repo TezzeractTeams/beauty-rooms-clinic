@@ -13,13 +13,13 @@ export const NAV_SERVICE_LINKS = [
 const BEAUTY_ROOMS_NJ_URL = "https://www.beautyroomsbynj.com/";
 
 const submenuItemClass =
-  "block px-4 py-2.5 font-barlow font-normal text-sm tracking-[0.05em] text-warm-brown/80 transition-colors hover:bg-[#F4F4EF] hover:text-warm-brown";
+  "block px-4 py-2.5 font-barlow font-normal text-[calc(0.875rem-1pt)] tracking-[0.05em] text-warm-brown/80 transition-colors hover:bg-[#F4F4EF] hover:text-warm-brown";
 
 const Logo = () => (
   <img
     src="/images/Logo.svg"
     alt="Beauty Rooms Clinic"
-    className="h-12 w-auto md:h-[4.25rem] lg:h-[4.1rem] select-none origin-center scale-[1.18] md:scale-[1.3] md:mb-2"
+    className="h-[calc(3rem*0.95)] w-auto md:h-[calc(4.25rem*0.95)] lg:h-[calc(4.1rem*0.95)] select-none origin-center scale-[1.18] md:scale-[1.3] md:mb-2"
   />
 );
 
@@ -56,7 +56,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
   <Link
     to={to}
     onClick={onClick}
-    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
+    className={`flex items-center gap-1 pb-1 font-barlow font-normal text-[calc(1.125rem-1pt)] tracking-[0.05em] transition-colors ${
       active
         ? "text-warm-brown border-b-2 border-warm-brown"
         : "text-warm-brown/70 hover:text-warm-brown"
@@ -68,7 +68,7 @@ const NavLink = ({ to, label, hasDropdown, active, onClick }: NavLinkProps) => (
 );
 
 const navLinkClass =
-  "block py-2 font-barlow font-medium text-sm tracking-[0.05em] text-warm-brown/80 hover:text-warm-brown transition-colors";
+  "block py-2 font-barlow font-medium text-[calc(0.875rem-1pt)] tracking-[0.05em] text-warm-brown/80 hover:text-warm-brown transition-colors";
 
 export default function Navbar() {
   const location = useLocation();
@@ -80,20 +80,25 @@ export default function Navbar() {
 
   const isProfessionalsActive = location.pathname === "/work-with-us";
 
+  const isAcademyActive = location.pathname === "/academy";
+
   const isSpecialistsActive = location.pathname === "/experts";
+
+  /** Nano brows launch funnel uses its own booking CTAs; hide global header Book Now here only. */
+  const hideHeaderBookNow = location.pathname === "/nano-brows-launch-offer";
 
   return (
     <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
-      <div className="flex items-center justify-between px-6 md:px-10 py-6">
+      <div className="mx-auto flex w-full max-w-[min(92rem,100%)] items-center justify-between py-6 pl-[max(0.75rem,calc(1.5rem-0.75vw))] pr-6 md:pl-[max(1rem,calc(2.5rem-1vw))] md:pr-10">
         {/* Desktop: nav groups hug the logo; Book Now stays on the far right */}
-        <div className="hidden md:flex w-full items-center">
-          <nav className="flex flex-1 min-w-0 items-center justify-end md:gap-[7%] pr-5 md:pr-7 lg:pr-9">
+        <div className="hidden md:flex w-full min-w-0 items-center">
+          <nav className="flex min-w-0 flex-1 items-center justify-end md:gap-[5%] pr-3 md:pr-5 lg:pr-6">
             <NavLink to="/" label="Home" active={isActive("/")} />
             <NavLink to="/about" label="About" active={isActive("/about")} />
             <div className="relative group">
               <Link
                 to="/services"
-                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
+                className={`flex items-center gap-1 pb-1 font-barlow font-normal text-[calc(1.125rem-1pt)] tracking-[0.05em] transition-colors ${
                   isServicesActive
                     ? "text-warm-brown border-b-2 border-warm-brown"
                     : "text-warm-brown/70 hover:text-warm-brown"
@@ -124,17 +129,18 @@ export default function Navbar() {
 
           <Link
             to="/"
-            className="relative z-10 shrink-0 mx-3 md:mx-4 lg:mx-10 inline-flex items-center justify-center"
+            className="relative z-10 mx-2 inline-flex shrink-0 items-center justify-center md:mx-3 lg:mx-6"
           >
             <Logo />
           </Link>
 
-          <div className="flex flex-1 min-w-0 items-center justify-between gap-6 md:gap-8 lg:gap-10 pl-6 md:pl-8 lg:pl-11">
-            <nav className="flex shrink-0 items-center gap-5 md:gap-7 lg:gap-8">
+          <div className="flex min-w-0 flex-1 items-center justify-between gap-[calc(1.5rem*0.98)] md:gap-[calc(2rem*0.98)] lg:gap-[calc(2.5rem*0.98)] pl-4 md:pl-5 lg:pl-6">
+            <nav className="flex shrink-0 items-center gap-[calc(1.25rem*0.98)] md:gap-[calc(1.75rem*0.98)] lg:gap-[calc(2rem*0.98)]">
+              <NavLink to="/academy" label="Academy" active={isAcademyActive} />
               <div className="relative group">
                 <Link
                   to="/work-with-us"
-                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-lg tracking-[0.05em] transition-colors ${
+                  className={`flex items-center gap-1 pb-1 font-barlow font-normal text-[calc(1.125rem-1pt)] tracking-[0.05em] transition-colors ${
                     isProfessionalsActive
                       ? "text-warm-brown border-b-2 border-warm-brown"
                       : "text-warm-brown/70 hover:text-warm-brown"
@@ -166,13 +172,15 @@ export default function Navbar() {
               <NavLink to="/faq" label="FAQ" active={isActive("/faq")} />
               <NavLink to="/contact" label="Contact" active={isActive("/contact")} />
             </nav>
-            <button
-              type="button"
-              onClick={() => openMainMenuBoulevardBooking()}
-              className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
-            >
-              Book Now
-            </button>
+            {!hideHeaderBookNow ? (
+              <button
+                type="button"
+                onClick={() => openMainMenuBoulevardBooking()}
+                className="flex items-center px-8 py-5 bg-primary text-primary-foreground font-barlow font-light text-[calc(0.875rem-1pt)] tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors shrink-0"
+              >
+                Book Now
+              </button>
+            ) : null}
           </div>
         </div>
 
@@ -195,7 +203,7 @@ export default function Navbar() {
 
       {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="md:hidden bg-[#FAFAF5] border-t border-[rgba(232,232,227,0.50)] px-6 py-6 flex flex-col gap-6">
+        <div className="mx-auto flex w-full max-w-[min(92rem,100%)] flex-col gap-[calc(1.5rem*0.98)] border-t border-[rgba(232,232,227,0.50)] bg-[#FAFAF5] py-6 pl-[max(0.75rem,calc(1.5rem-0.75vw))] pr-6 md:pl-[max(1rem,calc(2.5rem-1vw))] md:pr-10">
           <NavLink to="/" label="Home" active={isActive("/")} onClick={() => setMobileOpen(false)} />
           <NavLink to="/about" label="About" active={isActive("/about")} onClick={() => setMobileOpen(false)} />
           <div className="flex flex-col gap-2">
@@ -218,6 +226,12 @@ export default function Navbar() {
             to="/experts"
             label="Specialists"
             active={isSpecialistsActive}
+            onClick={() => setMobileOpen(false)}
+          />
+          <NavLink
+            to="/academy"
+            label="Academy"
+            active={isAcademyActive}
             onClick={() => setMobileOpen(false)}
           />
           <div className="flex flex-col gap-2">
@@ -245,16 +259,18 @@ export default function Navbar() {
           </div>
           <NavLink to="/faq" label="Faq" active={isActive("/faq")} onClick={() => setMobileOpen(false)} />
           <NavLink to="/contact" label="Contact" active={isActive("/contact")} onClick={() => setMobileOpen(false)} />
-          <button
-            type="button"
-            onClick={() => {
-              setMobileOpen(false);
-              openMainMenuBoulevardBooking();
-            }}
-            className="flex w-full items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-sm tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
-          >
-            Book Now
-          </button>
+          {!hideHeaderBookNow ? (
+            <button
+              type="button"
+              onClick={() => {
+                setMobileOpen(false);
+                openMainMenuBoulevardBooking();
+              }}
+              className="flex w-full items-center justify-center px-8 py-4 bg-primary text-primary-foreground font-barlow font-light text-[calc(0.875rem-1pt)] tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors"
+            >
+              Book Now
+            </button>
+          ) : null}
         </div>
       )}
     </header>

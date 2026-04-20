@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { ArrowRight, AtSign, Globe, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -91,9 +92,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/bookings" className={footerLinkClass}>
-                  Bookings
+                <Link to="/academy" className={footerLinkClass}>
+                  Academy
                 </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => openMainMenuBoulevardBooking()}
+                  className={`${footerLinkClass} cursor-pointer bg-transparent p-0 text-left`}
+                >
+                  Book now
+                </button>
               </li>
               <li>
                 <Link to="/faq" className={footerLinkClass}>
