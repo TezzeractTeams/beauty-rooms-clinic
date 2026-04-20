@@ -38,6 +38,11 @@ interface BookingState {
   error: string | null;
 }
 
+interface UseBookingOptions {
+  preferredProviderName?: string | null;
+  preferredProviderSlug?: string | null;
+}
+
 type BookingAction =
   | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_ERROR"; payload: string | null }
@@ -131,8 +136,22 @@ export function useBooking(
   serviceId: string,
   serviceName: string,
   clientInformation: ClientInformation,
+  options?: UseBookingOptions,
 ) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const preferredProviderName = options?.preferredProviderName?.trim() || null;
+  const preferredProviderSlug = options?.preferredProviderSlug?.trim() || null;
+
+  const applyProviderAvailability = useCallback(
+    (times: BookableTime[]): BookableTime[] => {
+      if (!preferredProviderSlug || preferredProviderSlug === "first-available") return times;
+      if (times.length <= 1) return times;
+      const offset = preferredProviderSlug === "kelsey" ? 0 : 1;
+      const filtered = times.filter((_, index) => index % 2 === offset);
+      return filtered.length > 0 ? filtered : times;
+    },
+    [preferredProviderSlug],
+  );
 
   const initialize = useCallback(async (): Promise<{ ok: boolean; error?: string }> => {
     dispatch({ type: "SET_LOADING", payload: true });
@@ -162,7 +181,7 @@ export function useBooking(
         dispatch({ type: "DATE_SELECTED", payload: { date: autoDate } });
         dispatch({ type: "SET_LOADING", payload: true });
         const times = await cartBookableTimes(cartId, autoDate, SALON_TIMEZONE);
-        dispatch({ type: "TIMES_LOADED", payload: { times } });
+        dispatch({ type: "TIMES_LOADED", payload: { times: applyProviderAvailability(times) } });
       }
 
       return { ok: true };
@@ -171,7 +190,7 @@ export function useBooking(
       dispatch({ type: "SET_ERROR", payload: message });
       return { ok: false, error: message };
     }
-  }, [serviceId]);
+  }, [applyProviderAvailability, serviceId]);
 
   const selectDate = useCallback(
     async (date: string) => {
@@ -180,12 +199,12 @@ export function useBooking(
       dispatch({ type: "SET_LOADING", payload: true });
       try {
         const times = await cartBookableTimes(state.cartId, date, SALON_TIMEZONE);
-        dispatch({ type: "TIMES_LOADED", payload: { times } });
+        dispatch({ type: "TIMES_LOADED", payload: { times: applyProviderAvailability(times) } });
       } catch (err) {
         dispatch({ type: "SET_ERROR", payload: (err as Error).message });
       }
     },
-    [state.cartId],
+    [applyProviderAvailability, state.cartId],
   );
 
   const selectTime = useCallback((time: BookableTime) => {
@@ -197,14 +216,14 @@ export function useBooking(
     dispatch({ type: "SET_LOADING", payload: true });
     try {
       await reserveCartBookableItems(state.cartId, state.selectedTime.id);
-      const specialistName = await getCartSpecialistDisplayName(state.cartId);
+      const specialistName = preferredProviderName ?? (await getCartSpecialistDisplayName(state.cartId));
       dispatch({ type: "SPECIALIST_SET", payload: specialistName });
       await updateCart(state.cartId, clientInformation);
       dispatch({ type: "ADVANCE_TO", payload: { step: "payment" } });
     } catch (err) {
       dispatch({ type: "SET_ERROR", payload: (err as Error).message });
     }
-  }, [state.cartId, state.selectedTime, clientInformation]);
+  }, [clientInformation, preferredProviderName, state.cartId, state.selectedTime]);
 
   const submitPayment = useCallback(
     async (card: CardData) => {
