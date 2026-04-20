@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleBlvdBookingCatalog, handleBlvdBookingConfig, handleBlvdGraphql } from "./routes/blvd.js";
 import { handleDemo } from "./routes/demo.js";
-import { handleWebsiteFormLead } from "./routes/website-form-lead.js";
+import { handleHeadSpaWebsiteFormLead, handleWebsiteFormLead } from "./routes/website-form-lead.js";
 
 export function createServer() {
   const app = express();
@@ -22,6 +22,7 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
 
   app.post("/api/website-form-lead", handleWebsiteFormLead);
+  app.post("/api/website-headspa-form-lead", handleHeadSpaWebsiteFormLead);
   app.get("/api/blvd/booking-config", handleBlvdBookingConfig);
   app.get("/api/blvd/booking-catalog", handleBlvdBookingCatalog);
   app.post("/api/blvd/graphql", handleBlvdGraphql);

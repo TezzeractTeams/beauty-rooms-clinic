@@ -2,10 +2,12 @@ import { BookingFlowPanel } from "@/components/booking/BookingFlowPanel";
 import { BookingIntakePanel, type BookingIntakeValues } from "@/components/booking/BookingIntakePanel";
 import { useBooking } from "@/components/booking/hooks/useBooking";
 import type { ClientInformation } from "@/components/booking/utils/boulevardApi";
+import { submitHeadSpaFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
-import { type FormEvent, useMemo, useState } from "react";
+import { type FormEvent, useCallback, useMemo, useState } from "react";
 import { toast } from "sonner";
 
+const SOURCE = "beauty_rooms_clinic_website";
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 
 type View = "contact" | "booking";
@@ -42,6 +44,22 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
   const { initialize, reset, ...bookingPanel } = useBooking(serviceId, serviceName, bookingClientInfo);
   void reset;
 
+  const baseLead = useCallback(
+    () => ({
+      source: SOURCE,
+      form: "head_spa_detox" as const,
+      pageUri: typeof window !== "undefined" ? window.location.href : "",
+      firstName: intakeValues.firstName.trim(),
+      lastName: intakeValues.lastName.trim(),
+      phone: intakeValues.phone.trim(),
+      email: intakeValues.email.trim(),
+      consent: intakeValues.consent,
+      providerSlug: intakeValues.providerSlug,
+      serviceName,
+    }),
+    [intakeValues, serviceName],
+  );
+
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -59,6 +77,16 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
     }
 
     setSubmitting(true);
+    const leadResult = await submitHeadSpaFormLead({
+      ...baseLead(),
+      step: "contact",
+    });
+    if (leadResult.ok === false) {
+      setSubmitting(false);
+      toast.error(leadResult.message);
+      return;
+    }
+
     const result = await initialize();
     setSubmitting(false);
 
