@@ -2,8 +2,6 @@ import type { RequestHandler } from "express";
 
 const BLVD_CLIENT_BASE = "https://sandbox.joinblvd.com/api/2020-01";
 
-<<<<<<< HEAD
-=======
 function toBlvdGlobalLocationId(rawId: string): string {
   const id = rawId.trim();
   if (!id) return id;
@@ -12,7 +10,6 @@ function toBlvdGlobalLocationId(rawId: string): string {
   return `urn:blvd:Location:${id}`;
 }
 
->>>>>>> origin/develop
 /** Public booking config (location URN) — safe to expose; keys stay server-side. */
 export const handleBlvdBookingConfig: RequestHandler = (_req, res) => {
   const locationId = process.env.BLVD_SANDBOX_LOCATION_ID;
@@ -20,11 +17,7 @@ export const handleBlvdBookingConfig: RequestHandler = (_req, res) => {
     res.status(503).json({ error: "BLVD_SANDBOX_LOCATION_ID is not configured" });
     return;
   }
-<<<<<<< HEAD
-  res.json({ locationId: locationId.trim() });
-=======
   res.json({ locationId: toBlvdGlobalLocationId(locationId) });
->>>>>>> origin/develop
 };
 
 /** Proxies GraphQL to Boulevard using server-side credentials (never sent to the browser). */
