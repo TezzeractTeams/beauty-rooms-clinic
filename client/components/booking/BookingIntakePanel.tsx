@@ -29,6 +29,8 @@ type Props = {
   submitLabel?: string;
   submittingLabel?: string;
   submitting?: boolean;
+  /** When true, omit noValidate and mark consent required so the browser enforces all fields before submit. */
+  enforceNativeRequired?: boolean;
   onChange: (next: BookingIntakeValues) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   className?: string;
@@ -46,6 +48,7 @@ export function BookingIntakePanel({
   submitLabel = "View Available Appointments",
   submittingLabel = "Loading availability...",
   submitting = false,
+  enforceNativeRequired = false,
   onChange,
   onSubmit,
   className,
@@ -59,7 +62,11 @@ export function BookingIntakePanel({
       <h2 className="font-barlow text-lg font-extralight tracking-[-0.02em] text-charcoal md:text-xl">{title}</h2>
       <p className="mt-2 font-barlow text-sm font-light leading-relaxed text-[rgba(45,41,38,0.65)]">{subtitle}</p>
 
-      <form className="professional-intake-form mt-6 space-y-4" onSubmit={onSubmit} noValidate>
+      <form
+        className="professional-intake-form mt-6 space-y-4"
+        onSubmit={onSubmit}
+        noValidate={!enforceNativeRequired}
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="relative">
             <User
@@ -71,11 +78,12 @@ export function BookingIntakePanel({
               id={`${idPrefix}-firstname`}
               name="firstname"
               autoComplete="given-name"
-              placeholder="First name"
+              placeholder="First name *"
               value={values.firstName}
               onChange={(ev) => withField("firstName", ev.target.value)}
               className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
               required
+              aria-required
             />
           </div>
           <div className="relative">
@@ -88,11 +96,12 @@ export function BookingIntakePanel({
               id={`${idPrefix}-lastname`}
               name="lastname"
               autoComplete="family-name"
-              placeholder="Last name"
+              placeholder="Last name *"
               value={values.lastName}
               onChange={(ev) => withField("lastName", ev.target.value)}
               className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
               required
+              aria-required
             />
           </div>
         </div>
@@ -108,11 +117,12 @@ export function BookingIntakePanel({
               name="phone"
               type="tel"
               autoComplete="tel"
-              placeholder="Phone number"
+              placeholder="Phone number *"
               value={values.phone}
               onChange={(ev) => withField("phone", ev.target.value)}
               className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
               required
+              aria-required
             />
           </div>
           <div className="relative min-w-0">
@@ -126,11 +136,12 @@ export function BookingIntakePanel({
               name="email"
               type="email"
               autoComplete="email"
-              placeholder="Email"
+              placeholder="Email *"
               value={values.email}
               onChange={(ev) => withField("email", ev.target.value)}
               className="h-11 rounded-none border-[rgba(103,92,83,0.2)] bg-[#fafaf5] pl-10 font-barlow text-sm focus-visible:ring-2 focus-visible:ring-warm-brown/30 focus-visible:ring-offset-0"
               required
+              aria-required
             />
           </div>
         </div>
@@ -140,9 +151,10 @@ export function BookingIntakePanel({
               className="block font-barlow text-[10px] font-light uppercase tracking-[0.12em] text-[rgba(45,41,38,0.65)]"
             >
               {providerLabel}
+              {enforceNativeRequired ? " *" : ""}
             </label>
             <div className="grid gap-2 sm:grid-cols-3">
-              {providers.map((provider) => (
+              {providers.map((provider, index) => (
                 <label
                   key={provider.slug}
                   className={cn(
@@ -160,6 +172,8 @@ export function BookingIntakePanel({
                     checked={values.providerSlug === provider.slug}
                     onChange={() => withField("providerSlug", provider.slug)}
                     className="sr-only"
+                    required={enforceNativeRequired && index === 0}
+                    aria-required={enforceNativeRequired}
                   />
                   {provider.name}
                 </label>
@@ -172,6 +186,8 @@ export function BookingIntakePanel({
             type="checkbox"
             checked={values.consent}
             onChange={(ev) => withField("consent", ev.target.checked)}
+            required={enforceNativeRequired}
+            aria-required={enforceNativeRequired}
             className="mt-0.5 h-4 w-4 shrink-0 rounded-sm border-[rgba(103,92,83,0.35)] accent-[hsl(var(--warm-brown))]"
           />
           <span>

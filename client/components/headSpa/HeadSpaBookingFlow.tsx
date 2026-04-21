@@ -63,12 +63,20 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!intakeValues.firstName.trim() || !intakeValues.lastName.trim()) {
-      toast.error("Please enter your first and last name.");
+    if (!intakeValues.firstName.trim()) {
+      toast.error("Please enter your first name.");
       return;
     }
-    if (!intakeValues.phone.trim() || !intakeValues.email.trim()) {
-      toast.error("Please fill in all fields.");
+    if (!intakeValues.lastName.trim()) {
+      toast.error("Please enter your last name.");
+      return;
+    }
+    if (!intakeValues.phone.trim()) {
+      toast.error("Please enter your phone number.");
+      return;
+    }
+    if (!intakeValues.email.trim()) {
+      toast.error("Please enter your email address.");
       return;
     }
     if (!intakeValues.consent) {
@@ -109,6 +117,7 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
           onSubmit={handleContactSubmit}
           submitLabel="Book your slot now"
           submitting={submitting}
+          enforceNativeRequired
           className="border-0 bg-transparent p-0 shadow-none"
         />
       )}
