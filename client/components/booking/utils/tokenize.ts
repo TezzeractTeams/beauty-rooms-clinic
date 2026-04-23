@@ -1,4 +1,4 @@
-const TOKENIZE_URL = "https://vault-sandbox.joinblvd.com/cards/tokenize";
+const TOKENIZE_URL = "https://pci.boulevard.app/cards/tokenize";
 
 export interface CardData {
   name: string;
