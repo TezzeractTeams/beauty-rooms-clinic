@@ -4,6 +4,7 @@ import type { ClientInformation } from "@/components/booking/utils/boulevardApi"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { NANO_BROWS_HERO_BOOKING_URL_PARAMS, tryOpenBoulevardBooking } from "@/lib/boulevardBooking";
+import { getLeadAttributionSnapshot } from "@/lib/leadAttribution";
 import { submitWebsiteFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { Loader2, Mail, Phone, User } from "lucide-react";
@@ -87,6 +88,7 @@ export function NanoBrowsHeroWizard({ idPrefix = "nano", anchorId, serviceId, se
     const result = await submitWebsiteFormLead({
       ...baseLead(),
       step: "contact",
+      attribution: getLeadAttributionSnapshot(),
     });
     setSubmitting(false);
 
