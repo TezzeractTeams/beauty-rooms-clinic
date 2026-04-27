@@ -1,4 +1,14 @@
-/** Contact step POSTs to n8n via server proxy; eligibility steps stay client-only. */
+import type { LeadFormAttribution } from "@/lib/leadAttribution";
+
+/**
+ * Contact step POSTs to n8n via server proxy; eligibility steps stay client-only.
+ *
+ * n8n webhook JSON includes nested `attribution` for HubSpot (contact + deal):
+ * - `utm_*`, `gclid`, `fbclid`, `msclkid` — from URL, merged into 30-day localStorage
+ * - `landing_page`, `entry_referrer` — first-touch when the stored row was created
+ * - `lead_channel` — coarse enum: `google_ads` | `facebook_ads` | `organic` | `referral` | `direct`
+ * Top-level `pageUri` is the submit-time URL (may differ from `attribution.landing_page`).
+ */
 export type WebsiteFormLeadPayload = {
   source: string;
   form: "nano_brows_wizard";
@@ -9,8 +19,10 @@ export type WebsiteFormLeadPayload = {
   phone: string;
   email: string;
   consent: boolean;
+  attribution: LeadFormAttribution;
 };
 
+/** Same `attribution` shape as {@link WebsiteFormLeadPayload} for the Head Spa n8n webhook. */
 export type HeadSpaFormLeadPayload = {
   source: string;
   form: "head_spa_detox";
@@ -23,6 +35,7 @@ export type HeadSpaFormLeadPayload = {
   consent: boolean;
   providerSlug: string;
   serviceName: string;
+  attribution: LeadFormAttribution;
 };
 
 async function postFormLead(

@@ -6,6 +6,7 @@ import { createRoot } from "react-dom/client";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { LeadAttributionSync } from "@/components/LeadAttributionSync";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MetaPixel } from "@/components/MetaPixel";
@@ -74,6 +75,7 @@ function App() {
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <LeadAttributionSync />
           {consent === null ? <CookieConsentBanner onChoose={handleCookieChoice} /> : null}
           {consent === "all" && analyticsReady ? (
             <>

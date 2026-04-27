@@ -2,6 +2,7 @@ import { BookingFlowPanel } from "@/components/booking/BookingFlowPanel";
 import { BookingIntakePanel, type BookingIntakeValues } from "@/components/booking/BookingIntakePanel";
 import { useBooking } from "@/components/booking/hooks/useBooking";
 import type { ClientInformation } from "@/components/booking/utils/boulevardApi";
+import { getLeadAttributionSnapshot } from "@/lib/leadAttribution";
 import { submitHeadSpaFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { type FormEvent, useCallback, useMemo, useState } from "react";
@@ -88,6 +89,7 @@ export function HeadSpaBookingFlow({ idPrefix = "headspa", anchorId, serviceId, 
     const leadResult = await submitHeadSpaFormLead({
       ...baseLead(),
       step: "contact",
+      attribution: getLeadAttributionSnapshot(),
     });
     if (leadResult.ok === false) {
       setSubmitting(false);
