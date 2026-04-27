@@ -14,7 +14,7 @@ import type { ClientInformation } from "@/components/booking/utils/boulevardApi"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { Clock3 } from "lucide-react";
+import { ArrowRight, Clock3 } from "lucide-react";
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -254,22 +254,31 @@ export default function Booking() {
             </h1>
           </header>
 
-          <div className={cn(CARD_BORDER, "mx-auto w-full max-w-4xl bg-[#F8F7F2] p-4 md:p-6")}>
+          <div className={cn(CARD_BORDER, "mx-auto w-full max-w-7xl bg-[#F8F7F2] p-4 md:p-6")}>
             {shouldShowCatalog ? (
-              <Tabs value={activeCategory} onValueChange={(value) => handlePickCategory(value as BookingCategoryId)}>
-                <TabsList className="h-auto w-full justify-start gap-2 rounded-none border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] p-1">
+              <Tabs
+                value={activeCategory}
+                onValueChange={(value) => handlePickCategory(value as BookingCategoryId)}
+                className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8"
+              >
+                <TabsList className="h-auto w-full shrink-0 flex flex-row flex-wrap justify-start gap-3 rounded-none border border-[rgba(103,92,83,0.12)] bg-[#FAFAF5] p-2 lg:w-[18rem] lg:flex-col lg:flex-nowrap lg:items-stretch lg:gap-4 lg:p-3">
                   {catalog.categories.map((category) => (
                     <TabsTrigger
                       key={category.id}
                       value={category.id}
-                      className="rounded-none px-4 py-2 font-barlow text-xs font-light uppercase tracking-[0.1em] data-[state=active]:bg-charcoal data-[state=active]:text-[#FAFAF5]"
+                      className="group inline-flex w-auto max-w-full items-center justify-between gap-2 rounded-none px-4 py-3 font-barlow text-xs font-light uppercase tracking-[0.1em] data-[state=active]:bg-charcoal data-[state=active]:text-[#FAFAF5] lg:min-h-[3.25rem] lg:w-full lg:gap-3 lg:py-4 lg:text-left"
                     >
-                      {category.label}
+                      <span className="min-w-0 text-left leading-snug lg:flex-1">{category.label}</span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0 opacity-55 group-data-[state=active]:opacity-100"
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
                     </TabsTrigger>
                   ))}
                 </TabsList>
 
-                <TabsContent value={activeCategory} className="mt-4 space-y-3">
+                <TabsContent value={activeCategory} className="mt-0 min-w-0 flex-1 space-y-3">
                   {tabServices.map((service) => (
                     <button
                       key={service.slug}
@@ -278,7 +287,7 @@ export default function Booking() {
                       className={cn(
                         CARD_BORDER,
                         "w-full bg-[#FAFAF5] px-4 py-4 text-left transition-colors hover:bg-[#F1EFE8] md:px-5",
-                        selectedService?.slug === service.slug && "border-charcoal/40",
+                        "lg:border-l-1",
                       )}
                     >
                       <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-start">
