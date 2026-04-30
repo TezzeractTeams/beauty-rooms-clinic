@@ -83,8 +83,9 @@ export default function Navbar() {
 
   const isSpecialistsActive = location.pathname === "/experts";
 
-  /** Nano brows launch funnel uses its own booking CTAs; hide global header Book Now here only. */
-  const hideHeaderBookNow = location.pathname === "/nano-brows-launch-offer";
+  /** Campaign funnels use on-page booking; hide global header Book Now on these routes only. */
+  const hideHeaderBookNow =
+    location.pathname === "/nano-brows-launch-offer" || location.pathname === "/mothers-day-head-spa";
 
   return (
     <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
