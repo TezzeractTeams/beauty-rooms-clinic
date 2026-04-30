@@ -16,7 +16,7 @@ export default function Index() {
       <WhySection />
       <ServicesSection />
       
-      <ConsultationCtaSection />
+      <ConsultationCtaSection ctaTo="/booking" />
     </Layout>
   );
 }

@@ -1,5 +1,5 @@
 import { getCategoryBottomCta } from "./services-from-json";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
+import { Link } from "react-router-dom";
 
 interface ServiceCategoryBottomCtaProps {
   categoryId: string;
@@ -25,13 +25,12 @@ export function ServiceCategoryBottomCta({ categoryId }: ServiceCategoryBottomCt
       <p className="font-barlow font-extralight text-base md:text-xl text-white/80 max-w-2xl mb-10 md:mb-12 leading-relaxed">
         {copy.subtext}
       </p>
-      <button
-        type="button"
-        onClick={() => openMainMenuBoulevardBooking()}
+      <Link
+        to="/booking"
         className="font-barlow font-light text-[11px] md:text-xs tracking-[0.14em] uppercase bg-white text-charcoal px-10 py-4 md:px-12 md:py-5 rounded-none inline-block transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         {copy.buttonLabel}
-      </button>
+      </Link>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import { ClockIcon } from "@/components/home/icons";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
+import { Link } from "react-router-dom";
 import type { FeaturedServiceCardData } from "./service-category-detail-sample";
 
 interface ServiceFeaturedCardProps {
@@ -40,13 +40,12 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
             </div>
           ) : null}
           <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
-            <button
-              type="button"
-              onClick={() => openMainMenuBoulevardBooking()}
+            <Link
+              to="/booking"
               className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Book now
-            </button>
+            </Link>
           </div>
         </div>
 

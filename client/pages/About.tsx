@@ -25,6 +25,7 @@ export default function About() {
         titleLines={["Ready to enhance your", "natural beauty?"]}
         subtext={null}
         ctaLabel="Book Your Appointment"
+        ctaTo="/booking"
       />
     </Layout>
   );
