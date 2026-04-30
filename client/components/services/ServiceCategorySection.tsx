@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { BenefitCard } from "@/components/home/BenefitCard";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { ArrowRightIcon, BadgeCheckIcon, ClockIcon, SparkleIcon } from "@/components/home/icons";
 import type { ServiceCategory } from "./service-types";
 
 const benefitIcons = [<SparkleIcon key="s" />, <BadgeCheckIcon key="b" />, <ClockIcon key="c" />] as const;
+const CATEGORY_BOOKING_LINKS: Record<string, string> = {
+  lash: "/booking?category=eyelash-services--3",
+  "head-spa": "/booking?category=headspa-services--0",
+  pmu: "/booking?category=pmu-services--4",
+};
 
 interface ServiceCategorySectionProps {
   category: ServiceCategory;
@@ -27,6 +31,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
 
   const splitImageSrc = listingImageSrc ?? imageSrc;
   const splitImageAlt = listingImageAlt ?? imageAlt;
+  const bookingTo = CATEGORY_BOOKING_LINKS[category.id] ?? "/booking";
 
   return (
     <section
@@ -84,14 +89,13 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         </div>
 
         <div>
-          <button
-            type="button"
-            onClick={() => openMainMenuBoulevardBooking()}
+          <Link
+            to={bookingTo}
             className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span>{ctaLabel}</span>
             <ArrowRightIcon />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

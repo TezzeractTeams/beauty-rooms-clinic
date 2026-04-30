@@ -1,5 +1,5 @@
 import { Globe, Star } from "lucide-react";
-import { openMainMenuBoulevardBooking, openBoulevardBookingWidget } from "@/lib/boulevardBooking";
+import { Link } from "react-router-dom";
 import type { Specialist } from "./specialists-data";
 
 function CertificationIcon() {
@@ -98,23 +98,22 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
         </div> */}
 
         <div className="mt-auto flex items-stretch gap-3 pt-2">
-          <button
-            type="button"
-            disabled={bookingDisabled}
-            onClick={() => {
-              if (bookingDisabled) return;
-              if (bookingUrlParams && !openBoulevardBookingWidget({ ...bookingUrlParams })) {
-                openMainMenuBoulevardBooking();
-                return;
-              }
-              if (!bookingUrlParams) {
-                openMainMenuBoulevardBooking();
-              }
-            }}
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:bg-primary/50 disabled:hover:bg-primary/50"
-          >
-            {bookLabel}
-          </button>
+          {bookingDisabled ? (
+            <button
+              type="button"
+              disabled
+              className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors disabled:cursor-not-allowed disabled:bg-primary/50"
+            >
+              {bookLabel}
+            </button>
+          ) : (
+            <Link
+              to="/booking"
+              className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {bookLabel}
+            </Link>
+          )}
           {websiteUrl ? (
             <a
               href={websiteUrl}

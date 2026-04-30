@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@/components/home/icons";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 
 /** Beveled frame: top-left and bottom-right corners cut at 45° */
 const imageClipPath =
@@ -33,13 +32,12 @@ export function SpecialistsHero() {
               <span>Explore our services</span>
               <ArrowRightIcon />
             </Link>
-            <button
-              type="button"
-              onClick={() => openMainMenuBoulevardBooking()}
+            <Link
+              to="/booking"
               className="font-barlow font-light text-xs tracking-[0.1em] uppercase text-[#6B635B] underline decoration-[#6B635B] underline-offset-[5px] transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-charcoal"
             >
               Book your appointment today
-            </button>
+            </Link>
           </div>
         </div>
       </div>
