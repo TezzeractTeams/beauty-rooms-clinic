@@ -25,7 +25,7 @@ export type WebsiteFormLeadPayload = {
 /** Same `attribution` shape as {@link WebsiteFormLeadPayload} for the Head Spa n8n webhook. */
 export type HeadSpaFormLeadPayload = {
   source: string;
-  form: "head_spa_detox";
+  form: "head_spa_detox" | "mothers_day_reset";
   step: "contact";
   pageUri: string;
   firstName: string;

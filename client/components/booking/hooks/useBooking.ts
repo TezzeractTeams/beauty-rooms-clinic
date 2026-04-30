@@ -235,7 +235,14 @@ export function useBooking(
     } catch (err) {
       dispatch({ type: "SET_ERROR", payload: (err as Error).message });
     }
-  }, [clientInformation, preferredProviderName, state.cartId, state.selectedTime]);
+  }, [
+    clientInformation,
+    preferredProviderName,
+    serviceName,
+    state.cartId,
+    state.selectedTime,
+    state.serviceTotalUsd,
+  ]);
 
   const submitPayment = useCallback(
     async (card: CardData) => {

@@ -33,6 +33,7 @@ import LipBlushSpecialLaunchOffer from "./pages/LipBlushSpecialLaunchOffer";
 import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
 import Academy from "./pages/Academy";
 import HeadSpaDetoxExperience from "./pages/HeadSpaDetoxExperience";
+import MothersDayHeadSpa from "./pages/MothersDayHeadSpa";
 import LashesLaunchOffer from "./pages/LashesLaunchOffer";
 import Booking from "./pages/Booking";
 
@@ -109,6 +110,7 @@ function App() {
             <Route path="/lashes-launch-offer" element={<LashesLaunchOffer />} />
             <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
             <Route path="/Head-Spa-Detox-Experience" element={<HeadSpaDetoxExperience />} />
+            <Route path="/mothers-day-head-spa" element={<MothersDayHeadSpa />} />
             <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
             <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
             <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />
