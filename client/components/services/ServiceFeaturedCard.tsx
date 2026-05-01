@@ -1,15 +1,30 @@
 import { ClockIcon } from "@/components/home/icons";
 import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import type { FeaturedServiceCardData } from "./service-category-detail-sample";
+import { Link } from "react-router-dom";
+
+function formatUsd(value: number) {
+  return `$${value.toFixed(0)}`;
+}
 
 interface ServiceFeaturedCardProps {
   service: FeaturedServiceCardData;
   /** Unique id for heading + aria-labelledby when multiple cards render on one page */
   headingId?: string;
+  /** When set, Book now navigates here instead of opening the main menu embed. */
+  bookingTo?: string;
 }
 
-export function ServiceFeaturedCard({ service, headingId = "featured-service-heading" }: ServiceFeaturedCardProps) {
-  const { name, description, duration, imageSrc, imageAlt } = service;
+const bookButtonClassName =
+  "inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
+export function ServiceFeaturedCard({
+  service,
+  headingId = "featured-service-heading",
+  bookingTo,
+}: ServiceFeaturedCardProps) {
+  const { name, description, duration, imageSrc, imageAlt, priceDiscountedUsd, priceActualUsd } = service;
+  const descriptionText = description?.trim() ?? "";
 
   return (
     <section className="w-full bg-[#FAF9F6]" aria-labelledby={headingId}>
@@ -21,9 +36,19 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
           >
             {name}
           </h2>
-          <p className="font-barlow font-light text-sm md:text-[15px] leading-[1.6] text-[#757575] mb-4 max-w-[540px]">
-            {description}
-          </p>
+          {descriptionText ? (
+            <p className="font-barlow font-light text-sm md:text-[15px] leading-[1.6] text-[#757575] mb-4 max-w-[540px]">
+              {descriptionText}
+            </p>
+          ) : null}
+          {typeof priceDiscountedUsd === "number" && priceDiscountedUsd >= 0 ? (
+            <p className="font-barlow font-light text-base text-charcoal mb-4">
+              {formatUsd(priceDiscountedUsd)}
+              {typeof priceActualUsd === "number" && priceActualUsd > priceDiscountedUsd + 0.005 ? (
+                <span className="ml-2 text-sm text-charcoal/45 line-through">{formatUsd(priceActualUsd)}</span>
+              ) : null}
+            </p>
+          ) : null}
           {duration ? (
             <div className="flex items-center gap-2.5 mb-4">
               <span
@@ -40,13 +65,19 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
             </div>
           ) : null}
           <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
-            <button
-              type="button"
-              onClick={() => openMainMenuBoulevardBooking()}
-              className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-            >
-              Book now
-            </button>
+            {bookingTo ? (
+              <Link to={bookingTo} className={bookButtonClassName}>
+                Book now
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => openMainMenuBoulevardBooking()}
+                className={bookButtonClassName}
+              >
+                Book now
+              </button>
+            )}
           </div>
         </div>
 

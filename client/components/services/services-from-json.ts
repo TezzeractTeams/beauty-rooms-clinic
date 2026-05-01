@@ -11,6 +11,12 @@ export interface CategoryDetailFromJson {
   services: FeaturedServiceCardData[];
 }
 
+/** Hero + intro for a category detail page (no dependency on JSON service rows). */
+export interface CategoryPageCopy {
+  heroBody: string;
+  introSampleDescription: string;
+}
+
 const IMG_LASHES = "/images/home-lashes.jpg";
 const IMG_HEAD_SPA = "/images/Head%20SPA.JPG";
 const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makup.jpg";
@@ -86,6 +92,15 @@ const CATEGORY_INTRO_SAMPLE: Record<string, string> = {
     "Choose hydration, detox, growth-focused, or relaxation sessions—and add mini facials, massage, or styling when you want a little extra.",
   pmu: "At Beauty Rooms Clinic, we don't believe in 'trend brows.' We believe in timeless proportions. Your session is a collaborative design process focused on restoring what time or over-plucking has taken away.",
 };
+
+export function getCategoryPageCopy(categoryId: string): CategoryPageCopy | undefined {
+  const heroBody = CATEGORY_HERO_BODY[categoryId];
+  if (!CATEGORY_UI[categoryId] || !heroBody) return undefined;
+  return {
+    heroBody,
+    introSampleDescription: CATEGORY_INTRO_SAMPLE[categoryId] ?? "",
+  };
+}
 
 const BOTTOM_CTA_SUBTEXT =
   "Join our community of confident clients in Sarasota & Lakewood Ranch. Schedule your consultation today.";
@@ -272,14 +287,12 @@ export function buildServiceCategories(): ServiceCategory[] {
 }
 
 export function getCategoryDetail(categoryId: string): CategoryDetailFromJson | undefined {
+  const page = getCategoryPageCopy(categoryId);
+  if (!page) return undefined;
   const ui = CATEGORY_UI[categoryId];
-  const heroBody = CATEGORY_HERO_BODY[categoryId];
-  if (!ui || !heroBody) return undefined;
   const rows = normalizeRows().filter((r) => r.slug === categoryId);
-  if (rows.length === 0) return undefined;
   return {
-    heroBody,
-    introSampleDescription: CATEGORY_INTRO_SAMPLE[categoryId] ?? "",
+    ...page,
     services: rows.map((r) => {
       const base = {
         name: r.name,
