@@ -22,7 +22,7 @@ import NotFound from "./pages/NotFound";
 import ServiceCategoryDetail from "./pages/ServiceCategoryDetail";
 import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
-import Specialists from "./pages/Specialists";
+import Professionals from "./pages/Professionals";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
@@ -94,7 +94,8 @@ function App() {
             <Route path="/services/esthetician" element={<Placeholder title="Esthetician Services" />} />
             <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/experts" element={<Specialists />} />
+            <Route path="/professionals" element={<Professionals />} />
+            <Route path="/experts" element={<Navigate to="/professionals" replace />} />
             <Route
               path="/bookings"
               element={<Navigate to={{ pathname: "/", hash: "book-now" }} replace />}

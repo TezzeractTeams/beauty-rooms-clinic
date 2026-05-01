@@ -3,7 +3,7 @@ import { ConsultationCtaSection } from "@/components/home/ConsultationCtaSection
 import {
   AboutApproachSection,
   AboutExperienceSection,
-  AboutExpertsSection,
+  AboutProfessionalsSection,
   AboutHeroSection,
   AboutOfferSection,
   AboutWhoSection,
@@ -17,7 +17,7 @@ export default function About() {
       <AboutWhoSection />
      
       <AboutOfferSection />
-      <AboutExpertsSection />
+      <AboutProfessionalsSection />
       <AboutExperienceSection />
       <AboutWhyChooseSection />
       <ConsultationCtaSection

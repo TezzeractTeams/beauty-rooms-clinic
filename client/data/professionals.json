@@ -1,0 +1,30 @@
+{
+  "professionals": [
+    {
+      "id": "Erica",
+      "name": "Erica Shea",
+      "title": "Permanent Makeup Expert",
+      "rating": 5,
+      "specialties": ["pmu"],
+      "tags": ["Microblading", "Permanent Makeup (PMU)", "Micro Needling"],
+      "description": "Erica is a master of permanent artistry, and paramedical micropigmentation. She blends meticulous bespoke mapping to deliver sophisticated, natural-looking results. As the founder of her own PMU Academy, Erica is dedicated to elevating industry standards through both elite clinical practice and professional mentorship.",
+      "certification": "Master lash artist certified",
+      "imageSrc": "images/Erica.JPG",
+      "imageAlt": "Portrait of Sarah, lash specialist",
+      "bookingCategory": "pmu-services--4"
+    },
+    {
+      "id": "Kelsey",
+      "name": "Kelsey",
+      "title": "Hairdresser and blonding specialist",
+      "rating": 5,
+      "specialties": ["head-spa"],
+      "tags": ["Head Spa", "Blonding", "Scalp health", "Clense", "Hydrate"],
+      "description": "Kelsey is a qualified hairdresser and blonding specialist, as well as a certified Head Spa expert. She focuses on scalp health as the foundation for beautiful hair, delivering customized treatments that cleanse, hydrate, and restore-while providing a deeply relaxing experience.",
+      "certification": "Certified Head Spa specialist",
+      "imageSrc": "images/Kelsey_Bio_Pic.png",
+      "imageAlt": "Portrait of Kelsey, head spa specialist",
+      "bookingCategory": "headspa-services--0"
+    }
+  ]
+}
