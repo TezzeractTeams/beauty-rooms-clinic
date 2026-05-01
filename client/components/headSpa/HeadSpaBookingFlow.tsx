@@ -27,6 +27,8 @@ type Props = {
   leadForm?: HeadSpaFormLeadPayload["form"];
   intakeTitle?: string;
   intakeSubtitle?: string;
+  /** Boulevard `itemDiscountCode` on the cart line (e.g. Mother’s Day MDAY20). */
+  boulevardDiscountCode?: string | null;
 };
 
 const tabListClass =
@@ -40,6 +42,7 @@ type ServicePanelProps = {
   leadForm: HeadSpaFormLeadPayload["form"];
   intakeTitle: string;
   intakeSubtitle: string;
+  boulevardDiscountCode: string | null;
   intakeValues: BookingIntakeValues;
   onIntakeChange: (values: BookingIntakeValues) => void;
   view: View;
@@ -55,6 +58,7 @@ function HeadSpaBookingServicePanel({
   leadForm,
   intakeTitle,
   intakeSubtitle,
+  boulevardDiscountCode,
   intakeValues,
   onIntakeChange,
   view,
@@ -73,7 +77,9 @@ function HeadSpaBookingServicePanel({
     [intakeValues],
   );
 
-  const { initialize, ...bookingPanel } = useBooking(service.id, service.name, bookingClientInfo);
+  const { initialize, ...bookingPanel } = useBooking(service.id, service.name, bookingClientInfo, {
+    boulevardDiscountCode,
+  });
 
   const baseLead = useCallback(
     () => ({
@@ -180,6 +186,7 @@ export function HeadSpaBookingFlow({
   leadForm = "head_spa_detox",
   intakeTitle = "Start Booking Your Head Spa Detox Experience",
   intakeSubtitle = "Add your details to view live date and time availability.",
+  boulevardDiscountCode = null,
 }: Props) {
   const [selectedServiceId, setSelectedServiceId] = useState(() => services[0].id);
   const selectedTabRef = useRef(selectedServiceId);
@@ -210,12 +217,15 @@ export function HeadSpaBookingFlow({
 
   const multi = services.length > 1;
 
+  const resolvedOfferCode = boulevardDiscountCode?.trim() || null;
+
   const panelProps = (s: HeadSpaBookingServiceOption) => ({
     idPrefix,
     service: s,
     leadForm,
     intakeTitle: multi ? `Book your ${s.name}` : intakeTitle,
     intakeSubtitle,
+    boulevardDiscountCode: resolvedOfferCode,
     intakeValues,
     onIntakeChange: setIntakeValues,
     view,

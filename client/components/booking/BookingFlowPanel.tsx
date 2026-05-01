@@ -135,6 +135,7 @@ export function BookingFlowPanel({
             error={state.error}
             serviceName={serviceName}
             serviceTotalUsd={state.serviceTotalUsd}
+            pricingBreakdown={state.pricingBreakdown}
             onSelectDate={selectDate}
             onSelectTime={selectTime}
             onConfirm={confirmDateTime}
@@ -147,6 +148,7 @@ export function BookingFlowPanel({
             error={state.error}
             serviceName={serviceName}
             serviceTotalUsd={state.serviceTotalUsd}
+            pricingBreakdown={state.pricingBreakdown}
             specialistName={state.specialistName}
             onSubmit={submitPayment}
           />
@@ -157,6 +159,7 @@ export function BookingFlowPanel({
             appointments={state.appointments}
             serviceName={serviceName}
             serviceTotalUsd={state.serviceTotalUsd}
+            pricingBreakdown={state.pricingBreakdown}
             specialistName={state.specialistName}
             onClose={
               onConfirmedClose ??

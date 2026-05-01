@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { CreditCard, Loader2, Lock } from "lucide-react";
 import { type FormEvent, useState } from "react";
 import { BookingOrderSummary } from "../BookingOrderSummary";
+import type { CartPricingBreakdown } from "../utils/boulevardApi";
 import { CardData } from "../utils/tokenize";
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
   error: string | null;
   serviceName: string;
   serviceTotalUsd: number | null;
+  pricingBreakdown?: CartPricingBreakdown | null;
   specialistName: string | null;
   onSubmit: (card: CardData) => void;
 }
@@ -18,6 +20,7 @@ export function PaymentStep({
   error,
   serviceName,
   serviceTotalUsd,
+  pricingBreakdown,
   specialistName,
   onSubmit,
 }: Props) {
@@ -70,6 +73,7 @@ export function PaymentStep({
       <BookingOrderSummary
         serviceName={serviceName}
         serviceTotalUsd={serviceTotalUsd}
+        pricingBreakdown={pricingBreakdown}
         providerLabel={providerLabel}
         emphasizeBookingCharge
       />

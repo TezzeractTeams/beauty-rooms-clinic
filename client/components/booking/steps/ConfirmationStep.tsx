@@ -1,12 +1,13 @@
 import { CalendarCheck, Clock, MapPin, Sparkles, User, UserRound } from "lucide-react";
 import { BookingOrderSummary } from "../BookingOrderSummary";
-import { AppointmentDetails } from "../utils/boulevardApi";
+import { AppointmentDetails, type CartPricingBreakdown } from "../utils/boulevardApi";
 import { formatAppointmentInSalon } from "../utils/salonTimezone";
 
 interface Props {
   appointments: AppointmentDetails[];
   serviceName: string;
   serviceTotalUsd: number | null;
+  pricingBreakdown?: CartPricingBreakdown | null;
   specialistName: string | null;
   onClose: () => void;
 }
@@ -22,6 +23,7 @@ export function ConfirmationStep({
   appointments,
   serviceName,
   serviceTotalUsd,
+  pricingBreakdown,
   specialistName,
   onClose,
 }: Props) {
@@ -49,6 +51,7 @@ export function ConfirmationStep({
         className="w-full text-left"
         serviceName={appt?.appointmentServices?.[0]?.service?.name ?? serviceName}
         serviceTotalUsd={serviceTotalUsd}
+        pricingBreakdown={pricingBreakdown}
         providerLabel={providerLabel}
       />
 

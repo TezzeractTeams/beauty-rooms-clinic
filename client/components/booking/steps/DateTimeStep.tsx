@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { BookingOrderSummary } from "../BookingOrderSummary";
 import { isComplimentaryCartTotal } from "../bookingPricing";
-import { BookableDate, BookableTime } from "../utils/boulevardApi";
+import { BookableDate, BookableTime, type CartPricingBreakdown } from "../utils/boulevardApi";
 import {
   formatSlotTime,
   getSalonTzShortLabel,
@@ -22,6 +22,7 @@ interface Props {
   error: string | null;
   serviceName: string;
   serviceTotalUsd: number | null;
+  pricingBreakdown?: CartPricingBreakdown | null;
   onSelectDate: (date: string) => void;
   onSelectTime: (time: BookableTime) => void;
   onConfirm: () => void;
@@ -55,6 +56,7 @@ export function DateTimeStep({
   error,
   serviceName,
   serviceTotalUsd,
+  pricingBreakdown,
   onSelectDate,
   onSelectTime,
   onConfirm,
@@ -119,6 +121,7 @@ export function DateTimeStep({
         className="mb-1"
         serviceName={serviceName}
         serviceTotalUsd={serviceTotalUsd}
+        pricingBreakdown={pricingBreakdown}
         providerLabel="First available"
       />
 
