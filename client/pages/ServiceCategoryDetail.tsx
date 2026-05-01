@@ -9,14 +9,9 @@ import {
   getCategoryDetail,
   serviceCategories,
 } from "@/components/services";
+import { bookingPathForCategory } from "@/components/services/categoryBookingLinks";
 import { Fragment } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-
-const HERO_BOOKING_LINKS: Record<string, string> = {
-  lash: "/booking?category=eyelash-services--3",
-  "head-spa": "/booking?category=headspa-services--0",
-  pmu: "/booking?category=pmu-services--4",
-};
 
 export default function ServiceCategoryDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -27,7 +22,7 @@ export default function ServiceCategoryDetail() {
     return <Navigate to="/services" replace />;
   }
 
-  const heroBookingTo = HERO_BOOKING_LINKS[category.id] ?? "/booking";
+  const heroBookingTo = bookingPathForCategory(category.id);
 
   return (
     <Layout>
@@ -64,6 +59,7 @@ export default function ServiceCategoryDetail() {
           <ServiceFeaturedCard
             headingId={`featured-${category.id}-${index}`}
             service={service}
+            bookingTo={heroBookingTo}
           />
         </Fragment>
       ))}

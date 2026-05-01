@@ -5,21 +5,21 @@ import { ArrowRightIcon } from "@/components/home/icons";
 const imageClipPath =
   "polygon(11% 0%, 100% 0%, 100% 89%, 89% 100%, 0% 100%, 0% 11%)";
 
-export function SpecialistsHero() {
+export function ProfessionalsHero() {
   return (
     <section
       className="flex w-full min-h-[calc(100dvh-85px)] flex-col bg-[#F9F8F3] md:h-[calc(100dvh-85px)] md:flex-row md:items-stretch"
-      aria-labelledby="specialists-page-heading"
+      aria-labelledby="professionals-page-heading"
     >
       <div className="flex w-full flex-1 flex-col justify-center px-6 py-14 md:h-full md:w-1/2 md:flex-none md:px-10 md:py-10 lg:px-[90px]">
         <div className="mx-auto w-full max-w-xl md:mx-0">
           <h1
-            id="specialists-page-heading"
+            id="professionals-page-heading"
             className="font-barlow font-extralight text-[clamp(36px,7vw,76px)] leading-[1.05] tracking-[-0.03em] text-charcoal mb-6 md:mb-8 md:font-extralight"
           >
             Meet our
             <br />
-            Specialists
+            Professionals
           </h1>
           <p className="font-barlow font-light text-base md:text-lg leading-[1.65] text-charcoal/75 mb-10 md:mb-12 max-w-[540px]">
             Our team of certified beauty professionals combine technical expertise with an eye for natural aesthetics.

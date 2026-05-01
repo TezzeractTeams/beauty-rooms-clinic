@@ -1,4 +1,5 @@
 import { getCategoryBottomCta } from "./services-from-json";
+import { bookingPathForCategory } from "./categoryBookingLinks";
 import { Link } from "react-router-dom";
 
 interface ServiceCategoryBottomCtaProps {
@@ -10,6 +11,7 @@ export function ServiceCategoryBottomCta({ categoryId }: ServiceCategoryBottomCt
   if (!copy) return null;
 
   const headingId = `category-bottom-cta-${categoryId}`;
+  const bookingTo = bookingPathForCategory(categoryId);
 
   return (
     <section
@@ -26,7 +28,7 @@ export function ServiceCategoryBottomCta({ categoryId }: ServiceCategoryBottomCt
         {copy.subtext}
       </p>
       <Link
-        to="/booking"
+        to={bookingTo}
         className="font-barlow font-light text-[11px] md:text-xs tracking-[0.14em] uppercase bg-white text-charcoal px-10 py-4 md:px-12 md:py-5 rounded-none inline-block transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         {copy.buttonLabel}

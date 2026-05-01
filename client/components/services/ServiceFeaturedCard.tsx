@@ -6,9 +6,15 @@ interface ServiceFeaturedCardProps {
   service: FeaturedServiceCardData;
   /** Unique id for heading + aria-labelledby when multiple cards render on one page */
   headingId?: string;
+  /** `/booking` path including optional `?category=` for category detail pages */
+  bookingTo?: string;
 }
 
-export function ServiceFeaturedCard({ service, headingId = "featured-service-heading" }: ServiceFeaturedCardProps) {
+export function ServiceFeaturedCard({
+  service,
+  headingId = "featured-service-heading",
+  bookingTo = "/booking",
+}: ServiceFeaturedCardProps) {
   const { name, description, duration, imageSrc, imageAlt } = service;
 
   return (
@@ -41,7 +47,7 @@ export function ServiceFeaturedCard({ service, headingId = "featured-service-hea
           ) : null}
           <div className="border-t border-[rgba(103,92,83,0.18)] pt-4">
             <Link
-              to="/booking"
+              to={bookingTo}
               className="inline-flex items-center justify-center min-w-[160px] px-8 py-3 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.12em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Book now
