@@ -1,7 +1,7 @@
 import { ClockIcon } from "@/components/home/icons";
+import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { Link } from "react-router-dom";
 import type { FeaturedServiceCardData } from "./service-category-detail-sample";
-import { Link } from "react-router-dom";
 
 function formatUsd(value: number) {
   return `$${value.toFixed(0)}`;
