@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { buildBookingDetailsHref, fetchBookingCatalog, type BookingService } from "@/components/booking/utils/bookingCatalogApi";
+import { fetchBookingCatalog, type BookingService } from "@/components/booking/utils/bookingCatalogApi";
 import { ArrowRightIcon } from "@/components/home/icons";
 import {
   LashKnowFaqSection,
@@ -10,12 +10,12 @@ import {
   getCategoryPageCopy,
   serviceCategories,
 } from "@/components/services";
+import { bookingPathForCategory } from "@/components/services/categoryBookingLinks";
 import type { FeaturedServiceCardData } from "@/components/services/service-category-detail-sample";
 import { resolveBookingCategoryForSiteSlug } from "@/components/services/resolveBookingCategoryForSiteSlug";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 
 function bookingServiceToCardData(
   s: BookingService,
@@ -45,6 +45,7 @@ export default function ServiceCategoryDetail() {
   if (!category || !pageCopy) {
     return <Navigate to="/services" replace />;
   }
+  const bookingTo = bookingPathForCategory(category.id);
 
   const resolvedBookingCategory = catalog ? resolveBookingCategoryForSiteSlug(catalog, slug) : null;
   const catalogServices =
@@ -70,7 +71,7 @@ export default function ServiceCategoryDetail() {
       return (
         <div className="mx-auto max-w-[1400px] px-6 py-16 text-center font-barlow text-sm font-light text-charcoal/80 md:px-12 lg:px-[90px]">
           {(error as Error | undefined)?.message ?? "Could not load services right now."}{" "}
-          <Link to="/booking" className="text-charcoal underline underline-offset-4 hover:text-primary">
+          <Link to={bookingTo} className="text-charcoal underline underline-offset-4 hover:text-primary">
             Open the booking page
           </Link>
           .
@@ -81,7 +82,7 @@ export default function ServiceCategoryDetail() {
       return (
         <div className="mx-auto max-w-[1400px] px-6 py-16 text-center font-barlow text-sm font-light text-charcoal/80 md:px-12 lg:px-[90px]">
           These services are not available from the live menu yet.{" "}
-          <Link to="/booking" className="text-charcoal underline underline-offset-4 hover:text-primary">
+          <Link to={bookingTo} className="text-charcoal underline underline-offset-4 hover:text-primary">
             Book online
           </Link>{" "}
           to see all current options.
@@ -94,10 +95,7 @@ export default function ServiceCategoryDetail() {
         <ServiceFeaturedCard
           headingId={`featured-${category.id}-${index}`}
           service={bookingServiceToCardData(service, cardImageSrc, cardImageAltSuffix)}
-          bookingTo={buildBookingDetailsHref({
-            categoryId: resolvedBookingCategory.id,
-            serviceSlug: service.slug,
-          })}
+          bookingTo={bookingTo}
         />
       </Fragment>
     ));
@@ -113,14 +111,13 @@ export default function ServiceCategoryDetail() {
         imageSrc={category.imageSrc}
         imageAlt={category.imageAlt}
         cta={
-          <button
-            type="button"
-            onClick={() => openMainMenuBoulevardBooking()}
+          <Link
+            to={bookingTo}
             className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span>Book appointment</span>
             <ArrowRightIcon />
-          </button>
+          </Link>
         }
       />
       {category.id === "lash" ? <LashKnowFaqSection /> : null}
