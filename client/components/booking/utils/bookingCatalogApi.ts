@@ -37,6 +37,17 @@ export async function fetchBookingCatalog(): Promise<BookingCatalog> {
   return (await response.json()) as BookingCatalog;
 }
 
+/** Deep-link to booking intake for a specific catalog service (matches `Booking` URL state). */
+export function buildBookingDetailsHref(params: { categoryId: string; serviceSlug: string }): string {
+  const q = new URLSearchParams({
+    category: params.categoryId,
+    service: params.serviceSlug,
+    provider: "first-available",
+    stage: "details",
+  });
+  return `/booking?${q.toString()}`;
+}
+
 export function findCategoryById(catalog: BookingCatalog, categoryId: string | null): BookingCategory | null {
   if (!categoryId) return null;
   return catalog.categories.find((category) => category.id === categoryId) ?? null;
