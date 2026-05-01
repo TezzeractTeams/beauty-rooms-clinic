@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BenefitCard } from "@/components/home/BenefitCard";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
 import { ArrowRightIcon, BadgeCheckIcon, ClockIcon, SparkleIcon } from "@/components/home/icons";
+import { bookingPathForCategory } from "./categoryBookingLinks";
 import type { ServiceCategory } from "./service-types";
 
 const benefitIcons = [<SparkleIcon key="s" />, <BadgeCheckIcon key="b" />, <ClockIcon key="c" />] as const;
@@ -27,6 +27,7 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
 
   const splitImageSrc = listingImageSrc ?? imageSrc;
   const splitImageAlt = listingImageAlt ?? imageAlt;
+  const bookingTo = bookingPathForCategory(category.id);
 
   return (
     <section
@@ -84,14 +85,13 @@ export function ServiceCategorySection({ category }: ServiceCategorySectionProps
         </div>
 
         <div>
-          <button
-            type="button"
-            onClick={() => openMainMenuBoulevardBooking()}
+          <Link
+            to={bookingTo}
             className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-barlow font-light text-xs tracking-[0.1em] uppercase hover:bg-primary/90 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <span>{ctaLabel}</span>
             <ArrowRightIcon />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

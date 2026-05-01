@@ -3,7 +3,7 @@ import { ConsultationCtaSection } from "@/components/home/ConsultationCtaSection
 import {
   AboutApproachSection,
   AboutExperienceSection,
-  AboutExpertsSection,
+  AboutProfessionalsSection,
   AboutHeroSection,
   AboutOfferSection,
   AboutWhoSection,
@@ -17,7 +17,7 @@ export default function About() {
       <AboutWhoSection />
      
       <AboutOfferSection />
-      <AboutExpertsSection />
+      <AboutProfessionalsSection />
       <AboutExperienceSection />
       <AboutWhyChooseSection />
       <ConsultationCtaSection
@@ -25,6 +25,7 @@ export default function About() {
         titleLines={["Ready to enhance your", "natural beauty?"]}
         subtext={null}
         ctaLabel="Book Your Appointment"
+        ctaTo="/booking"
       />
     </Layout>
   );

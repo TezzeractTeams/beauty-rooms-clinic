@@ -1,25 +1,25 @@
 import { useMemo, useState } from "react";
 import {
-  SPECIALIST_FILTERS,
-  filterSpecialists,
-  specialists,
-  type SpecialistFilterId,
-} from "./specialists-data";
-import { SpecialistCard } from "./SpecialistCard";
+  PROFESSIONAL_FILTERS,
+  filterProfessionals,
+  professionals,
+  type ProfessionalFilterId,
+} from "./professionals-data";
+import { ProfessionalCard } from "./ProfessionalCard";
 
-export function SpecialistsDirectory() {
-  const [activeFilter, setActiveFilter] = useState<SpecialistFilterId>("all");
+export function ProfessionalsDirectory() {
+  const [activeFilter, setActiveFilter] = useState<ProfessionalFilterId>("all");
 
   const visible = useMemo(
-    () => filterSpecialists(specialists, activeFilter),
+    () => filterProfessionals(professionals, activeFilter),
     [activeFilter],
   );
 
   return (
-    <section className="w-full bg-white" aria-label="Specialists directory">
+    <section className="w-full bg-white" aria-label="Professionals directory">
       <div className="mx-auto max-w-[1400px] px-6 pb-14 pt-10 lg:px-[90px] lg:pb-16 lg:pt-12">
         <div className="mb-10 flex flex-wrap items-center justify-center gap-2 md:mb-12 md:gap-3">
-          {SPECIALIST_FILTERS.map(({ id, label }) => {
+          {PROFESSIONAL_FILTERS.map(({ id, label }) => {
             const isActive = activeFilter === id;
             return (
               <button
@@ -41,13 +41,13 @@ export function SpecialistsDirectory() {
 
         {visible.length === 0 ? (
           <p className="text-center font-barlow text-sm font-light text-muted-foreground">
-            No specialists match this category yet.
+            No professionals match this category yet.
           </p>
         ) : (
           <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-8 lg:grid-cols-3 lg:gap-10">
             {visible.map((s) => (
               <li key={s.id} className="h-full">
-                <SpecialistCard specialist={s} headingId={`specialist-${s.id}-heading`} />
+                <ProfessionalCard professional={s} headingId={`professional-${s.id}-heading`} />
               </li>
             ))}
           </ul>

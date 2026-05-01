@@ -1,46 +1,33 @@
 import { Globe, Star } from "lucide-react";
-import { openMainMenuBoulevardBooking, openBoulevardBookingWidget } from "@/lib/boulevardBooking";
-import type { Specialist } from "./specialists-data";
+import { Link } from "react-router-dom";
+import type { Professional } from "./professionals-data";
 
-function CertificationIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
-      <circle cx="9" cy="9" r="8" stroke="currentColor" strokeWidth="1" className="text-[#B8B4AD]" />
-      <path
-        d="M5.25 9L8 11.75L12.75 7"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-[#8A847C]"
-      />
-    </svg>
-  );
-}
-
-interface SpecialistCardProps {
-  specialist: Specialist;
+interface ProfessionalCardProps {
+  professional: Professional;
   headingId: string;
 }
 
-export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
+export function ProfessionalCard({ professional, headingId }: ProfessionalCardProps) {
   const {
     name,
     title,
     rating,
     tags,
     description,
-    certification,
     imageSrc,
     imageAlt,
     ctaLabel,
     bookingDisabled,
-    bookingUrlParams,
     websiteUrl,
-  } = specialist;
+    bookingCategory,
+  } = professional;
 
   const ratingLabel = rating.toFixed(1);
   const bookLabel = ctaLabel ?? `Book with ${name}`;
+  const bookingTo =
+    bookingCategory != null && bookingCategory !== ""
+      ? { pathname: "/booking", search: `?category=${encodeURIComponent(bookingCategory)}` }
+      : "/booking";
 
   return (
     <article
@@ -90,31 +77,23 @@ export function SpecialistCard({ specialist, headingId }: SpecialistCardProps) {
 
         <p className="font-barlow text-sm font-light leading-[1.65] text-[#6B6560]">{description}</p>
 
-        {/* <div className="flex items-center gap-2 border-t border-[#EFEDEA] pt-4">
-          <CertificationIcon />
-          <p className="font-barlow text-[10px] font-light tracking-[0.12em] uppercase text-[#9A948C]">
-            {certification}
-          </p>
-        </div> */}
-
         <div className="mt-auto flex items-stretch gap-3 pt-2">
-          <button
-            type="button"
-            disabled={bookingDisabled}
-            onClick={() => {
-              if (bookingDisabled) return;
-              if (bookingUrlParams && !openBoulevardBookingWidget({ ...bookingUrlParams })) {
-                openMainMenuBoulevardBooking();
-                return;
-              }
-              if (!bookingUrlParams) {
-                openMainMenuBoulevardBooking();
-              }
-            }}
-            className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:bg-primary/50 disabled:hover:bg-primary/50"
-          >
-            {bookLabel}
-          </button>
+          {bookingDisabled ? (
+            <button
+              type="button"
+              disabled
+              className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors disabled:cursor-not-allowed disabled:bg-primary/50"
+            >
+              {bookLabel}
+            </button>
+          ) : (
+            <Link
+              to={bookingTo}
+              className="inline-flex flex-1 items-center justify-center rounded-lg bg-primary px-4 py-3.5 text-center font-barlow text-xs font-light tracking-[0.1em] uppercase text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              {bookLabel}
+            </Link>
+          )}
           {websiteUrl ? (
             <a
               href={websiteUrl}

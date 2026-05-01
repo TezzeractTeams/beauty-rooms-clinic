@@ -22,7 +22,7 @@ import NotFound from "./pages/NotFound";
 import ServiceCategoryDetail from "./pages/ServiceCategoryDetail";
 import Services from "./pages/Services";
 import WorkWithUs from "./pages/WorkWithUs";
-import Specialists from "./pages/Specialists";
+import Professionals from "./pages/Professionals";
 import ComingSoon from "./pages/ComingSoon";
 import Faq from "./pages/Faq";
 import Privacy from "./pages/Privacy";
@@ -34,6 +34,8 @@ import MicroneedlingSpecial from "./pages/MicroneedlingSpecial";
 import Academy from "./pages/Academy";
 import HeadSpaDetoxExperience from "./pages/HeadSpaDetoxExperience";
 import MothersDayHeadSpa from "./pages/MothersDayHeadSpa";
+import HeadSpaDetoxMothersDay from "./pages/HeadSpaDetoxMothersDay";
+import HydraFacialMothersDayOffer from "./pages/HydraFacialMothersDayOffer";
 import LashesLaunchOffer from "./pages/LashesLaunchOffer";
 import Booking from "./pages/Booking";
 
@@ -94,7 +96,8 @@ function App() {
             <Route path="/services/esthetician" element={<Placeholder title="Esthetician Services" />} />
             <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/experts" element={<Specialists />} />
+            <Route path="/professionals" element={<Professionals />} />
+            <Route path="/experts" element={<Navigate to="/professionals" replace />} />
             <Route
               path="/bookings"
               element={<Navigate to={{ pathname: "/", hash: "book-now" }} replace />}
@@ -111,6 +114,8 @@ function App() {
             <Route path="/nano-brows-launch-offer" element={<NanoBrowsSpecial />} />
             <Route path="/Head-Spa-Detox-Experience" element={<HeadSpaDetoxExperience />} />
             <Route path="/mothers-day-head-spa" element={<MothersDayHeadSpa />} />
+            <Route path="/head-spa-detox-mothers-day" element={<HeadSpaDetoxMothersDay />} />
+            <Route path="/hydra-facial-mothers-day-offer" element={<HydraFacialMothersDayOffer />} />
             <Route path="/nano-brows-special" element={<Navigate to="/nano-brows-launch-offer" replace />} />
             <Route path="/lip-blush-special-launch-offer" element={<LipBlushSpecialLaunchOffer />} />
             <Route path="/microneedling-special" element={<MicroneedlingSpecial />} />

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import { openMainMenuBoulevardBooking } from "@/lib/boulevardBooking";
+import { Link } from "react-router-dom";
 import {
   SITE_ADDRESS_LINE1,
   SITE_ADDRESS_LINE2,
@@ -196,13 +196,12 @@ export default function Contact() {
           <span className="block">or send us a message today</span>
         </h2>
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
-          <button
-            type="button"
-            onClick={() => openMainMenuBoulevardBooking()}
+          <Link
+            to="/booking"
             className="inline-block border border-white bg-transparent px-10 py-4 font-barlow font-light text-[11px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:px-12 md:py-5 md:text-xs"
           >
             Book now
-          </button>
+          </Link>
           <a
             href={`mailto:${SITE_EMAIL}`}
             className="inline-block border border-white/60 bg-transparent px-10 py-4 font-barlow font-light text-[11px] uppercase tracking-[0.12em] text-white/95 transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white md:px-12 md:py-5 md:text-xs"

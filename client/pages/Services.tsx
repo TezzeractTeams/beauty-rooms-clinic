@@ -36,7 +36,7 @@ export default function Services() {
       ))}
 
 
-      <ConsultationCtaSection />
+      <ConsultationCtaSection ctaTo="/booking" />
     </Layout>
   );
 }

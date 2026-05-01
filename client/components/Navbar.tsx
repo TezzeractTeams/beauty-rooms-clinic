@@ -77,15 +77,18 @@ export default function Navbar() {
 
   const isServicesActive = location.pathname === "/services" || location.pathname.startsWith("/services/");
 
-  const isProfessionalsActive = location.pathname === "/work-with-us";
+  const isJoinOurTeamActive = location.pathname === "/work-with-us";
 
   const isAcademyActive = location.pathname === "/academy";
 
-  const isSpecialistsActive = location.pathname === "/experts";
+  const isProfessionalsPageActive = location.pathname === "/professionals";
 
   /** Campaign funnels use on-page booking; hide global header Book Now on these routes only. */
   const hideHeaderBookNow =
-    location.pathname === "/nano-brows-launch-offer" || location.pathname === "/mothers-day-head-spa";
+    location.pathname === "/nano-brows-launch-offer" ||
+    location.pathname === "/mothers-day-head-spa" ||
+    location.pathname === "/head-spa-detox-mothers-day" ||
+    location.pathname === "/hydra-facial-mothers-day-offer";
 
   return (
     <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
@@ -121,9 +124,9 @@ export default function Navbar() {
               </div>
             </div>
             <NavLink
-              to="/experts"
+              to="/professionals"
               label="Professionals"
-              active={isSpecialistsActive}
+              active={isProfessionalsPageActive}
             />
           </nav>
 
@@ -141,7 +144,7 @@ export default function Navbar() {
                 <Link
                   to="/work-with-us"
                   className={`flex items-center gap-1 pb-1 font-barlow font-normal text-[calc(1.125rem-1pt)] tracking-[0.05em] transition-colors ${
-                    isProfessionalsActive
+                    isJoinOurTeamActive
                       ? "text-warm-brown border-b-2 border-warm-brown"
                       : "text-warm-brown/70 hover:text-warm-brown"
                   }`}
@@ -222,9 +225,9 @@ export default function Navbar() {
             </div>
           </div>
           <NavLink
-            to="/experts"
-            label="Specialists"
-            active={isSpecialistsActive}
+            to="/professionals"
+            label="Professionals"
+            active={isProfessionalsPageActive}
             onClick={() => setMobileOpen(false)}
           />
           <NavLink
@@ -238,7 +241,7 @@ export default function Navbar() {
               to="/work-with-us"
               label="Join our team"
               hasDropdown
-              active={isProfessionalsActive}
+              active={isJoinOurTeamActive}
               onClick={() => setMobileOpen(false)}
             />
             <div className="flex flex-col gap-1 border-l border-[rgba(103,92,83,0.2)] pl-4 ml-1">
