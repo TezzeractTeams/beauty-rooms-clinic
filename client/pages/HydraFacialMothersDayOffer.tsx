@@ -12,8 +12,11 @@ const OFFER_SECTION_IMAGE_SRC = "/images/Mother.webp";
 const CTA_BACKGROUND_IMAGE_SRC = "/images/headspa-wide.png";
 
 /** Boulevard catalog ID for the bookable Hydra Facial service. */
-const HYDRA_FACIAL_BOOK_SERVICE_ID = "urn:blvd:Service:563b491d-6e0d-4898-b272-6a9565abde38";
+const HYDRA_FACIAL_BOOK_SERVICE_ID = "urn:blvd:Service:78d6feeb-fd5e-4c07-8485-1695e5c84827";
 const HYDRA_FACIAL_BOOK_SERVICE_DISPLAY_NAME = "Hydra Facial";
+
+/** Mother’s Day offer — Boulevard `addCartSelectedBookableItem` `itemDiscountCode`. */
+const MOTHERS_DAY_BLVD_OFFER_CODE = "MDAY20";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
@@ -101,6 +104,7 @@ export default function HydraFacialMothersDayOffer() {
                   <HeadSpaBookingFlow
                     idPrefix="hydra-md"
                     anchorId="hydra-md-lead-form"
+                    boulevardDiscountCode={MOTHERS_DAY_BLVD_OFFER_CODE}
                     leadForm="hydra_facial_mothers_day"
                     intakeTitle={`Book your ${HYDRA_FACIAL_BOOK_SERVICE_DISPLAY_NAME}`}
                     intakeSubtitle="Share your preferred contact details below to reveal live openings with our skincare team."

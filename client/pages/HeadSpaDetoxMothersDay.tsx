@@ -11,7 +11,11 @@ const HERO_LIFESTYLE_SRC = "/images/mothers-day-head-spa.webp";
 const OFFER_SECTION_IMAGE_SRC = "/images/Mother.webp";
 const CTA_BACKGROUND_IMAGE_SRC = "/images/headspa-wide.png";
 
+const HEAD_SPA_BOOKING_SERVICE_ID = "urn:blvd:Service:98e25cb6-1f79-49c9-bc39-2233e1ba3be3";
 const HEAD_SPA_BOOKING_SERVICE_NAME = "Head Spa Detox Experience";
+
+/** Mother’s Day offer — Boulevard `addCartSelectedBookableItem` `itemDiscountCode`. */
+const MOTHERS_DAY_BLVD_OFFER_CODE = "MDAY20";
 
 const cardBorder = "border border-[rgba(103,92,83,0.12)]";
 const mutedBody = "font-barlow text-base font-light leading-[1.65] text-[rgba(45,41,38,0.78)] md:text-lg";
@@ -98,9 +102,10 @@ export default function HeadSpaDetoxMothersDay() {
                 <div className="mt-8">
                   <HeadSpaBookingFlow
                     anchorId="head-spa-md-detox-lead-form"
+                    boulevardDiscountCode={MOTHERS_DAY_BLVD_OFFER_CODE}
                     services={[
                       {
-                        id: "urn:blvd:Service:ad63b326-e0e2-4d0a-b615-c658f053e7d2",
+                        id: HEAD_SPA_BOOKING_SERVICE_ID,
                         name: HEAD_SPA_BOOKING_SERVICE_NAME,
                       },
                     ]}

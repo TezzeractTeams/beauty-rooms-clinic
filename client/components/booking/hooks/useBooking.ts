@@ -8,14 +8,17 @@ import {
   CartAppointment,
   cartBookableDates,
   cartBookableTimes,
+  cartPricingSnapshotToBreakdown,
   checkoutCart,
   ClientInformation,
   createCart,
   getBookingLocationId,
-  getCartBookableLineTotalUsd,
+  getCartBookablePricingSnapshot,
   getCartSpecialistDisplayName,
   reserveCartBookableItems,
+  tryAddCartOfferCode,
   updateCart,
+  type CartPricingBreakdown,
 } from "../utils/boulevardApi";
 import { isComplimentaryCartTotal } from "../bookingPricing";
 import { SALON_TIMEZONE, salonTodayYmd } from "../utils/salonTimezone";
@@ -35,6 +38,8 @@ interface BookingState {
   specialistName: string | null;
   /** Service line total in USD from cart `lineTotal` (Money cents) after item is added. */
   serviceTotalUsd: number | null;
+  /** Offer breakdown when booking with `boulevardDiscountCode` (from Boulevard cart line fields). */
+  pricingBreakdown: CartPricingBreakdown | null;
   loading: boolean;
   error: string | null;
 }
@@ -42,6 +47,8 @@ interface BookingState {
 interface UseBookingOptions {
   preferredProviderName?: string | null;
   preferredProviderSlug?: string | null;
+  /** Passed to Boulevard: `itemDiscountCode` on the line plus `addCartOffer` (cart-level Offers often use the latter only). */
+  boulevardDiscountCode?: string | null;
 }
 
 type BookingAction =
@@ -56,6 +63,7 @@ type BookingAction =
   | { type: "CHECKOUT_DONE"; payload: { appointments: AppointmentDetails[] } }
   | { type: "SPECIALIST_SET"; payload: string | null }
   | { type: "SERVICE_TOTAL_SET"; payload: number | null }
+  | { type: "PRICING_BREAKDOWN_SET"; payload: CartPricingBreakdown | null }
   | { type: "RESET" };
 
 const initialState: BookingState = {
@@ -68,6 +76,7 @@ const initialState: BookingState = {
   appointments: [],
   specialistName: null,
   serviceTotalUsd: null,
+  pricingBreakdown: null,
   loading: false,
   error: null,
 };
@@ -96,6 +105,8 @@ function reducer(state: BookingState, action: BookingAction): BookingState {
       return { ...state, specialistName: action.payload };
     case "SERVICE_TOTAL_SET":
       return { ...state, serviceTotalUsd: action.payload };
+    case "PRICING_BREAKDOWN_SET":
+      return { ...state, pricingBreakdown: action.payload };
     case "RESET":
       return initialState;
     default:
@@ -142,6 +153,7 @@ export function useBooking(
   const [state, dispatch] = useReducer(reducer, initialState);
   const preferredProviderName = options?.preferredProviderName?.trim() || null;
   const preferredProviderSlug = options?.preferredProviderSlug?.trim() || null;
+  const boulevardDiscountCode = options?.boulevardDiscountCode?.trim() || null;
 
   const applyProviderAvailability = useCallback(
     (times: BookableTime[]): BookableTime[] => {
@@ -160,15 +172,28 @@ export function useBooking(
       const locationId = await getBookingLocationId();
       const cartId = await createCart(locationId);
       dispatch({ type: "CART_CREATED", payload: { cartId } });
-      await addCartSelectedBookableItem(cartId, serviceId);
+      await addCartSelectedBookableItem(
+        cartId,
+        serviceId,
+        boulevardDiscountCode ? { discountCode: boulevardDiscountCode } : undefined,
+      );
+      if (boulevardDiscountCode) {
+        await tryAddCartOfferCode(cartId, boulevardDiscountCode);
+      }
 
       let serviceTotalUsd: number | null = null;
+      let pricingBreakdown: CartPricingBreakdown | null = null;
       try {
-        serviceTotalUsd = await getCartBookableLineTotalUsd(cartId);
+        const snapshot = await getCartBookablePricingSnapshot(cartId);
+        serviceTotalUsd = snapshot.lineTotalUsd;
+        if (boulevardDiscountCode) {
+          pricingBreakdown = cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode);
+        }
       } catch {
         /* cart pricing optional for booking */
       }
       dispatch({ type: "SERVICE_TOTAL_SET", payload: serviceTotalUsd });
+      dispatch({ type: "PRICING_BREAKDOWN_SET", payload: pricingBreakdown });
 
       const { lower, upper } = buildDateRange();
       const dates = await cartBookableDates(cartId, lower, upper, SALON_TIMEZONE);
@@ -191,7 +216,7 @@ export function useBooking(
       dispatch({ type: "SET_ERROR", payload: message });
       return { ok: false, error: message };
     }
-  }, [applyProviderAvailability, serviceId]);
+  }, [applyProviderAvailability, boulevardDiscountCode, serviceId]);
 
   const selectDate = useCallback(
     async (date: string) => {
@@ -220,6 +245,19 @@ export function useBooking(
       const specialistName = preferredProviderName ?? (await getCartSpecialistDisplayName(state.cartId));
       dispatch({ type: "SPECIALIST_SET", payload: specialistName });
       await updateCart(state.cartId, clientInformation);
+
+      try {
+        const snapshot = await getCartBookablePricingSnapshot(state.cartId);
+        dispatch({ type: "SERVICE_TOTAL_SET", payload: snapshot.lineTotalUsd });
+        if (boulevardDiscountCode) {
+          dispatch({
+            type: "PRICING_BREAKDOWN_SET",
+            payload: cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode),
+          });
+        }
+      } catch {
+        /* pricing refresh optional */
+      }
       if (isComplimentaryCartTotal(state.serviceTotalUsd)) {
         const cartAppointments = await checkoutCart(state.cartId);
         const appointments = mapCartAppointmentsToDisplay(cartAppointments, {
@@ -239,6 +277,7 @@ export function useBooking(
     clientInformation,
     preferredProviderName,
     serviceName,
+    boulevardDiscountCode,
     state.cartId,
     state.selectedTime,
     state.serviceTotalUsd,

@@ -120,32 +120,122 @@ export async function createCart(locationId: string): Promise<string> {
 export async function addCartSelectedBookableItem(
   cartId: string,
   itemId: string,
+  opts?: { discountCode?: string },
 ): Promise<void> {
+  const discountCode = opts?.discountCode?.trim() || null;
   await gql<{ addCartSelectedBookableItem: { cart: BlvdCart } }>(
-    `mutation AddItem($cartId: ID!, $itemId: ID!) {
-      addCartSelectedBookableItem(input: { id: $cartId, itemId: $itemId }) {
+    `mutation AddItem($cartId: ID!, $itemId: ID!, $discountCode: String) {
+      addCartSelectedBookableItem(input: { id: $cartId, itemId: $itemId, itemDiscountCode: $discountCode }) {
         cart { id }
       }
     }`,
-    { cartId, itemId },
+    { cartId, itemId, discountCode },
   );
 }
 
-/** `Money` scalar is in cents; sums all bookable line totals on the cart. */
-export async function getCartBookableLineTotalUsd(cartId: string): Promise<number | null> {
+/**
+ * Cart-level offer (`addCartOffer`). Many Boulevard dashboard Offers attach here — unlike `itemDiscountCode`,
+ * invalid codes typically return GraphQL errors (use {@link tryAddCartOfferCode} for a soft attempt).
+ */
+export async function addCartOfferCode(cartId: string, offerCode: string): Promise<void> {
+  const code = offerCode.trim();
+  if (!code) throw new Error("Missing offer code");
+  await gql<{ addCartOffer: { cart: BlvdCart } }>(
+    `mutation AddCartOffer($input: AddCartOfferInput!) {
+      addCartOffer(input: $input) {
+        cart { id }
+      }
+    }`,
+    { input: { id: cartId, offerCode: code } },
+  );
+}
+
+/** Applies a cart-level offer when configured in Boulevard; ignores failures so booking still works. */
+export async function tryAddCartOfferCode(cartId: string, offerCode: string): Promise<boolean> {
+  try {
+    await addCartOfferCode(cartId, offerCode);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/** Built from Boulevard `CartBookableItem`: price before discounts/taxes, discount, final line total (typically incl. taxes). */
+export interface CartPricingBreakdown {
+  itemCostUsd: number;
+  discountUsd: number;
+  discountCode: string;
+  totalUsd: number;
+}
+
+export interface CartBookablePricingSnapshot {
+  itemCostUsd: number | null;
+  discountUsd: number | null;
+  discountCode: string | null;
+  lineTotalUsd: number | null;
+}
+
+/** Shape pricing for checkout UI when an offer code flow is enabled (`discountCode` falls back to attempted code). */
+export function cartPricingSnapshotToBreakdown(
+  snapshot: CartBookablePricingSnapshot,
+  fallbackDiscountLabel: string,
+): CartPricingBreakdown | null {
+  const itemCostUsd = snapshot.itemCostUsd;
+  const totalUsd = snapshot.lineTotalUsd;
+  if (
+    itemCostUsd == null ||
+    totalUsd == null ||
+    !Number.isFinite(itemCostUsd) ||
+    !Number.isFinite(totalUsd)
+  ) {
+    return null;
+  }
+  const discountUsd = snapshot.discountUsd ?? 0;
+  const trimmedFallback = fallbackDiscountLabel.trim();
+  const discountCode =
+    (snapshot.discountCode?.trim() || trimmedFallback || "Offer").trim() || "Offer";
+  return { itemCostUsd, discountUsd, discountCode, totalUsd };
+}
+
+/** `Money` scalars are cents; uses line-level discount when present, else `cart.summary` (cart-wide offers). */
+export async function getCartBookablePricingSnapshot(cartId: string): Promise<CartBookablePricingSnapshot> {
   const data = await gql<{
     cart: {
+      summary?: {
+        subtotal?: number | null;
+        discountAmount?: number | null;
+        total?: number | null;
+      } | null;
+      offers?: Array<{
+        code?: string | null;
+        applied?: boolean | null;
+      } | null> | null;
       selectedItems: Array<{
         __typename?: string;
-        lineTotal?: number;
+        price?: number | null;
+        discountAmount?: number | null;
+        discountCode?: string | null;
+        lineTotal?: number | null;
       } | null> | null;
     } | null;
   }>(
-    `query CartLineTotals($cartId: ID!) {
+    `query CartPricing($cartId: ID!) {
       cart(id: $cartId) {
+        summary {
+          subtotal
+          discountAmount
+          total
+        }
+        offers {
+          code
+          applied
+        }
         selectedItems {
           __typename
           ... on CartBookableItem {
+            price
+            discountAmount
+            discountCode
             lineTotal
           }
         }
@@ -154,16 +244,73 @@ export async function getCartBookableLineTotalUsd(cartId: string): Promise<numbe
     { cartId },
   );
 
-  let cents = 0;
-  let found = false;
+  let priceCents = 0;
+  let discountCents = 0;
+  let lineCents = 0;
+  let priceFound = false;
+  let lineFound = false;
+  let itemDiscountCode: string | null = null;
+
   for (const item of data.cart?.selectedItems ?? []) {
-    if (item?.lineTotal != null && typeof item.lineTotal === "number") {
-      cents += item.lineTotal;
-      found = true;
+    if (!item || item.__typename !== "CartBookableItem") continue;
+    if (typeof item.price === "number") {
+      priceCents += item.price;
+      priceFound = true;
     }
+    if (typeof item.discountAmount === "number") {
+      discountCents += item.discountAmount;
+    }
+    if (typeof item.lineTotal === "number") {
+      lineCents += item.lineTotal;
+      lineFound = true;
+    }
+    const dc = item.discountCode?.trim();
+    if (dc && !itemDiscountCode) itemDiscountCode = dc;
   }
-  if (!found) return null;
-  return cents / 100;
+
+  const summary = data.cart?.summary;
+  const summarySubtotal = summary?.subtotal;
+  const summaryDiscount = summary?.discountAmount;
+  const summaryTotal = summary?.total;
+  const summaryDiscountCents = typeof summaryDiscount === "number" ? summaryDiscount : 0;
+
+  let offerCartCode: string | null = null;
+  for (const o of data.cart?.offers ?? []) {
+    if (!o?.applied || !o.code?.trim()) continue;
+    offerCartCode = o.code.trim();
+    break;
+  }
+
+  const cartWideDiscountCode = offerCartCode ?? itemDiscountCode;
+
+  if (discountCents > 0 && priceFound && lineFound) {
+    return {
+      itemCostUsd: priceCents / 100,
+      discountUsd: discountCents / 100,
+      discountCode: itemDiscountCode ?? offerCartCode,
+      lineTotalUsd: lineCents / 100,
+    };
+  }
+
+  if (
+    summaryDiscountCents > 0 &&
+    typeof summarySubtotal === "number" &&
+    typeof summaryTotal === "number"
+  ) {
+    return {
+      itemCostUsd: summarySubtotal / 100,
+      discountUsd: summaryDiscountCents / 100,
+      discountCode: cartWideDiscountCode,
+      lineTotalUsd: summaryTotal / 100,
+    };
+  }
+
+  return {
+    itemCostUsd: priceFound ? priceCents / 100 : null,
+    discountUsd: priceFound ? discountCents / 100 : null,
+    discountCode: cartWideDiscountCode,
+    lineTotalUsd: lineFound ? lineCents / 100 : null,
+  };
 }
 
 export async function cartBookableDates(
