@@ -85,7 +85,10 @@ export default function Navbar() {
 
   /** Campaign funnels use on-page booking; hide global header Book Now on these routes only. */
   const hideHeaderBookNow =
-    location.pathname === "/nano-brows-launch-offer" || location.pathname === "/mothers-day-head-spa";
+    location.pathname === "/nano-brows-launch-offer" ||
+    location.pathname === "/mothers-day-head-spa" ||
+    location.pathname === "/head-spa-detox-mothers-day" ||
+    location.pathname === "/hydra-facial-mothers-day-offer";
 
   return (
     <header className="w-full overflow-visible bg-[#FAFAF5] border-b border-[rgba(232,232,227,0.50)] sticky top-0 z-50">
