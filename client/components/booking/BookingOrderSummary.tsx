@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import {
-  computeDepositSplit,
-  DEFAULT_BOOKING_DEPOSIT_USD,
+  computeDepositFromInitialPriceFraction,
+  DEFAULT_BOOKING_DEPOSIT_FRACTION,
   formatUsd,
   isComplimentaryCartTotal,
 } from "./bookingPricing";
@@ -11,13 +11,11 @@ import type { CartPricingBreakdown } from "./utils/boulevardApi";
 export interface BookingOrderSummaryProps {
   serviceName: string;
   serviceTotalUsd: number | null;
-  /** When set (Mother's Day offer flows), shows Item cost → Discount → Total from Boulevard, then deposit rows. */
+  /** When set, shows priced lines from Boulevard; deposit uses list price (`itemCostUsd`) vs amount due (`totalUsd`). */
   pricingBreakdown?: CartPricingBreakdown | null;
-  /** Defaults to $50 booking deposit. */
-  depositUsd?: number;
-  /** e.g. "First available" before reserve, or specialist name after. */
+  /** Fraction of **initial/list price** (before discounts) charged as deposit today. Capped at post-discount total. */
+  depositFraction?: number;
   providerLabel: string;
-  /** Extra emphasis on paying only the deposit today (payment step). */
   emphasizeBookingCharge?: boolean;
   className?: string;
 }
@@ -43,21 +41,29 @@ export function BookingOrderSummary({
   serviceName,
   serviceTotalUsd,
   pricingBreakdown,
-  depositUsd = DEFAULT_BOOKING_DEPOSIT_USD,
+  depositFraction = DEFAULT_BOOKING_DEPOSIT_FRACTION,
   providerLabel,
   emphasizeBookingCharge,
   className,
 }: BookingOrderSummaryProps) {
   const complimentary = isComplimentaryCartTotal(serviceTotalUsd);
-  const splitBasisUsd =
+  const showOfferLines = pricingBreakdown != null;
+  const showDiscountRow = pricingBreakdown != null && pricingBreakdown.discountUsd > 0;
+
+  const amountDueUsd =
     pricingBreakdown != null ? pricingBreakdown.totalUsd : serviceTotalUsd;
-  const { payNow, balance } = computeDepositSplit(splitBasisUsd, depositUsd);
+  const initialPriceUsd =
+    pricingBreakdown != null ? pricingBreakdown.itemCostUsd : serviceTotalUsd;
+
+  const fraction =
+    depositFraction != null && Number.isFinite(depositFraction) ? depositFraction : DEFAULT_BOOKING_DEPOSIT_FRACTION;
+
+  const { payNow, balance } = computeDepositFromInitialPriceFraction(amountDueUsd, initialPriceUsd, fraction);
+
   const totalLabel =
     serviceTotalUsd != null && Number.isFinite(serviceTotalUsd) ? formatUsd(serviceTotalUsd) : "—";
   const payNowLabel = payNow != null ? formatUsd(payNow) : "—";
   const balanceLabel = balance != null ? formatUsd(balance) : "—";
-
-  const showOfferLines = pricingBreakdown != null;
 
   return (
     <div
@@ -75,15 +81,19 @@ export function BookingOrderSummary({
           <>
             {showOfferLines ? (
               <>
-                <Row label="Item cost" value={formatUsd(pricingBreakdown.itemCostUsd)} />
-                {pricingBreakdown.discountUsd > 0 ? (
-                  <Row
-                    label={`Discount (${pricingBreakdown.discountCode})`}
-                    value={formatUsd(-pricingBreakdown.discountUsd)}
-                    valueClassName="text-charcoal/75"
-                  />
-                ) : null}
-                <Row label="Total" value={formatUsd(pricingBreakdown.totalUsd)} />
+                {showDiscountRow ? (
+                  <>
+                    <Row label="Item cost" value={formatUsd(pricingBreakdown.itemCostUsd)} />
+                    <Row
+                      label={`Discount (${pricingBreakdown.discountCode})`}
+                      value={formatUsd(-pricingBreakdown.discountUsd)}
+                      valueClassName="text-charcoal/75"
+                    />
+                    <Row label="Total" value={formatUsd(pricingBreakdown.totalUsd)} />
+                  </>
+                ) : (
+                  <Row label="Total" value={formatUsd(pricingBreakdown.totalUsd)} />
+                )}
                 <div className="border-t border-[rgba(103,92,83,0.12)] pt-2.5" aria-hidden />
                 <Row label="Deposit / You pay now" value={payNowLabel} valueClassName="text-primary" />
                 <Row label="Pay when you arrive" value={balanceLabel} />
@@ -107,9 +117,9 @@ export function BookingOrderSummary({
         </p>
       ) : !complimentary &&
         !emphasizeBookingCharge &&
-        splitBasisUsd != null &&
+        amountDueUsd != null &&
         payNow != null &&
-        payNow < splitBasisUsd ? (
+        payNow < amountDueUsd ? (
         <p className="mt-3 border-t border-[rgba(103,92,83,0.08)] pt-3 font-barlow text-xs font-light leading-relaxed text-charcoal/55">
           Booking deposit {formatUsd(payNow)}; balance {formatUsd(balance ?? 0)} due at check-in.
         </p>

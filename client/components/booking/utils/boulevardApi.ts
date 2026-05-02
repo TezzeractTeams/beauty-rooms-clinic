@@ -175,25 +175,40 @@ export interface CartBookablePricingSnapshot {
   lineTotalUsd: number | null;
 }
 
-/** Shape pricing for checkout UI when an offer code flow is enabled (`discountCode` falls back to attempted code). */
+/**
+ * Normalizes a cart pricing snapshot for order summary + deposit math.
+ * Preserves list price (`itemCostUsd`) vs amount due after discounts (`totalUsd` / line total).
+ */
 export function cartPricingSnapshotToBreakdown(
   snapshot: CartBookablePricingSnapshot,
-  fallbackDiscountLabel: string,
+  fallbackDiscountLabel: string | null,
 ): CartPricingBreakdown | null {
-  const itemCostUsd = snapshot.itemCostUsd;
   const totalUsd = snapshot.lineTotalUsd;
-  if (
-    itemCostUsd == null ||
-    totalUsd == null ||
-    !Number.isFinite(itemCostUsd) ||
-    !Number.isFinite(totalUsd)
-  ) {
+  if (totalUsd == null || !Number.isFinite(totalUsd)) {
     return null;
   }
-  const discountUsd = snapshot.discountUsd ?? 0;
-  const trimmedFallback = fallbackDiscountLabel.trim();
+
+  let itemCostUsd = snapshot.itemCostUsd;
+  if (itemCostUsd == null || !Number.isFinite(itemCostUsd)) {
+    itemCostUsd = totalUsd;
+  }
+
+  let discountUsd = snapshot.discountUsd ?? 0;
+  if (!Number.isFinite(discountUsd)) discountUsd = 0;
+  discountUsd = Math.max(0, discountUsd);
+
+  if (itemCostUsd + 1e-6 < totalUsd) {
+    itemCostUsd = totalUsd;
+    discountUsd = 0;
+  } else if (discountUsd === 0 && itemCostUsd > totalUsd + 0.005) {
+    discountUsd = Math.round((itemCostUsd - totalUsd) * 100) / 100;
+  }
+
+  const fallback = fallbackDiscountLabel?.trim() ?? "";
+  const fromApi = snapshot.discountCode?.trim() ?? "";
   const discountCode =
-    (snapshot.discountCode?.trim() || trimmedFallback || "Offer").trim() || "Offer";
+    discountUsd > 0 ? (fromApi || fallback || "Offer").trim() || "Offer" : fromApi || fallback || "";
+
   return { itemCostUsd, discountUsd, discountCode, totalUsd };
 }
 

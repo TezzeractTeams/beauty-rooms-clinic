@@ -1,20 +1,43 @@
-/** Default deposit charged at booking (USD); balance due at appointment. */
-export const DEFAULT_BOOKING_DEPOSIT_USD = 50;
+/** Default booking deposit rate (fraction of initial list price before discount). */
+export const DEFAULT_BOOKING_DEPOSIT_FRACTION = 0.25;
 
 export function formatUsd(amount: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
 }
 
-export function computeDepositSplit(
-  serviceTotalUsd: number | null,
-  depositUsd: number = DEFAULT_BOOKING_DEPOSIT_USD,
+/**
+ * Deposit as a fraction of **initial / list price** (before discounts). Pay-now is capped at {@link amountDueUsd}
+ * (what the client owes for the line after discounts) so the deposit never exceeds the cart total.
+ */
+export function computeDepositFromInitialPriceFraction(
+  amountDueUsd: number | null,
+  initialPriceUsd: number | null,
+  fraction: number,
 ): { payNow: number | null; balance: number | null } {
-  if (serviceTotalUsd == null || !Number.isFinite(serviceTotalUsd)) {
+  if (amountDueUsd == null || !Number.isFinite(amountDueUsd) || !Number.isFinite(fraction)) {
     return { payNow: null, balance: null };
   }
-  const total = Math.max(serviceTotalUsd, 0);
-  const payNow = Math.min(depositUsd, total);
-  const balance = Math.max(total - payNow, 0);
+  const due = Math.max(amountDueUsd, 0);
+  if (due === 0) {
+    return { payNow: 0, balance: 0 };
+  }
+
+  const list =
+    initialPriceUsd != null && Number.isFinite(initialPriceUsd) && initialPriceUsd > 0
+      ? Math.max(initialPriceUsd, 0)
+      : due;
+
+  if (fraction >= 1) {
+    return { payNow: due, balance: 0 };
+  }
+  if (fraction <= 0) {
+    return { payNow: 0, balance: due };
+  }
+
+  const rawCents = Math.round(list * 100 * fraction);
+  let payNow = rawCents / 100;
+  payNow = Math.min(payNow, due);
+  const balance = Math.max(due - payNow, 0);
   return { payNow, balance };
 }
 

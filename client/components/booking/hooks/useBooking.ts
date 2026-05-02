@@ -186,9 +186,7 @@ export function useBooking(
       try {
         const snapshot = await getCartBookablePricingSnapshot(cartId);
         serviceTotalUsd = snapshot.lineTotalUsd;
-        if (boulevardDiscountCode) {
-          pricingBreakdown = cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode);
-        }
+        pricingBreakdown = cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode ?? null);
       } catch {
         /* cart pricing optional for booking */
       }
@@ -249,12 +247,10 @@ export function useBooking(
       try {
         const snapshot = await getCartBookablePricingSnapshot(state.cartId);
         dispatch({ type: "SERVICE_TOTAL_SET", payload: snapshot.lineTotalUsd });
-        if (boulevardDiscountCode) {
-          dispatch({
-            type: "PRICING_BREAKDOWN_SET",
-            payload: cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode),
-          });
-        }
+        dispatch({
+          type: "PRICING_BREAKDOWN_SET",
+          payload: cartPricingSnapshotToBreakdown(snapshot, boulevardDiscountCode ?? null),
+        });
       } catch {
         /* pricing refresh optional */
       }
