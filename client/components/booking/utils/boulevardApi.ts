@@ -160,12 +160,24 @@ export async function tryAddCartOfferCode(cartId: string, offerCode: string): Pr
   }
 }
 
+/** `CartSummary.deposit` (Boulevard Client API). */
+export type BoulevardCartDepositType = "FULL_DEPOSIT" | "NO_DEPOSIT" | "PARTIAL_DEPOSIT";
+
+export function parseBoulevardDepositType(raw: unknown): BoulevardCartDepositType | null {
+  if (raw === "FULL_DEPOSIT" || raw === "NO_DEPOSIT" || raw === "PARTIAL_DEPOSIT") return raw;
+  return null;
+}
+
 /** Built from Boulevard `CartBookableItem`: price before discounts/taxes, discount, final line total (typically incl. taxes). */
 export interface CartPricingBreakdown {
   itemCostUsd: number;
   discountUsd: number;
   discountCode: string;
   totalUsd: number;
+  /** From `cart.summary.deposit`; optional for UI semantics. */
+  depositType: BoulevardCartDepositType | null;
+  /** Required deposit today in USD (`cart.summary.depositAmount`, Money cents). */
+  depositAmountUsd: number | null;
 }
 
 export interface CartBookablePricingSnapshot {
@@ -173,6 +185,8 @@ export interface CartBookablePricingSnapshot {
   discountUsd: number | null;
   discountCode: string | null;
   lineTotalUsd: number | null;
+  depositType: BoulevardCartDepositType | null;
+  depositAmountUsd: number | null;
 }
 
 /**
@@ -209,7 +223,14 @@ export function cartPricingSnapshotToBreakdown(
   const discountCode =
     discountUsd > 0 ? (fromApi || fallback || "Offer").trim() || "Offer" : fromApi || fallback || "";
 
-  return { itemCostUsd, discountUsd, discountCode, totalUsd };
+  return {
+    itemCostUsd,
+    discountUsd,
+    discountCode,
+    totalUsd,
+    depositType: snapshot.depositType ?? null,
+    depositAmountUsd: snapshot.depositAmountUsd,
+  };
 }
 
 /** `Money` scalars are cents; uses line-level discount when present, else `cart.summary` (cart-wide offers). */
@@ -220,6 +241,8 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
         subtotal?: number | null;
         discountAmount?: number | null;
         total?: number | null;
+        deposit?: string | null;
+        depositAmount?: number | null;
       } | null;
       offers?: Array<{
         code?: string | null;
@@ -240,6 +263,8 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
           subtotal
           discountAmount
           total
+          deposit
+          depositAmount
         }
         offers {
           code
@@ -288,6 +313,16 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
   const summaryDiscount = summary?.discountAmount;
   const summaryTotal = summary?.total;
   const summaryDiscountCents = typeof summaryDiscount === "number" ? summaryDiscount : 0;
+  const summaryDepositType = parseBoulevardDepositType(summary?.deposit);
+  const summaryDepositAmountUsd =
+    typeof summary?.depositAmount === "number" && Number.isFinite(summary.depositAmount)
+      ? summary.depositAmount / 100
+      : null;
+
+  const depositFields = {
+    depositType: summaryDepositType,
+    depositAmountUsd: summaryDepositAmountUsd,
+  } satisfies Pick<CartBookablePricingSnapshot, "depositType" | "depositAmountUsd">;
 
   let offerCartCode: string | null = null;
   for (const o of data.cart?.offers ?? []) {
@@ -304,6 +339,7 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
       discountUsd: discountCents / 100,
       discountCode: itemDiscountCode ?? offerCartCode,
       lineTotalUsd: lineCents / 100,
+      ...depositFields,
     };
   }
 
@@ -317,6 +353,7 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
       discountUsd: summaryDiscountCents / 100,
       discountCode: cartWideDiscountCode,
       lineTotalUsd: summaryTotal / 100,
+      ...depositFields,
     };
   }
 
@@ -325,6 +362,7 @@ export async function getCartBookablePricingSnapshot(cartId: string): Promise<Ca
     discountUsd: priceFound ? discountCents / 100 : null,
     discountCode: cartWideDiscountCode,
     lineTotalUsd: lineFound ? lineCents / 100 : null,
+    ...depositFields,
   };
 }
 

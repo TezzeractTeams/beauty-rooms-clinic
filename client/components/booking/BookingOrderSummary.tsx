@@ -1,20 +1,13 @@
 import { cn } from "@/lib/utils";
-import {
-  computeDepositFromInitialPriceFraction,
-  DEFAULT_BOOKING_DEPOSIT_FRACTION,
-  formatUsd,
-  isComplimentaryCartTotal,
-} from "./bookingPricing";
+import { depositPayNowAndBalance, formatUsd, isComplimentaryCartTotal } from "./bookingPricing";
 
 import type { CartPricingBreakdown } from "./utils/boulevardApi";
 
 export interface BookingOrderSummaryProps {
   serviceName: string;
   serviceTotalUsd: number | null;
-  /** When set, shows priced lines from Boulevard; deposit uses list price (`itemCostUsd`) vs amount due (`totalUsd`). */
+  /** When set, shows priced lines from Boulevard; deposit comes from summary `depositAmount`. */
   pricingBreakdown?: CartPricingBreakdown | null;
-  /** Fraction of **initial/list price** (before discounts) charged as deposit today. Capped at post-discount total. */
-  depositFraction?: number;
   providerLabel: string;
   emphasizeBookingCharge?: boolean;
   className?: string;
@@ -41,7 +34,6 @@ export function BookingOrderSummary({
   serviceName,
   serviceTotalUsd,
   pricingBreakdown,
-  depositFraction = DEFAULT_BOOKING_DEPOSIT_FRACTION,
   providerLabel,
   emphasizeBookingCharge,
   className,
@@ -52,13 +44,7 @@ export function BookingOrderSummary({
 
   const amountDueUsd =
     pricingBreakdown != null ? pricingBreakdown.totalUsd : serviceTotalUsd;
-  const initialPriceUsd =
-    pricingBreakdown != null ? pricingBreakdown.itemCostUsd : serviceTotalUsd;
-
-  const fraction =
-    depositFraction != null && Number.isFinite(depositFraction) ? depositFraction : DEFAULT_BOOKING_DEPOSIT_FRACTION;
-
-  const { payNow, balance } = computeDepositFromInitialPriceFraction(amountDueUsd, initialPriceUsd, fraction);
+  const { payNow, balance } = depositPayNowAndBalance(amountDueUsd, pricingBreakdown ?? null);
 
   const totalLabel =
     serviceTotalUsd != null && Number.isFinite(serviceTotalUsd) ? formatUsd(serviceTotalUsd) : "—";
@@ -111,7 +97,7 @@ export function BookingOrderSummary({
           <Row label="Service provider" value={providerLabel} valueClassName="font-normal" />
         </div>
       </div>
-      {!complimentary && emphasizeBookingCharge && payNow != null ? (
+      {!complimentary && emphasizeBookingCharge && payNow != null && payNow > 0 ? (
         <p className="mt-3 border-t border-[rgba(103,92,83,0.08)] pt-3 font-barlow text-xs font-light leading-relaxed text-charcoal/60">
           Only {formatUsd(payNow)} is charged today to secure this booking. The remainder is due at your appointment.
         </p>
