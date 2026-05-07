@@ -174,7 +174,7 @@ export default function HeadSpaDetoxMothersDay() {
                 id="hsd-md-offer-heading"
                 className="font-barlow text-[clamp(26px,3.5vw,36px)] font-extralight tracking-[-0.03em] text-charcoal"
               >
-                Mother&apos;s Day is next week
+                Mother&apos;s Day is almost here
               </h2>
               <p className="text-base md:text-lg">
                 Skip the flowers. Give her something she&apos;ll actually enjoy — time to switch off. Our team in
