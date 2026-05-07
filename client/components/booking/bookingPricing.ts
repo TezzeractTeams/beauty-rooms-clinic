@@ -1,20 +1,18 @@
-/** Default booking deposit rate (fraction of initial list price before discount). */
-export const DEFAULT_BOOKING_DEPOSIT_FRACTION = 0.25;
+import type { CartPricingBreakdown } from "./utils/boulevardApi";
 
 export function formatUsd(amount: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
 }
 
 /**
- * Deposit as a fraction of **initial / list price** (before discounts). Pay-now is capped at {@link amountDueUsd}
- * (what the client owes for the line after discounts) so the deposit never exceeds the cart total.
+ * Pay today from {@link CartPricingBreakdown.depositAmountUsd} (`cart.summary.depositAmount`), clamped to amount due.
+ * Falls back via `depositType` when Boulevard omits amount but sends `NO_DEPOSIT` / `FULL_DEPOSIT`.
  */
-export function computeDepositFromInitialPriceFraction(
+export function depositPayNowAndBalance(
   amountDueUsd: number | null,
-  initialPriceUsd: number | null,
-  fraction: number,
+  pricingBreakdown: CartPricingBreakdown | null,
 ): { payNow: number | null; balance: number | null } {
-  if (amountDueUsd == null || !Number.isFinite(amountDueUsd) || !Number.isFinite(fraction)) {
+  if (amountDueUsd == null || !Number.isFinite(amountDueUsd)) {
     return { payNow: null, balance: null };
   }
   const due = Math.max(amountDueUsd, 0);
@@ -22,23 +20,26 @@ export function computeDepositFromInitialPriceFraction(
     return { payNow: 0, balance: 0 };
   }
 
-  const list =
-    initialPriceUsd != null && Number.isFinite(initialPriceUsd) && initialPriceUsd > 0
-      ? Math.max(initialPriceUsd, 0)
-      : due;
+  let depositUsd = pricingBreakdown?.depositAmountUsd ?? null;
+  const depositType = pricingBreakdown?.depositType ?? null;
 
-  if (fraction >= 1) {
-    return { payNow: due, balance: 0 };
-  }
-  if (fraction <= 0) {
-    return { payNow: 0, balance: due };
+  if (depositUsd != null && !Number.isFinite(depositUsd)) {
+    depositUsd = null;
   }
 
-  const rawCents = Math.round(list * 100 * fraction);
-  let payNow = rawCents / 100;
-  payNow = Math.min(payNow, due);
-  const balance = Math.max(due - payNow, 0);
-  return { payNow, balance };
+  if (depositUsd == null && depositType === "NO_DEPOSIT") {
+    depositUsd = 0;
+  }
+  if (depositUsd == null && depositType === "FULL_DEPOSIT") {
+    depositUsd = due;
+  }
+
+  if (depositUsd == null) {
+    return { payNow: null, balance: null };
+  }
+
+  const payNow = Math.min(Math.max(depositUsd, 0), due);
+  return { payNow, balance: Math.max(due - payNow, 0) };
 }
 
 /** Strict: only explicit $0 cart total (not unknown/null) skips payment. */
