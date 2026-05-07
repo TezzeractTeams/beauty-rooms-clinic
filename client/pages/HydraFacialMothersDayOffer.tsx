@@ -112,6 +112,7 @@ export default function HydraFacialMothersDayOffer() {
                       {
                         id: HYDRA_FACIAL_BOOK_SERVICE_ID,
                         name: HYDRA_FACIAL_BOOK_SERVICE_DISPLAY_NAME,
+                        webhookService: "Hydra Facial",
                       },
                     ]}
                   />
