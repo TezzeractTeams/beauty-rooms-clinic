@@ -107,7 +107,6 @@ export default function HeadSpaDetoxMothersDay() {
                       {
                         id: HEAD_SPA_BOOKING_SERVICE_ID,
                         name: HEAD_SPA_BOOKING_SERVICE_NAME,
-                        webhookService: "ADD-ON Extended Scalp Massage",
                       },
                     ]}
                   />
