@@ -12,6 +12,8 @@ import {
 } from "@/components/booking/utils/bookingCatalogApi";
 import type { ClientInformation } from "@/components/booking/utils/boulevardApi";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getLeadAttributionSnapshot } from "@/lib/leadAttribution";
+import { submitHeadSpaFormLead } from "@/lib/websiteFormLead";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowRight, Clock3 } from "lucide-react";
@@ -22,6 +24,7 @@ import { toast } from "sonner";
 type BookingStage = "catalog" | "details" | "flow";
 
 const CARD_BORDER = "border border-[rgba(103,92,83,0.12)]";
+const BOOKING_LEAD_SOURCE = "beauty_rooms_clinic_website";
 
 function formatUsd(value: number) {
   return `$${value.toFixed(0)}`;
@@ -198,6 +201,29 @@ export default function Booking() {
     }
 
     setSubmitting(true);
+    const pageHref = typeof window !== "undefined" ? window.location.href : "";
+    const leadResult = await submitHeadSpaFormLead({
+      source: BOOKING_LEAD_SOURCE,
+      form: "online_booking",
+      step: "contact",
+      pageUri: pageHref,
+      firstName: intakeValues.firstName.trim(),
+      lastName: intakeValues.lastName.trim(),
+      phone: intakeValues.phone.trim(),
+      email: intakeValues.email.trim(),
+      consent: intakeValues.consent,
+      providerSlug: intakeValues.providerSlug,
+      serviceName: selectedService.name,
+      service: selectedService.name,
+      form_submit_url: pageHref,
+      attribution: getLeadAttributionSnapshot(),
+    });
+    if (leadResult.ok === false) {
+      setSubmitting(false);
+      toast.error(leadResult.message);
+      return;
+    }
+
     const result = await initialize();
     setSubmitting(false);
     if (!result.ok) {
