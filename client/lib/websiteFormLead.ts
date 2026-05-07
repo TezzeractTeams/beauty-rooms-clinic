@@ -37,6 +37,8 @@ export type HeadSpaFormLeadPayload = {
   serviceName: string;
   /** CRM / n8n-friendly service label (may differ from Boulevard `serviceName`). */
   service: string;
+  /** Full URL of the page where the form was submitted (submit-time `window.location.href`). */
+  form_submit_url: string;
   attribution: LeadFormAttribution;
 };
 

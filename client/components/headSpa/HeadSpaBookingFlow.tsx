@@ -96,6 +96,7 @@ function HeadSpaBookingServicePanel({
       providerSlug: intakeValues.providerSlug,
       serviceName: service.name,
       service: service.webhookService?.trim() || service.name,
+      form_submit_url: typeof window !== "undefined" ? window.location.href : "",
     }),
     [intakeValues, leadForm, service.name, service.webhookService],
   );
