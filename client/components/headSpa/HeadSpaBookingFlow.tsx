@@ -17,6 +17,8 @@ type View = "contact" | "booking";
 export type HeadSpaBookingServiceOption = {
   id: string;
   name: string;
+  /** Sent as top-level `service` on the lead webhook. Defaults to `name`. */
+  webhookService?: string;
 };
 
 type Props = {
@@ -93,8 +95,9 @@ function HeadSpaBookingServicePanel({
       consent: intakeValues.consent,
       providerSlug: intakeValues.providerSlug,
       serviceName: service.name,
+      service: service.webhookService?.trim() || service.name,
     }),
-    [intakeValues, leadForm, service.name],
+    [intakeValues, leadForm, service.name, service.webhookService],
   );
 
   const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {

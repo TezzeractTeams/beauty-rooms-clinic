@@ -35,6 +35,8 @@ export type HeadSpaFormLeadPayload = {
   consent: boolean;
   providerSlug: string;
   serviceName: string;
+  /** CRM / n8n-friendly service label (may differ from Boulevard `serviceName`). */
+  service: string;
   attribution: LeadFormAttribution;
 };
 
