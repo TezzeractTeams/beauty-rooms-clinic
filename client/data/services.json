@@ -326,5 +326,50 @@
     "Booking Link": "",
     "Image URL": "",
     "": ""
+  },
+  {
+    "SERVICE GATEGORY ": "FACIAL",
+    "SERVICE ": "Signature facial",
+    "SERVICE DESCRIPTION": "A customized facial tailored to your skin—cleansing, exfoliation, extractions as needed, and targeted masques to restore hydration, clarity, and glow.",
+    "DURATION": "60min",
+    "Booking Link": "",
+    "Image URL": "",
+    "": ""
+  },
+  {
+    "SERVICE GATEGORY ": "FACIAL",
+    "SERVICE ": "HydraFacial",
+    "SERVICE DESCRIPTION": "A multi-step resurfacing treatment that cleanses, extracts, and infuses serums for immediate luminosity and refined texture with minimal downtime.",
+    "DURATION": "60min",
+    "Booking Link": "",
+    "Image URL": "",
+    "": ""
+  },
+  {
+    "SERVICE GATEGORY ": "FACIAL",
+    "SERVICE ": "Chemical peel",
+    "SERVICE DESCRIPTION": "Controlled exfoliation to improve tone, texture, and clarity—selected for your skin goals and comfort level.",
+    "DURATION": "45min",
+    "Booking Link": "",
+    "Image URL": "",
+    "": ""
+  },
+  {
+    "SERVICE GATEGORY ": "FACIAL",
+    "SERVICE ": "Dermaplaning",
+    "SERVICE DESCRIPTION": "Precision removal of vellus hair and dull surface cells for smoother makeup application and a brighter, glassy finish.",
+    "DURATION": "45min",
+    "Booking Link": "",
+    "Image URL": "",
+    "": ""
+  },
+  {
+    "SERVICE GATEGORY ": "FACIAL",
+    "SERVICE ": "Anti-aging & firming facial",
+    "SERVICE DESCRIPTION": "Performance-focused protocols designed to support elasticity, fine lines, and overall firmness with restorative care.",
+    "DURATION": "75min",
+    "Booking Link": "",
+    "Image URL": "",
+    "": ""
   }
 ]

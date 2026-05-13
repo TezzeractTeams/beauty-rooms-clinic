@@ -55,6 +55,25 @@ describe("resolveBookingCategoryForSiteSlug", () => {
     };
     expect(resolveBookingCategoryForSiteSlug(catalog, "pmu")?.id).toBe("pmu-services--0");
   });
+
+  it("maps esthetician / facials from category label", () => {
+    const catalog: BookingCatalog = {
+      categories: [{ id: "facials--5", label: "FACIALS" }],
+      services: [
+        {
+          id: "f",
+          slug: "signature-facial-abc",
+          category: "facials--5",
+          name: "Signature facial",
+          durationMinutes: 60,
+          discountedPriceUsd: 150,
+          actualPriceUsd: 150,
+          providers: [],
+        },
+      ],
+    };
+    expect(resolveBookingCategoryForSiteSlug(catalog, "esthetician")?.id).toBe("facials--5");
+  });
 });
 
 describe("buildBookingDetailsHref", () => {
