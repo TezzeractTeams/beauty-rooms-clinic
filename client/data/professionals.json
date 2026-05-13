@@ -25,6 +25,18 @@
       "imageSrc": "images/Kelsey_Bio_Pic.png",
       "imageAlt": "Portrait of Kelsey, head spa specialist",
       "bookingCategory": "headspa-services--0"
+    },
+    {
+      "id": "Dani",
+      "name": "Dani",
+      "title": "Licensed esthetician & restoration specialist",
+      "rating": 5,
+      "specialties": ["esthetician"],
+      "tags": ["Advanced resurfacing", "Lash artistry", "Permanent makeup"],
+      "description": "Dani is a licensed esthetician and restoration specialist dedicated to the art of sculpted vitality and skin longevity within the Florida Gulf Coast community. Her philosophy centers on the \"bespoke treatment,\" moving beyond standard protocols to curate high-performance rituals that unveil immediate luminosity and long-term dermal health. Specializing in advanced resurfacing, precision lash artistry, and artisanal permanent makeup, Dani marries meticulous technique with high-potency botanicals to deliver a consistently refined aesthetic. In a space defined by quiet luxury and clinical excellence, her focus is not merely on the service, but on the restoration of your most confident, vibrant self.",
+      "certification": "Licensed esthetician",
+      "imageSrc": "/images/dani.jpeg",
+      "imageAlt": "Dani performing a bespoke facial treatment for a client in the spa treatment room"
     }
   ]
 }
