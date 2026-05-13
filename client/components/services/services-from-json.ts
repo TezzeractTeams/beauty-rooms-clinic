@@ -22,11 +22,12 @@ const IMG_HEAD_SPA = "/images/Head%20SPA.JPG";
 const IMG_PERMANENT_MAKEUP = "/images/Permanent%20Makup.jpg";
 const IMG_PMU_SERVICES_LISTING = "/images/lip-pmu.jpg";
 
-/** Display order on /services and in nav: Lash, Head Spa, PMU */
+/** Display order on /services and in nav: Lash, Head Spa, PMU, Facials (Aesthetics) */
 const CATEGORY_ORDER = [
   { label: "LASH", id: "lash" },
   { label: "HEAD SPA", id: "head-spa" },
   { label: "PMU", id: "pmu" },
+  { label: "FACIAL", id: "esthetician" },
 ] as const;
 
 const CATEGORY_UI: Record<
@@ -75,6 +76,16 @@ const CATEGORY_UI: Record<
     listingImageSrc: IMG_PMU_SERVICES_LISTING,
     listingImageAlt: "Lip and permanent makeup treatment at Beauty Rooms Clinic",
   },
+  esthetician: {
+    eyebrow: "Aesthetics",
+    title: "Facials & skin treatments",
+    detailPageHeroTitle: "Bespoke facials. Lasting skin health.",
+    ctaLabel: "Book facial appointment",
+    imageSrc: "/images/dani.jpeg",
+    imageAlt: "Licensed esthetician performing a customized facial treatment at Beauty Rooms Clinic",
+    imageAltShort: "Facial and skin treatment",
+    imageOnLeft: true,
+  },
 };
 
 const CATEGORY_HERO_BODY: Record<string, string> = {
@@ -83,6 +94,8 @@ const CATEGORY_HERO_BODY: Record<string, string> = {
     "Scalp-focused rituals that melt tension away while supporting healthier hair from the root.",
   pmu:
     "Elevate your daily aesthetic with precision-crafted Permanent Makeup. At BRC, we specialize in hyper-realistic techniques designed to harmonize with your unique facial structure, ensuring you wake up every day looking refined, refreshed, and effortlessly yourself.",
+  esthetician:
+    "Clinical-grade facials and skin rituals tailored to your goals—from luminosity and texture to resilience—delivered with meticulous technique in a sanctuary of calm.",
 };
 
 /** Second paragraph under the category intro heading (sample / supporting copy) */
@@ -91,6 +104,8 @@ const CATEGORY_INTRO_SAMPLE: Record<string, string> = {
   "head-spa":
     "Choose hydration, detox, growth-focused, or relaxation sessions—and add mini facials, massage, or styling when you want a little extra.",
   pmu: "At Beauty Rooms Clinic, we don't believe in 'trend brows.' We believe in timeless proportions. Your session is a collaborative design process focused on restoring what time or over-plucking has taken away.",
+  esthetician:
+    "Each visit is curated for your skin—whether you need resurfacing, deep cleansing, or a glow-forward maintenance ritual—with botanical-forward formulations and precision protocols.",
 };
 
 export function getCategoryPageCopy(categoryId: string): CategoryPageCopy | undefined {
@@ -110,6 +125,10 @@ const CATEGORY_BOTTOM_CTA: Record<string, { headingHighlight: string; buttonLabe
   lash: { headingHighlight: "lashes", buttonLabel: "Book your lash consultation" },
   pmu: { headingHighlight: "PMU", buttonLabel: "Book your PMU consultation" },
   "head-spa": { headingHighlight: "head spa", buttonLabel: "Book your head spa consultation" },
+  esthetician: {
+    headingHighlight: "facials",
+    buttonLabel: "Book your facial consultation",
+  },
 };
 
 export interface CategoryBottomCtaCopy {
@@ -189,6 +208,23 @@ const CATEGORY_BENEFITS: Record<string, { title: string; description: string }[]
         "Premium pigments and precise application deliver lasting confidence with fewer products and less time in front of the mirror.",
     },
   ],
+  esthetician: [
+    {
+      title: "Immediate Luminosity",
+      description:
+        "Custom facials and resurfacing treatments leave skin looking brighter, smoother, and more even—often right after your appointment.",
+    },
+    {
+      title: "Built for Long-Term Skin Health",
+      description:
+        "Protocols support barrier function, clarity, and collagen-friendly care so your glow deepens over time, not just on the table.",
+    },
+    {
+      title: "Quiet Luxury, Clinical Standards",
+      description:
+        "Every session balances elevated hospitality with meticulous technique—so relaxation never comes at the cost of results.",
+    },
+  ],
 };
 
 interface NormalizedServiceRow {
@@ -219,6 +255,7 @@ function categoryLabelToSlug(label: string): string | undefined {
   if (u === "LASH") return "lash";
   if (u === "HEAD SPA") return "head-spa";
   if (u === "PMU") return "pmu";
+  if (u === "FACIAL") return "esthetician";
   return undefined;
 }
 

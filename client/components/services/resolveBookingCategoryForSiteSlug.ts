@@ -1,6 +1,6 @@
 import type { BookingCatalog, BookingCategory } from "@/components/booking/utils/bookingCatalogApi";
 
-export const SERVICE_SITE_SLUGS = ["lash", "head-spa", "pmu"] as const;
+export const SERVICE_SITE_SLUGS = ["lash", "head-spa", "pmu", "esthetician"] as const;
 export type ServiceSiteSlug = (typeof SERVICE_SITE_SLUGS)[number];
 
 function labelMatchesSite(siteSlug: ServiceSiteSlug, label: string): boolean {
@@ -12,6 +12,13 @@ function labelMatchesSite(siteSlug: ServiceSiteSlug, label: string): boolean {
       return n.includes("pmu") || n.includes("permanent");
     case "lash":
       return n.includes("eyelash") || n.includes("lash");
+    case "esthetician": {
+      if (/head[\s-]*spa|headspa/.test(n)) return false;
+      return (
+        /\bfacials?\b|hydrafacial|esthetician/.test(n) ||
+        /\b(skin\s*care|advanced\s+skin|skin\s+treatments?)\b/.test(n)
+      );
+    }
     default:
       return false;
   }

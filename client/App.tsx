@@ -93,7 +93,6 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/faq" element={<Faq />} />
-            <Route path="/services/esthetician" element={<Placeholder title="Esthetician Services" />} />
             <Route path="/services/:slug" element={<ServiceCategoryDetail />} />
             <Route path="/services" element={<Services />} />
             <Route path="/professionals" element={<Professionals />} />
