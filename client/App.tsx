@@ -12,7 +12,8 @@ import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { MetaPixel } from "@/components/MetaPixel";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import { getStoredConsent, setStoredConsent, type CookieConsentChoice } from "@/lib/cookieConsent";
-import { loadOptionalAnalytics } from "@/lib/loadOptionalAnalytics";
+import { loadGoogleAnalytics, loadMarketingAnalytics } from "@/lib/loadOptionalAnalytics";
+import { syncGtmConsent } from "@/lib/gtmConsent";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -46,20 +47,44 @@ const queryClient = new QueryClient();
 // remove the "{/*" line and the "*/" line that wrap the full route list.
 function App() {
   const [consent, setConsent] = useState<CookieConsentChoice | null>(() => getStoredConsent());
-  const [analyticsReady, setAnalyticsReady] = useState(false);
+  const [gaReady, setGaReady] = useState(false);
+  const [marketingReady, setMarketingReady] = useState(false);
 
+  // Load GA4 for everyone (Consent Mode controls cookie behavior)
+  useEffect(() => {
+    let cancelled = false;
+    loadGoogleAnalytics()
+      .then(() => {
+        if (!cancelled) setGaReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) setGaReady(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Sync consent state to GTM/GA4
+  useEffect(() => {
+    if (consent !== null) {
+      syncGtmConsent(consent);
+    }
+  }, [consent]);
+
+  // Load marketing tools only after Accept all
   useEffect(() => {
     if (consent !== "all") {
-      setAnalyticsReady(false);
+      setMarketingReady(false);
       return;
     }
     let cancelled = false;
-    loadOptionalAnalytics()
+    loadMarketingAnalytics()
       .then(() => {
-        if (!cancelled) setAnalyticsReady(true);
+        if (!cancelled) setMarketingReady(true);
       })
       .catch(() => {
-        if (!cancelled) setAnalyticsReady(false);
+        if (!cancelled) setMarketingReady(false);
       });
     return () => {
       cancelled = true;
@@ -80,12 +105,8 @@ function App() {
           <ScrollToTop />
           <LeadAttributionSync />
           {consent === null ? <CookieConsentBanner onChoose={handleCookieChoice} /> : null}
-          {consent === "all" && analyticsReady ? (
-            <>
-              <GoogleAnalytics />
-              <MetaPixel />
-            </>
-          ) : null}
+          {gaReady ? <GoogleAnalytics /> : null}
+          {consent === "all" && marketingReady ? <MetaPixel /> : null}
           <Routes>
             {/*<Route path="*" element={<ComingSoon />} />*/}
 

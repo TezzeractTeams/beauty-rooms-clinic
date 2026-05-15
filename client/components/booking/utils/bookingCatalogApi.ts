@@ -1,3 +1,5 @@
+import { filterBookingCatalogForWebsite } from "@shared/bookingCatalogDisplay";
+
 /** Tab / URL param id for a menu category (from Boulevard `availableCategories`). */
 export type BookingCategoryId = string;
 
@@ -34,7 +36,8 @@ export async function fetchBookingCatalog(): Promise<BookingCatalog> {
     const err = await response.text();
     throw new Error(err || "Could not load booking services.");
   }
-  return (await response.json()) as BookingCatalog;
+  const raw = (await response.json()) as BookingCatalog;
+  return filterBookingCatalogForWebsite(raw);
 }
 
 /** Deep-link to booking intake for a specific catalog service (matches `Booking` URL state). */

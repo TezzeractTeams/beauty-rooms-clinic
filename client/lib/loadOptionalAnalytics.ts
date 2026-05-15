@@ -1,7 +1,11 @@
+import { installGtagDataLayerShim } from "@/lib/gtmConsent";
+
 export const GA_MEASUREMENT_ID = "G-PRYKX5EC9S";
 export const META_PIXEL_ID = "1427234232487835";
+export const CLARITY_PROJECT_ID = "wnuhyca72l";
 
-let loadPromise: Promise<void> | null = null;
+let gaLoadPromise: Promise<void> | null = null;
+let marketingLoadPromise: Promise<void> | null = null;
 let googleInited = false;
 let metaInited = false;
 
@@ -18,10 +22,7 @@ function loadScript(src: string): Promise<void> {
 
 async function ensureGoogleTag(): Promise<void> {
   if (googleInited) return;
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  };
+  installGtagDataLayerShim();
   await loadScript(
     `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`,
   );
@@ -88,14 +89,68 @@ function ensureMetaPixel(): void {
   metaInited = true;
 }
 
+let clarityInited = false;
+
+/** Same bootstrap as the former index.html snippet; runs only after marketing consent. */
+function ensureClarity(): void {
+  if (clarityInited) return;
+  clarityInited = true;
+
+  (function (
+    c: Window,
+    l: Document,
+    a: string,
+    r: string,
+    i: string,
+    t?: HTMLScriptElement,
+    y?: Element | null,
+  ) {
+    // Clarity stub mirrors https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-api
+    const w = c as Window & Record<string, { q?: IArguments[] } & ((...args: unknown[]) => void)>;
+    w[a] =
+      w[a] ||
+      function (this: unknown) {
+        (w[a].q = w[a].q || []).push(arguments);
+      };
+    t = l.createElement(r) as HTMLScriptElement;
+    t.async = true;
+    t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0];
+    y!.parentNode!.insertBefore(t, y);
+  })(window, document, "clarity", "script", CLARITY_PROJECT_ID);
+}
+
 /**
- * Loads Google Analytics and Meta Pixel once. Safe to call multiple times.
+ * Loads Google Analytics for everyone (respects Consent Mode signals for cookieless vs full tracking).
+ * Safe to call multiple times.
  */
-export function loadOptionalAnalytics(): Promise<void> {
-  if (loadPromise) return loadPromise;
-  loadPromise = (async () => {
-    await ensureGoogleTag();
-    ensureMetaPixel();
+export function loadGoogleAnalytics(): Promise<void> {
+  if (gaLoadPromise) return gaLoadPromise;
+  gaLoadPromise = (async () => {
+    try {
+      await ensureGoogleTag();
+    } catch (err) {
+      gaLoadPromise = null;
+      throw err;
+    }
   })();
-  return loadPromise;
+  return gaLoadPromise;
+}
+
+/**
+ * Loads Meta Pixel and Microsoft Clarity after the user accepts marketing cookies.
+ * Safe to call multiple times.
+ */
+export function loadMarketingAnalytics(): Promise<void> {
+  if (marketingLoadPromise) return marketingLoadPromise;
+  marketingLoadPromise = (async () => {
+    try {
+      ensureMetaPixel();
+      ensureClarity();
+    } catch (err) {
+      marketingLoadPromise = null;
+      throw err;
+    }
+  })();
+  return marketingLoadPromise;
 }
