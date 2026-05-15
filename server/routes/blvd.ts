@@ -1,5 +1,10 @@
 import type { RequestHandler } from "express";
 
+import {
+  shouldOmitHeadSpaAddOnBookable,
+  shouldOmitHeadSpaAddOnCategoryTab,
+} from "../../shared/bookingCatalogDisplay.ts";
+
 /** Live Client GraphQL (matches @boulevard/blvd-book-sdk `PlatformTarget.Live`). */
 const BLVD_LIVE_CLIENT_BASE = "https://dashboard.boulevard.io/api/2020-01";
 
@@ -139,10 +144,12 @@ function mapAvailableCategoriesToCatalog(rows: AvailableCategoryRow[]): BookingC
   let catIndex = 0;
   for (const row of list) {
     if (!row?.name) continue;
+    if (shouldOmitHeadSpaAddOnCategoryTab(row.name)) continue;
     const bookableForRow: BookingCatalogService[] = [];
     for (const item of row.availableItems ?? []) {
       if (!item?.id || !item.name) continue;
       if (item.__typename && item.__typename !== "CartAvailableBookableItem") continue;
+      if (shouldOmitHeadSpaAddOnBookable(row.name, item.name)) continue;
 
       const listPriceCents = typeof item.listPrice === "number" ? item.listPrice : 0;
       const priceUsd = listPriceCents / 100;
