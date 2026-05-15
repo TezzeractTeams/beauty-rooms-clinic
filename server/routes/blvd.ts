@@ -3,7 +3,7 @@ import type { RequestHandler } from "express";
 import {
   shouldOmitHeadSpaAddOnBookable,
   shouldOmitHeadSpaAddOnCategoryTab,
-} from "../../shared/bookingCatalogDisplay.ts";
+} from "../../shared/bookingCatalogDisplay.js";
 
 /** Live Client GraphQL (matches @boulevard/blvd-book-sdk `PlatformTarget.Live`). */
 const BLVD_LIVE_CLIENT_BASE = "https://dashboard.boulevard.io/api/2020-01";
